@@ -10,44 +10,42 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.jboss.security.auth.spi.Users.User;
+
 import model.UserTim2;
 
 @Singleton
 @LocalBean
 @Startup
-public class Test {
+public class FillDatabase {
 
 	@PersistenceContext(name = "AukcijaServerTim2")
 	private EntityManager em;
 
+	private String[] boje ={"crna", "bela", "zuta", "crvena", "zelena", "crvena","braon", "ljubicasta"};
+	private String[] velicina ={"XS", "S", "M", "L", "XL", "XXL", "37", "38", "39", "40", "41", "42", "43", "44", "45"};
+	// TODO: continue here...
+	//private String[] tipov ={"majica", "pantalone","kosulja","haljina", "sako","..." ... C};
+	
+	
 	@PostConstruct
 	public void postConstruct() {
-		if(true) return;
-		
+		if(em.find(User.class, "admin") != null){
+			System.out.println("Database is filled");
+		} else {
+			System.out.println("Let's fill the database");
+		}
 		System.out.println("Started post constr.");
 		// sacuvaj informacije o polaganju
 		UserTim2 i = new UserTim2();
-		i.setEmail("hello");
-		i.setUsername("hello33");
-		i.setIme("hello");
-		i.setPrezime("hello");
+		i.setUsername("admin");
 		em.persist(i);
-		
-		i = new UserTim2();
-		i.setEmail("hello!");
-		i.setUsername("hello1");
-		i.setIme("hello1");
-		i.setPrezime("hello1");
-		em.persist(i);
-
-
-		i = new UserTim2();
-		i.setEmail("hello2");
-		i.setUsername("hello2");
-		i.setIme("hello2");
-		i.setPrezime("hello2");
-		em.persist(i);
-		
+		/* TODO: implement...
+		fillBoja();
+		fillVrednost();
+		fillTip();
+		fillVelicina();
+		*/
 		TypedQuery<UserTim2> q = em.createQuery("SELECT s FROM UserTim2 s", UserTim2.class);
 		List<UserTim2> l = q.getResultList();
 		

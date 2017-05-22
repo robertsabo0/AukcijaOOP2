@@ -29,4 +29,41 @@ public class KomentarTim2 implements Serializable{
 	
 	@ManyToOne
 	private StavkaTim2 stavka;
+
+	public int getId() {
+		return id;
+	}
+
+	public String getSadrzaj() {
+		return sadrzaj;
+	}
+
+	public void setSadrzaj(String sadrzaj) {
+		this.sadrzaj = sadrzaj;
+	}
+
+	public Date getPostaljeno() {
+		return postaljeno;
+	}
+
+	public void setPostaljeno(Date postaljeno) {
+		this.postaljeno = postaljeno;
+	}
+
+	public UserTim2 getPostaljvenoOdStrane() {
+		return postaljvenoOdStrane;
+	}
+
+	public void setPostaljvenoOdStrane(UserTim2 postaljvenoOdStrane) {
+		this.postaljvenoOdStrane = postaljvenoOdStrane;
+	}
+
+	public StavkaTim2 getStavka() {
+		return stavka;
+	}
+
+	public void setStavka(StavkaTim2 stavka) {
+		this.stavka = stavka;
+	}
+	
 }

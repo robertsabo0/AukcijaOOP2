@@ -28,6 +28,4 @@ public class BojaTim2 implements Serializable{
 	public void setOpis(String opis) {
 		this.opis = CommonTim2.toCapitalizes(opis);
 	}
-	
-	
 }
