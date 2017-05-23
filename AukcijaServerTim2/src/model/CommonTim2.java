@@ -5,6 +5,7 @@ public class CommonTim2 {
 		return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
 	}
 	
+	public static final String persistanceName="AukcijaServerTim2";
 	/*
 	 * drop tables
 	 * 

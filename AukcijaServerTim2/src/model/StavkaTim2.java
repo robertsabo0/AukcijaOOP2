@@ -27,6 +27,25 @@ public class StavkaTim2 implements Serializable{
 	private String opis;
 	private Date datumPostavljanja;
 	
+	private boolean prodata;
+	private double aktuelnaCena;
+	
+	public boolean isProdata() {
+		return prodata;
+	}
+
+	public void setProdata(boolean prodata) {
+		this.prodata = prodata;
+	}
+
+	public double getAktuelnaCena() {
+		return aktuelnaCena;
+	}
+
+	public void setAktuelnaCena(double aktuelnaCena) {
+		this.aktuelnaCena = aktuelnaCena;
+	}
+
 	@ManyToOne
 	private UserTim2 postavljenoOdStrane;
 	

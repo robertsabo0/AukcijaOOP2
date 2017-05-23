@@ -1,57 +1,85 @@
 package beans;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
-import org.jboss.security.auth.spi.Users.User;
-
+import model.BojaTim2;
+import model.CommonTim2;
+import model.MaterijalTim2;
+import model.TipTim2;
 import model.UserTim2;
+import model.VelicinaTim2;
 
 @Singleton
 @LocalBean
 @Startup
 public class FillDatabase {
 
-	@PersistenceContext(name = "AukcijaServerTim2")
+	@PersistenceContext(name = CommonTim2.persistanceName)
 	private EntityManager em;
 
 	private String[] boje ={"crna", "bela", "zuta", "crvena", "zelena", "crvena","braon", "ljubicasta"};
 	private String[] velicina ={"XS", "S", "M", "L", "XL", "XXL", "37", "38", "39", "40", "41", "42", "43", "44", "45"};
-	// TODO: continue here...
-	//private String[] tipov ={"majica", "pantalone","kosulja","haljina", "sako","..." ... C};
+	private String[] tipov ={"majica", "pantalone","kosulja","haljina", "sako","sorc", "suknja",
+							"patike", "cipele", "papuce", "sandale", "cizme", "zimska obuca", "stikle"};
+	private String[] matrijal ={"koza", "skaj", "pamuk"};
 	
 	
 	@PostConstruct
 	public void postConstruct() {
-		if(em.find(User.class, "admin") != null){
-			System.out.println("Database is filled");
-		} else {
-			System.out.println("Let's fill the database");
+		if(em.find(UserTim2.class, "admin") == null){
+
+			System.out.println("Database is not filled yet!");
+			
+			UserTim2 i = new UserTim2();
+			i.setUsername("admin");
+			em.persist(i);
+			
+			fillBoja();
+			fillMaterijal();
+			fillTip();
+			fillVelicina();
 		}
-		System.out.println("Started post constr.");
-		// sacuvaj informacije o polaganju
-		UserTim2 i = new UserTim2();
-		i.setUsername("admin");
-		em.persist(i);
-		/* TODO: implement...
-		fillBoja();
-		fillVrednost();
-		fillTip();
-		fillVelicina();
-		*/
-		TypedQuery<UserTim2> q = em.createQuery("SELECT s FROM UserTim2 s", UserTim2.class);
-		List<UserTim2> l = q.getResultList();
-		
-		for(UserTim2 u : l){
-			System.out.println(u.getUsername() +": "+u.getIme()+" "+u.getPrezime()+" ("+u.getEmail()+");");
+		System.out.println("Database is filled!");
+	}
+
+
+	private void fillVelicina() {
+		for(String s : velicina){
+			VelicinaTim2 b = new VelicinaTim2();
+			b.setOpis(s);
+			em.persist(b);
 		}
-		System.out.println("Done!");
+	}
+
+
+	private void fillTip() {
+		for(String s : tipov){
+			TipTim2 b = new TipTim2();
+			b.setOpis(s);
+			em.persist(b);
+		}
+	}
+
+
+	private void fillMaterijal() {
+		for(String s : matrijal){
+			MaterijalTim2 b = new MaterijalTim2();
+			b.setOpis(s);
+			em.persist(b);
+		}
+	}
+
+
+	private void fillBoja() {
+		for(String s : boje){
+			BojaTim2 boja = new BojaTim2();
+			boja.setOpis(s);
+			em.persist(boja);
+		}
 	}
 }
