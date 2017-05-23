@@ -1,0 +1,16 @@
+Kontam da bean-ovi koji snabdevaju stranice kao sto su Dashboard i Pretraga treb da snabdeva neki @Stateless bean... Zasto? Nzm, ne treba pamtiti nikakvo stanje... to je oke
+
+Kod pretrage ce biti potrebe za bean-om o mogucim filterima: sve boje iz baze, svi tipovi, ...,; za to msm da je oke da stavimo neki singleton, cisto da imamo od svakoga po jedan. mogao bi i Stateless, opusteno, mindegy.
+
+Imacemo 2, ili moze to i u jedan, Stetefull beana. To bi bili/bio onaj sto vodi racuna o registraciji, tj logovanju; kao i prikaz pojedinacno oglasa.
+Kod logovanja treba da znamo da li se ulogovao ili ne, tj ako se uloguje, zapamtiti ga, a ko ne, to zapamtiti nekako. 
+Pri prikazu pojedinacnog oglasa, ukoliko je ulogovan korisnik, onda moze da licitira na ponudu kao i da ostavlja komentar. U suprotnom ove dve mogucnosti ce biti iskljucene. (msm da je to sve sto se tice uloga...)
+
+Ukoliko imate bolju ideju organizacije, mozemo se skontati.. Al ovo sam skontao danas kad je pricao da moze ovako... Moze i na 1000 drugih nacina, ali ovo mi zvuci oke.
+
+
+
+Ko prikaza pojedinacne stavke, msm da je oke da pise svugde aktuelna cena... tj najvisa ponuda...
+Tipa( aktuelna cena: 5000din ili ako je prodato: prodato za 5600din...)
+Kod prikaza pojedinacne stavke, kao detaljnog pregleda, dodao bih mogucnost pregleda istoje ponuda... To bi bila samo hronoloki sortirana lista
+na kojoj bi se videlo ko je, kad i koliko ponudio... Takodje, ako vec imamo prikaz profila, to bih dodao na istu listu, na klik da se otovori stranica tog lika...
