@@ -139,11 +139,14 @@ public class Login extends JPanel {
 		regPanel.add(panel_3, BorderLayout.NORTH);
 		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(100);
-		panel_3.add(horizontalStrut_1);
+		Component horizontalGlue_2 = Box.createHorizontalGlue();
+		panel_3.add(horizontalGlue_2);
 		
-		JLabel lblregistrujSe = new JLabel("<html><h4>Registruj se");
-		panel_3.add(lblregistrujSe);
+		JLabel lblRegistrujSe = new JLabel("Registruj se");
+		panel_3.add(lblRegistrujSe);
+		
+		Component horizontalGlue_3 = Box.createHorizontalGlue();
+		panel_3.add(horizontalGlue_3);
 
 		JPanel loginPanel = new JPanel();
 		splitPane.setLeftComponent(loginPanel);
@@ -167,16 +170,16 @@ public class Login extends JPanel {
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap(14, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblPassword)
 								.addComponent(lblUsername))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(btnUlogujSe, Alignment.TRAILING))
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(passwordField)
+								.addComponent(textField)))
+						.addComponent(btnUlogujSe))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -192,7 +195,7 @@ public class Login extends JPanel {
 						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnUlogujSe)
-					.addContainerGap(152, Short.MAX_VALUE))
+					.addContainerGap(151, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		
@@ -200,10 +203,13 @@ public class Login extends JPanel {
 		loginPanel.add(panel_2, BorderLayout.NORTH);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 		
-		Component horizontalStrut = Box.createHorizontalStrut(50);
-		panel_2.add(horizontalStrut);
+		Component horizontalGlue = Box.createHorizontalGlue();
+		panel_2.add(horizontalGlue);
 		
-		JLabel lblUlogujse = new JLabel("<html><h4> Uloguj se");
-		panel_2.add(lblUlogujse);
+		JLabel lblUlogujSe = new JLabel("Uloguj se");
+		panel_2.add(lblUlogujSe);
+		
+		Component horizontalGlue_1 = Box.createHorizontalGlue();
+		panel_2.add(horizontalGlue_1);
 	}
 }
