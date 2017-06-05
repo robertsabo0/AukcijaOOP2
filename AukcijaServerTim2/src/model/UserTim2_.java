@@ -1,11 +1,11 @@
 package model;
 
 import javax.annotation.Generated;
-import javax.persistence.metamodel.ListAttribute;
+import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2017-05-22T19:43:46.438+0200")
+@Generated(value="Dali", date="2017-06-05T21:57:48.805+0200")
 @StaticMetamodel(UserTim2.class)
 public class UserTim2_ {
 	public static volatile SingularAttribute<UserTim2, String> username;
@@ -13,6 +13,6 @@ public class UserTim2_ {
 	public static volatile SingularAttribute<UserTim2, String> prezime;
 	public static volatile SingularAttribute<UserTim2, String> email;
 	public static volatile SingularAttribute<UserTim2, String> opis;
-	public static volatile ListAttribute<UserTim2, StavkaTim2> postavio;
-	public static volatile ListAttribute<UserTim2, PonudaTim2> nudio;
+	public static volatile CollectionAttribute<UserTim2, Object> postavio;
+	public static volatile CollectionAttribute<UserTim2, Object> nudio;
 }
