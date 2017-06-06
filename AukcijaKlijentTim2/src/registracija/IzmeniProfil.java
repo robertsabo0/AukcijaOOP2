@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 
 public class IzmeniProfil extends JPanel {
 
@@ -16,11 +17,11 @@ public class IzmeniProfil extends JPanel {
 	 */
 	private static final long serialVersionUID = -2055820999086617818L;
 	private JTextField textField;
-	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
+	private JPasswordField passwordField;
 
 	/**
 	 * Create the panel.
@@ -41,9 +42,6 @@ public class IzmeniProfil extends JPanel {
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		
@@ -68,6 +66,8 @@ public class IzmeniProfil extends JPanel {
 		textField_5.setColumns(10);
 		
 		JLabel lblmoraBitiJedinstveno = new JLabel("(*Mora biti jedinstveno)");
+		
+		passwordField = new JPasswordField();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -83,15 +83,15 @@ public class IzmeniProfil extends JPanel {
 							.addComponent(lblOpis)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(passwordField)
 						.addComponent(textField_5)
 						.addComponent(textField_4)
 						.addComponent(textField_3)
 						.addComponent(textField_2)
-						.addComponent(textField_1)
 						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
 					.addGap(18)
 					.addComponent(lblmoraBitiJedinstveno)
-					.addContainerGap(164, Short.MAX_VALUE))
+					.addContainerGap(96, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -103,8 +103,8 @@ public class IzmeniProfil extends JPanel {
 						.addComponent(lblmoraBitiJedinstveno))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPassword))
+						.addComponent(lblPassword)
+						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -121,7 +121,7 @@ public class IzmeniProfil extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblOpis))
-					.addContainerGap(77, Short.MAX_VALUE))
+					.addContainerGap(44, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		
