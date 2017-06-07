@@ -87,22 +87,22 @@ public class GlavniPanel extends JPanel {
 		add(lblNewLabel_8);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setEditable(true);
+		//comboBox.setEditable(true);
 		comboBox.setBounds(217, 117, 86, 20);
 		add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setEditable(true);
+		//comboBox_1.setEditable(true);
 		comboBox_1.setBounds(217, 157, 86, 20);
 		add(comboBox_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
 		comboBox_2.setBounds(217, 197, 86, 20);
-		comboBox_2.setEditable(true);
+		//comboBox_2.setEditable(true);
 		add(comboBox_2);
 		
 		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setEditable(true);
+		//comboBox_3.setEditable(true);
 		comboBox_3.setBounds(217, 237, 86, 20);
 		add(comboBox_3);
 		
