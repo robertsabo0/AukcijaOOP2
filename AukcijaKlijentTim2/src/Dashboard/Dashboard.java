@@ -33,6 +33,7 @@ import javax.swing.JScrollPane;
 
 import beans.StavkeGetters;
 import main.Aukcija;
+import main.BeansGetter;
 import model.StavkaTim2;
 import prikazStavke.GlavniPanel;
 
@@ -77,7 +78,7 @@ public class Dashboard extends JPanel{
 	 
 	 public Dashboard() throws NamingException{
 		 this.setLayout(new FlowLayout());
-		 List<StavkaTim2> stavke=getDashboardStavka().getSve();
+		 List<StavkaTim2> stavke= BeansGetter.stavkeGetters().getSve();
 		 JScrollPane skrol=new JScrollPane();
 		 for(int i=0;i<stavke.size();i++){
 			 JPanel stavka=new JPanel();
