@@ -39,7 +39,7 @@ public class OfflineBar extends JMenuBar {
 		JMenu mnKorisnik = new JMenu("Korisnik");
 		menuBar.add(mnKorisnik);
 
-		JPanel logovanje = new Login();
+		JPanel logovanje = new Login(frame);
 		JMenuItem mntmUlogujSe = new JMenuItem("Uloguj se");
 		mntmUlogujSe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

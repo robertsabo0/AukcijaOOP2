@@ -2,18 +2,26 @@ package registracija;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import beans.LoginUser;
+import beans.LosaLozinkaException;
+import main.OnlineBar;
 
 public class Login extends JPanel {
 
@@ -21,7 +29,7 @@ public class Login extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -1281817289232296908L;
-	private JTextField textField;
+	private JTextField userNameField;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
 	private JTextField textField_2;
@@ -29,11 +37,11 @@ public class Login extends JPanel {
 	private JTextField textField_4;
 	private JTextField textField_1;
 	private JTextField textField_5;
-
+	
 	/**
 	 * Create the panel.
 	 */
-	public Login() {
+	public Login(JFrame frame) {
 		setLayout(new BorderLayout(0, 0));
 
 		JSplitPane splitPane = new JSplitPane();
@@ -157,12 +165,32 @@ public class Login extends JPanel {
 		
 		JLabel lblUsername = new JLabel("Username:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		userNameField = new JTextField();
+		userNameField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		
 		JButton btnUlogujSe = new JButton("Uloguj se");
+		btnUlogujSe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					LoginUser luser= new LoginUser();
+					try {
+						luser.loginUser(userNameField.getText(),passwordField.getPassword());
+						if (LoginUser.ulogovan){
+							frame.getJMenuBar().removeAll();
+							OnlineBar bar = new OnlineBar(frame);
+							frame.setJMenuBar(bar);
+						}
+					} catch (LosaLozinkaException e1) {
+						JOptionPane.showMessageDialog(null, "Pogresna sifra za korisnika");
+					}
+			
+				}catch(NullPointerException ex){
+					JOptionPane.showMessageDialog(null, "Korisnik s unetim korisnicnik imenom ne postoji");
+				}
+			}
+		});
 		
 		passwordField = new JPasswordField();
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -178,7 +206,7 @@ public class Login extends JPanel {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(passwordField)
-								.addComponent(textField)))
+								.addComponent(userNameField)))
 						.addComponent(btnUlogujSe))
 					.addContainerGap())
 		);
@@ -188,7 +216,7 @@ public class Login extends JPanel {
 					.addGap(19)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblUsername)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(userNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPassword)
