@@ -16,4 +16,14 @@ public interface StavkeGetters {
 										double cenaOd, 
 										double cenaDo,
 										boolean prikaziIProdate);
+	public List<StavkaTim2> getSve();
+	
+	public List<BojaTim2> getBoje();
+	
+	public List<MaterijalTim2> getMaterijali();
+	
+	public List<VelicinaTim2> getVelicine();
+	
+	public List<TipTim2> getTipovi();
+	
 }

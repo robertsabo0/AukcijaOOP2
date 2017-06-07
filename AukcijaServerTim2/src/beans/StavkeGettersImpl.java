@@ -58,9 +58,39 @@ public class StavkeGettersImpl implements StavkeGetters{
 		
 		return list;
 	}
-	public List<BojaTim2> getSveBoje(){
-		String query= "SELECT b FROM BojaTim2 b";
-		TypedQuery<BojaTim2> s=em.createQuery(query, BojaTim2.class);
-		return s.getResultList();
+
+	@Override
+	public List<StavkaTim2> getSve() {
+		TypedQuery<StavkaTim2> q=em.createNamedQuery("StavkaTim2.getSve", StavkaTim2.class);
+		return q.getResultList();
 	}
+
+	@Override
+	public List<BojaTim2> getBoje() {
+		TypedQuery<BojaTim2> q = em.createNamedQuery("BojaTim2.getAll", BojaTim2.class);
+		List<BojaTim2> l = q.getResultList();
+		return l;
+	}
+
+	@Override
+	public List<MaterijalTim2> getMaterijali() {
+		TypedQuery<MaterijalTim2> q = em.createNamedQuery("MaterijalTim2.getAll", MaterijalTim2.class);
+		List<MaterijalTim2> l = q.getResultList();
+		return l;
+	}
+
+	@Override
+	public List<VelicinaTim2> getVelicine() {
+		TypedQuery<VelicinaTim2> q = em.createNamedQuery("VelicinaTim2.getAll", VelicinaTim2.class);
+		List<VelicinaTim2> l = q.getResultList();
+		return l;
+	}
+
+	@Override
+	public List<TipTim2> getTipovi() {
+		TypedQuery<TipTim2> q = em.createNamedQuery("TipTim2.getAll", TipTim2.class);
+		List<TipTim2> l = q.getResultList();
+		return l;
+	}
+
 }
