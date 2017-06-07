@@ -5,8 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({@NamedQuery(name="MaterijalTim2.getAll", query="SELECT a FROM MaterijalTim2 a")})
 public class MaterijalTim2 implements Serializable{
 
 	/**
