@@ -3,6 +3,7 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.naming.NamingException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,8 +18,10 @@ public class Aukcija extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * @throws NamingException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NamingException {
+		if(true)return;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
