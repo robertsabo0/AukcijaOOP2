@@ -9,9 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({@NamedQuery(name="StavkaTim2.getNazivi", query="SELECT s.naziv FROM StavkaTim2 s"),
+			  @NamedQuery(name="StakaTim2.getId", query="SELECT s.id FROM StavkaTim2 s"),
+			  @NamedQuery(name="StavkaTim2.getCena", query="SELECT s.aktuelnaCena FROM StavkaTim2 s"),
+			  @NamedQuery(name="StavkaTim2.getDatum", query="SELECT s.datumPostavljanja FROM StavkaTim2 s"),
+			  @NamedQuery(name="StavkaTim2.getSve", query="SELECT s FROM StavkaTim2 s")
+})
 public class StavkaTim2 implements Serializable{
 	
 	/**
