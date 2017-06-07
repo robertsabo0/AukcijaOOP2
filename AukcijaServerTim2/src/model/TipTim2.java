@@ -5,8 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({@NamedQuery(name="TipTim2.getAll", query="SELECT a FROM TipTim2 a")})
 public class TipTim2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
