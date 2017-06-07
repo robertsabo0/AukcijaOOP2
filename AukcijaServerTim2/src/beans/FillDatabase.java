@@ -1,5 +1,9 @@
 package beans;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -10,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import model.BojaTim2;
 import model.CommonTim2;
 import model.MaterijalTim2;
+import model.StavkaTim2;
 import model.TipTim2;
 import model.UserTim2;
 import model.VelicinaTim2;
@@ -30,7 +35,8 @@ public class FillDatabase {
 	
 	
 	@PostConstruct
-	public void postConstruct() {
+	public void postConstruct()  {
+		//popuniBazu();
 		if(em.find(UserTim2.class, "admin") == null){
 
 			System.out.println("Database is not filled yet!");
@@ -43,11 +49,23 @@ public class FillDatabase {
 			fillMaterijal();
 			fillTip();
 			fillVelicina();
+			
 		}
 		System.out.println("Database is filled!");
 	}
 
-
+	public void popuniBazu() throws ParseException{
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = fmt.parse("2013-05-06");
+		for(int i=0;i<10;i++){
+			StavkaTim2 s=new StavkaTim2();
+			s.setAktuelnaCena(100);
+			s.setNaziv("asdasd");
+			s.setDatumPostavljanja(date);
+			em.persist(s);
+			System.out.println("Stavka ubacena");
+		}
+	}
 	private void fillVelicina() {
 		for(String s : velicina){
 			VelicinaTim2 b = new VelicinaTim2();
