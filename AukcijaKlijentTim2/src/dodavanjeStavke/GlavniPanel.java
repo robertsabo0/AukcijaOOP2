@@ -1,15 +1,20 @@
 package dodavanjeStavke;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import javax.swing.Box;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import main.BeansGetter;
+import model.BojaTim2;
+import model.MaterijalTim2;
+import model.TipTim2;
+import model.VelicinaTim2;
 
 public class GlavniPanel extends JPanel {
 	private JTextField textField;
@@ -19,8 +24,9 @@ public class GlavniPanel extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws NamingException 
 	 */
-	public GlavniPanel() {
+	public GlavniPanel() throws NamingException {
 		setLayout(null);
 		JLabel lblNewLabel = new JLabel("Naziv:");
 		lblNewLabel.setBounds(110, 40, 46, 14);
@@ -86,24 +92,36 @@ public class GlavniPanel extends JPanel {
 		lblNewLabel_8.setBounds(10, 11, 382, 14);
 		add(lblNewLabel_8);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<>();
+		java.util.List<BojaTim2> l = BeansGetter.stavkeGetters().getBoje();
+		for(BojaTim2 li : l)
+			comboBox.addItem(li.getOpis());
 		//comboBox.setEditable(true);
-		comboBox.setBounds(217, 117, 86, 20);
+		comboBox.setBounds(217, 117, 175, 20);
 		add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
+		java.util.List<MaterijalTim2> mat = BeansGetter.stavkeGetters().getMaterijali();
+		for(MaterijalTim2 li : mat)
+			comboBox_1.addItem(li.getOpis());
 		//comboBox_1.setEditable(true);
-		comboBox_1.setBounds(217, 157, 86, 20);
+		comboBox_1.setBounds(217, 157, 175, 20);
 		add(comboBox_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(217, 197, 86, 20);
+		java.util.List<TipTim2> tip = BeansGetter.stavkeGetters().getTipovi();
+		for(TipTim2 li : tip)
+			comboBox_2.addItem(li.getOpis());
+		comboBox_2.setBounds(217, 197, 175, 20);
 		//comboBox_2.setEditable(true);
 		add(comboBox_2);
 		
 		JComboBox comboBox_3 = new JComboBox();
+		java.util.List<VelicinaTim2> vel = BeansGetter.stavkeGetters().getVelicine();
+		for(VelicinaTim2 li : vel)
+			comboBox_3.addItem(li.getOpis());
 		//comboBox_3.setEditable(true);
-		comboBox_3.setBounds(217, 237, 86, 20);
+		comboBox_3.setBounds(217, 237, 175, 20);
 		add(comboBox_3);
 		
 
