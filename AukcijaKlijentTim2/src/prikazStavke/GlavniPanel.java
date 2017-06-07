@@ -1,6 +1,7 @@
 package prikazStavke;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
 import model.StavkaTim2;
@@ -16,16 +17,16 @@ public class GlavniPanel extends JPanel {
 	 */
 	public GlavniPanel(StavkaTim2 s) {
 		this.s=s;
-		JSplitPane sp=new JSplitPane();
-		sp.setLayout(new BorderLayout());
+		JScrollPane sp=new JScrollPane();
+		//sp.setLayout(new BorderLayout());
 		setLayout(new BorderLayout());
 		PanelSlika slike=new PanelSlika();
 		PanelKomentari komentari=new PanelKomentari();
 		PanelOpis opis=new PanelOpis(s);
-		sp.add(opis, BorderLayout.CENTER);
-		sp.add(slike, BorderLayout.WEST);
-		sp.add(komentari, BorderLayout.SOUTH);
-		add(sp);
-		sp.setVisible(true);
+		add(opis, BorderLayout.CENTER);
+		add(slike, BorderLayout.WEST);
+		add(komentari, BorderLayout.SOUTH);
+		sp.add(this);
+		//sp.setVisible(true);
 	}
 }

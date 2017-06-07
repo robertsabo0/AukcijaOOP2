@@ -12,7 +12,6 @@ public class PanelSlika extends JPanel {
 		
 		JLabel lblSlika = new JLabel("slika");
 		add(lblSlika);
-
 	}
 
 }

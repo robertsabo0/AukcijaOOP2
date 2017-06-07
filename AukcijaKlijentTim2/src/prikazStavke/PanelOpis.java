@@ -26,18 +26,18 @@ public class PanelOpis extends JPanel {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Naziv:"+s.getNaziv());
-		lblNewLabel.setBounds(35, 21, 52, 14);
+		lblNewLabel.setBounds(35, 21, 131, 14);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Opis:"+s.getOpis());
-		lblNewLabel_1.setBounds(35, 61, 86, 14);
+		lblNewLabel_1.setBounds(35, 61, 184, 14);
 		add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Boja:"+s.getBoja());
-		lblNewLabel_2.setBounds(35, 101, 52, 14);
+		lblNewLabel_2.setBounds(35, 101, 143, 14);
 		add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Materijal:"+s.getMaterijal().getOpis());
+	/*	JLabel lblNewLabel_3 = new JLabel("Materijal:"+s.getMaterijal().getOpis());
 		lblNewLabel_3.setBounds(35, 141, 97, 14);
 		add(lblNewLabel_3);
 		
@@ -52,14 +52,14 @@ public class PanelOpis extends JPanel {
 		JLabel lblNewLabel_6 = new JLabel("Datum postavljanja:"+s.getDatumPostavljanja());
 		lblNewLabel_6.setBounds(35, 261, 151, 14);
 		add(lblNewLabel_6);
-		
-		JLabel lblNewLabel_7 = new JLabel("Postavljeno od strane:"+s.getPostavljenoOdStrane().getIme());
+		*/
+		JLabel lblNewLabel_7 = new JLabel("Postavljeno od strane:"+s.getPostavljenoOdStrane().getUsername());
 		lblNewLabel_7.setBounds(35, 301, 151, 14);
 		add(lblNewLabel_7);
-		
+		/*
 		JLabel lblNewLabel_8 = new JLabel("Aktuelna cena:"+s.getAktuelnaCena());
 		lblNewLabel_8.setBounds(35, 341, 97, 14);
-		add(lblNewLabel_8);
+		add(lblNewLabel_8);*/
 		
 		JLabel lblNewLabel_9 = new JLabel("Postavi cenu:");
 		lblNewLabel_9.setBounds(35, 381, 97, 14);

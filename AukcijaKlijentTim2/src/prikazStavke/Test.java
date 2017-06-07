@@ -10,7 +10,7 @@ public class Test {
 		JFrame f=new JFrame();
 		GlavniPanel g=new GlavniPanel(s);
 		f.add(g);
-		f.setSize(600, 600);
+		f.setSize(300, 300);
 		f.setVisible(true);
 	}
 }
