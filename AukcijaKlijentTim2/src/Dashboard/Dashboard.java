@@ -34,6 +34,7 @@ import javax.swing.JScrollPane;
 import beans.StavkeGetters;
 import main.Aukcija;
 import model.StavkaTim2;
+import prikazStavke.GlavniPanel;
 
 public class Dashboard extends JPanel{
 	
@@ -83,10 +84,22 @@ public class Dashboard extends JPanel{
 			 stavka.setLayout(new BoxLayout(stavka, BoxLayout.Y_AXIS));
 			 s=stavke.get(i);
 			 JLabel naziv=new JLabel("Naziv: "+s.getNaziv());
-			 JLabel cena=new JLabel("Cena: "+s.getAktuelnaCena());
+			 JLabel cena;
+			 if(s.isProdata()){
+				 cena=new JLabel("Prodato za: "+s.getAktuelnaCena());
+				 cena.setBackground(Color.GREEN);
+				
+				
+			 }
+			 else{
+				 cena=new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
+				 cena.setBackground(Color.RED);
+				 cena.setOpaque(true);
+			 }
+			 
 			 JLabel	datum=new JLabel("Datum postavljanja: "+s.getDatumPostavljanja());
 			 dugme=new JButton("Prikazi");
-			 dugme.addActionListener(new ProsledjivanjeStavke());
+			 dugme.addActionListener(new ProsledjivanjeStavke(s));
 			 stavka.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
 			 stavka.add(naziv);
 			 stavka.add(cena);
@@ -97,10 +110,13 @@ public class Dashboard extends JPanel{
 		// skrol.add(this);
 	 }
 	 private class ProsledjivanjeStavke implements ActionListener{
-
+		 StavkaTim2 s;
+		 public ProsledjivanjeStavke(StavkaTim2 s){
+			 this.s=s;
+		 }
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//GlavniPanel g=new GlavniPanel(s);
+			GlavniPanel g=new GlavniPanel(s);
 			
 		}
 		 
