@@ -37,7 +37,7 @@ public class PanelOpis extends JPanel {
 		lblNewLabel_2.setBounds(35, 101, 143, 14);
 		add(lblNewLabel_2);
 		
-	/*	JLabel lblNewLabel_3 = new JLabel("Materijal:"+s.getMaterijal().getOpis());
+		JLabel lblNewLabel_3 = new JLabel("Materijal:"+s.getMaterijal().getOpis());
 		lblNewLabel_3.setBounds(35, 141, 97, 14);
 		add(lblNewLabel_3);
 		
@@ -59,7 +59,7 @@ public class PanelOpis extends JPanel {
 		
 		JLabel lblNewLabel_8 = new JLabel("Aktuelna cena:"+s.getAktuelnaCena());
 		lblNewLabel_8.setBounds(35, 341, 97, 14);
-		add(lblNewLabel_8);*/
+		add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Postavi cenu:");
 		lblNewLabel_9.setBounds(35, 381, 97, 14);
