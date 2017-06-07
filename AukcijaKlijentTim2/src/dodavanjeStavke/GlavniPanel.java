@@ -7,14 +7,13 @@ import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GlavniPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
 
@@ -65,26 +64,6 @@ public class GlavniPanel extends JPanel {
 		add(textField_1);
 		textField_1.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(217, 117, 86, 20);
-		add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(217, 157, 86, 20);
-		add(textField_3);
-		textField_3.setColumns(10);
-		
-		textField_4 = new JTextField();
-		textField_4.setBounds(217, 197, 86, 20);
-		add(textField_4);
-		textField_4.setColumns(10);
-		
-		textField_5 = new JTextField();
-		textField_5.setBounds(217, 237, 86, 20);
-		add(textField_5);
-		textField_5.setColumns(10);
-		
 		textField_6 = new JTextField();
 		textField_6.setBounds(217, 277, 86, 20);
 		add(textField_6);
@@ -96,12 +75,36 @@ public class GlavniPanel extends JPanel {
 		textField_7.setColumns(10);
 		
 		JButton btnNewButton = new JButton("postavi");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(357, 362, 89, 23);
 		add(btnNewButton);
 		
 		JLabel lblNewLabel_8 = new JLabel("Prostor za dodavanje novog proizvoda na aukciju");
 		lblNewLabel_8.setBounds(10, 11, 382, 14);
 		add(lblNewLabel_8);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setEditable(true);
+		comboBox.setBounds(217, 117, 86, 20);
+		add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setEditable(true);
+		comboBox_1.setBounds(217, 157, 86, 20);
+		add(comboBox_1);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(217, 197, 86, 20);
+		comboBox_2.setEditable(true);
+		add(comboBox_2);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setEditable(true);
+		comboBox_3.setBounds(217, 237, 86, 20);
+		add(comboBox_3);
 		
 
 	}

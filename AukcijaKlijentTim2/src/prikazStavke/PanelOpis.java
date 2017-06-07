@@ -52,11 +52,11 @@ public class PanelOpis extends JPanel {
 		JLabel lblNewLabel_6 = new JLabel("Datum postavljanja:"+s.getDatumPostavljanja());
 		lblNewLabel_6.setBounds(35, 261, 151, 14);
 		add(lblNewLabel_6);
-		*/
+		
 		JLabel lblNewLabel_7 = new JLabel("Postavljeno od strane:"+s.getPostavljenoOdStrane().getUsername());
 		lblNewLabel_7.setBounds(35, 301, 151, 14);
 		add(lblNewLabel_7);
-		/*
+		
 		JLabel lblNewLabel_8 = new JLabel("Aktuelna cena:"+s.getAktuelnaCena());
 		lblNewLabel_8.setBounds(35, 341, 97, 14);
 		add(lblNewLabel_8);*/

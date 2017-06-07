@@ -65,4 +65,9 @@ public class StavkeGettersImpl implements StavkeGetters{
 		return q.getResultList();
 	}
 
+	public List<BojaTim2> getSveBoje(){
+		String query= "SELECT b FROM BojaTim2 b";
+		TypedQuery<BojaTim2> s=em.createQuery(query, BojaTim2.class);
+		return s.getResultList();
+	}
 }

@@ -7,8 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+			  @NamedQuery(name="KomentarTim2.getSve", query="SELECT k FROM KomentarTim2 k")
+})
+
+
+
 public class KomentarTim2 implements Serializable{
 
 	/**
