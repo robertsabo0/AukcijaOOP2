@@ -16,4 +16,5 @@ public interface StavkeGetters {
 										double cenaOd, 
 										double cenaDo,
 										boolean prikaziIProdate);
+	public List<StavkaTim2> getSve();
 }

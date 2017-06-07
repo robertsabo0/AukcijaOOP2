@@ -59,4 +59,10 @@ public class StavkeGettersImpl implements StavkeGetters{
 		return list;
 	}
 
+	@Override
+	public List<StavkaTim2> getSve() {
+		TypedQuery<StavkaTim2> q=em.createNamedQuery("StavkaTim2.getSve", StavkaTim2.class);
+		return q.getResultList();
+	}
+
 }
