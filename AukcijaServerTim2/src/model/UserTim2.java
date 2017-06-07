@@ -21,6 +21,7 @@ public class UserTim2 implements Serializable{
 	private String prezime;
 	private String email;
 	private String opis;
+	private String password;
 	
 	// TODO: dopuniti potrebnim podacima pri 
 	// 		 izradi dela za registaciju
@@ -61,6 +62,13 @@ public class UserTim2 implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
