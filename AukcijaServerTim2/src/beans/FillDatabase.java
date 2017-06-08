@@ -38,15 +38,7 @@ public class FillDatabase {
 	
 	
 	@PostConstruct
-<<<<<<< HEAD
-	public void postConstruct() throws ParseException  {
-//		try {
-//			this.dodajKomentar();
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-=======
+
 	public void postConstruct()  {
 		try {
 			this.dodajKomentar();
@@ -54,9 +46,13 @@ public class FillDatabase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
->>>>>>> b135350337015a92b6a014f7d8d51144ecd638fb
-		//popuniBazu();
+
+		try {
+			popuniBazu();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		popuniPonude();
 		if(em.find(UserTim2.class, "admin") == null){
 
@@ -100,14 +96,9 @@ public class FillDatabase {
 			p.setStavka(em.find(StavkaTim2.class, l1));
 			p.setStavka(em.find(StavkaTim2.class, l2));
 			em.persist(p);
-<<<<<<< HEAD
-		
-	}
-=======
 		}
-	}
+	
 
->>>>>>> b135350337015a92b6a014f7d8d51144ecd638fb
 	public void dodajKomentar() throws ParseException{
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		Date datee = fmt.parse("2013-05-06");
