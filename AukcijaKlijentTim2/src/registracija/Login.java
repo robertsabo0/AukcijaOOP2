@@ -177,12 +177,13 @@ public class Login extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					UserTim2 user= BeansGetter.sessionStavka().loginUser(userNameField.getText(),passwordField.getPassword());
-						
-						/*if (BeansGetter.sessionStavka().getUlogovan()){
+					if (user!=null)
+						System.out.println("Ulogovao se");
+					if (BeansGetter.sessionStavka().getUlogovan()){
 								frame.getJMenuBar().removeAll();
 								OnlineBar bar = new OnlineBar(frame);
 								frame.setJMenuBar(bar);
-						}*/
+					}
 			
 				}catch(NullPointerException ex){
 					JOptionPane.showMessageDialog(null, "Korisnik s unetim korisnicnik imenom ne postoji");
