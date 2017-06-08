@@ -12,7 +12,7 @@ public class TestFrame extends JFrame{
 	public static void main(String[] args) {
 		JFrame f=new TestFrame();
 		f.setTitle("Aukcija");
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		f.setSize(600, 600);
 		f.setContentPane(SearchPanel.showMe());
 		f.pack();

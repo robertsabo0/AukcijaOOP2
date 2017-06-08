@@ -1,8 +1,6 @@
 package search;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +14,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeListener;
 
 import main.BeansGetter;
 import model.BojaTim2;
 import model.MaterijalTim2;
+import model.StavkaTim2;
 import model.TipTim2;
 import model.VelicinaTim2;
 
 class FiltersPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	BojaTim2[] boje;
 	VelicinaTim2[] velicine;
 	TipTim2[] tipovi;
@@ -64,8 +66,8 @@ class FiltersPanel extends JPanel {
 
 		initializeBoxes();
 		GridLayout gridLayout = new GridLayout(1, 5);
-		gridLayout.setHgap(25);
-		gridLayout.setVgap(25);
+		gridLayout.setHgap(10);
+		gridLayout.setVgap(10);
 		setLayout(gridLayout);		
 
 		JPanel bojePanel = new JPanel();
@@ -128,6 +130,7 @@ class FiltersPanel extends JPanel {
 		ostaloPanel.add(Box.createVerticalGlue());
 		
 		Box boxOd = new Box(BoxLayout.X_AXIS);
+		boxOd.setSize(10000, 11000);
 		boxOd.add(new JLabel("Minimalna cena: "));
 		boxOd.add(cenaOd);
 		ostaloPanel.add(boxOd);
@@ -161,9 +164,7 @@ class FiltersPanel extends JPanel {
 		}
 		
 		cenaOd = new JSpinner(new SpinnerNumberModel(0, 0, 10_000_000, 1000));
-		cenaOd.setPreferredSize(new Dimension(4, 10));
-		cenaDo = new JSpinner(new SpinnerNumberModel(10_000_000, 0, 10_000_000, 1000));
-		cenaDo.setBounds(new Rectangle(25, 10));
+		cenaDo = new JSpinner(new SpinnerNumberModel(10_000_000, 0, 100_000_000, 1000));
 		
 		showButton = new JButton("Prikazi");
 		showButton.addActionListener(e -> showFiltered());
@@ -217,6 +218,7 @@ class FiltersPanel extends JPanel {
 		
 		JOptionPane.showConfirmDialog(null, sb.toString());
 		
-		//BeansGetter.stavkeGetters().getStavkaFiltered(bojeFilter, materijaliFilter, velicineFilter, tipoviFilter, (double)cenaOd.getValue(),(double)cenaDo.getValue(), showProdate);
+		BeansGetter.stavkeGetters().getStavkaFiltered(bojeFilter, materijaliFilter, velicineFilter, tipoviFilter, Double.parseDouble(cenaOd.getValue().toString()),Double.parseDouble(cenaDo.getValue().toString()), showProdate);
+		
 	}
 }

@@ -37,15 +37,15 @@ public class StavkeGettersImpl implements StavkeGetters{
 		if(cenaOd <= 0) cenaOd = 0;
 		if(cenaDo <= 0) cenaDo = Double.MAX_VALUE;
 		
-		String query = "FROM StavkaTim2 s "
-										+ "WHERE s.boje IN :boje"
-										+ " AND s.materijal IN :materijal"
-										+ " AND s.velicina IN :velicine"
-										+ " AND s.tip IN :tipovi"
+		String query = "SELECT s FROM StavkaTim2 s "//27
+										+ "WHERE s.boja IN (:boje)"//56
+										+ " AND s.materijal IN (:materijal)"
+										+ " AND s.velicina IN (:velicine)"
+										+ " AND s.tip IN (:tipovi)"
 										+ " AND s.aktuelnaCena >= :cenaOd AND s.aktuelnaCena <= :cenaDo";
 		
 		if(!prikaziIProdate){
-			query +=" AND s.prodato == false";
+			query +=" AND s.prodata = false";
 		}
 		
 		TypedQuery<StavkaTim2> s = em.createQuery(query, StavkaTim2.class);

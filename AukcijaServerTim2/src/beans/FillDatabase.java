@@ -40,20 +40,6 @@ public class FillDatabase {
 	@PostConstruct
 
 	public void postConstruct()  {
-		try {
-			this.dodajKomentar();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			popuniBazu();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		popuniPonude();
 		if(em.find(UserTim2.class, "admin") == null){
 
 			System.out.println("Database is not filled yet!");
