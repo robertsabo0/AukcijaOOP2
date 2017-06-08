@@ -1,5 +1,6 @@
 package Dashboard;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -31,6 +32,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import beans.StavkeGetters;
 import main.Aukcija;
@@ -79,17 +81,22 @@ public class Dashboard extends JPanel{
 	 
 	 
 	 public Dashboard() throws NamingException{
-		 this.setLayout(new FlowLayout());
-<<<<<<< HEAD
+		 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 		 
-		 List<StavkaTim2> licitirane=getDashboardStavka().licitiraneStavke("admin");
-		 List<StavkaTim2> postavljene=getDashboardStavka().postavljeneStavke("admin");
-=======
+		 List<StavkaTim2> licitirane=BeansGetter.stavkeGetters().licitiraneStavke("admin");
+		 List<StavkaTim2> postavljene=BeansGetter.stavkeGetters().postavljeneStavke("admin");
+
 		 List<StavkaTim2> stavke= BeansGetter.stavkeGetters().getSve();
->>>>>>> 95b2530d06f45c990b6dfbd62ee224382a4b7c1e
-		 JScrollPane skrol=new JScrollPane();
-		 JLabel l1=new JLabel("Licitirane stavke: ");
-		 add(l1);
+
+		 
+		 
+		 JLabel licitiraneL=new JLabel("Licitirane stavke: ");
+		 licitiraneL.setHorizontalAlignment(SwingConstants.CENTER);
+		 add(licitiraneL);
+		 JPanel flow1=new JPanel();
+		 flow1.setLayout(new FlowLayout());
+		 add(flow1);
 		 for(int i=0;i<licitirane.size();i++){
 			 JPanel stavka=new JPanel();
 			 stavka.setLayout(new BoxLayout(stavka, BoxLayout.Y_AXIS));
@@ -98,12 +105,13 @@ public class Dashboard extends JPanel{
 			 JLabel cena;
 			 if(s.isProdata()){
 				 cena=new JLabel("Prodato za: "+s.getAktuelnaCena());
-				
+				 cena.setForeground(Color.RED);
 				
 			 }
 			 else{
 				 cena=new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
-				 cena.setBackground(Color.RED);
+				 cena.setForeground(Color.GREEN);
+				// cena.settex
 				
 			 }
 			 
@@ -115,9 +123,15 @@ public class Dashboard extends JPanel{
 			 stavka.add(cena);
 			 stavka.add(datum);
 			 stavka.add(dugme);
-			 add(stavka);
+			 flow1.add(stavka);
 		 }
-		 this.add(new JLabel("Postavljene stavke: "));
+		 
+		 JLabel postavljeneL=new JLabel("Postavljene stavke: ");
+		 postavljeneL.setHorizontalAlignment(SwingConstants.CENTER);
+		 add(postavljeneL);
+		 JPanel flow2=new JPanel();
+		 flow1.setLayout(new FlowLayout());
+		 add(flow2);
 		 for(int i=0;i<postavljene.size();i++){
 			 JPanel stavka=new JPanel();
 			 stavka.setLayout(new BoxLayout(stavka, BoxLayout.Y_AXIS));
@@ -126,14 +140,14 @@ public class Dashboard extends JPanel{
 			 JLabel cena;
 			 if(s.isProdata()){
 				 cena=new JLabel("Prodato za: "+s.getAktuelnaCena());
-				 cena.setBackground(Color.GREEN);
+				 cena.setForeground(Color.RED);
 				
 				
 			 }
 			 else{
 				 cena=new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
-				 cena.setBackground(Color.RED);
-				 cena.setOpaque(true);
+				 cena.setForeground(Color.GREEN);
+				 
 			 }
 			 
 			 JLabel	datum=new JLabel("Datum postavljanja: "+s.getDatumPostavljanja());
@@ -144,7 +158,7 @@ public class Dashboard extends JPanel{
 			 stavka.add(cena);
 			 stavka.add(datum);
 			 stavka.add(dugme);
-			 add(stavka);
+			 flow2.add(stavka);
 		 }
 		 
 		// skrol.add(this);
