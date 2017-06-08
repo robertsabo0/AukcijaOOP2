@@ -1,6 +1,8 @@
 package search;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
 
 import main.BeansGetter;
 import model.BojaTim2;
@@ -32,6 +38,9 @@ class FiltersPanel extends JPanel {
 	JCheckBox showSold;
 	
 	JButton showButton;
+	
+	JSpinner cenaOd;
+	JSpinner cenaDo;
 	
 	public static void main(String[] args) {
 		TestFrame.main(args);
@@ -117,6 +126,17 @@ class FiltersPanel extends JPanel {
 		ostaloPanel.setLayout(boxLayou); 
 		ostaloPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 		ostaloPanel.add(Box.createVerticalGlue());
+		
+		Box boxOd = new Box(BoxLayout.X_AXIS);
+		boxOd.add(new JLabel("Minimalna cena: "));
+		boxOd.add(cenaOd);
+		ostaloPanel.add(boxOd);
+		
+		Box boxDo = new Box(BoxLayout.X_AXIS);
+		boxDo.add(new JLabel("Maksimalna cena: "));
+		boxDo.add(cenaDo);
+		ostaloPanel.add(boxDo);
+		
 		ostaloPanel.add(showSold);
 		ostaloPanel.add(showButton);
 		
@@ -125,23 +145,30 @@ class FiltersPanel extends JPanel {
 	}
 
 	private void initializeBoxes() {
-		showSold = new JCheckBox("Prikazi prodate");
+		showSold = new JCheckBox("Prikazi prodate", false);
 		
 		for(int i = 0 ; i < bojeBoxes.length; i++){
-			bojeBoxes[i]= new JCheckBox(boje[i].getOpis());
+			bojeBoxes[i]= new JCheckBox(boje[i].getOpis(), true);
 		}
 		for(int i = 0 ; i < velicineBoxes.length; i++){
-			velicineBoxes[i]= new JCheckBox(velicine[i].getOpis());
+			velicineBoxes[i]= new JCheckBox(velicine[i].getOpis(), true);
 		}
 		for(int i = 0 ; i < tipoviBoxes.length; i++){
-			tipoviBoxes[i]= new JCheckBox(tipovi[i].getOpis());
+			tipoviBoxes[i]= new JCheckBox(tipovi[i].getOpis(), true);
 		}
 		for(int i = 0 ; i < materijaliBoxes.length; i++){
-			materijaliBoxes[i]= new JCheckBox(materijali[i].getOpis());
+			materijaliBoxes[i]= new JCheckBox(materijali[i].getOpis(), true);
 		}
+		
+		cenaOd = new JSpinner(new SpinnerNumberModel(0, 0, 10_000_000, 1000));
+		cenaOd.setPreferredSize(new Dimension(4, 10));
+		cenaDo = new JSpinner(new SpinnerNumberModel(10_000_000, 0, 10_000_000, 1000));
+		cenaDo.setBounds(new Rectangle(25, 10));
 		
 		showButton = new JButton("Prikazi");
 		showButton.addActionListener(e -> showFiltered());
+		
+		showFiltered();
 	}
 	
 	public void showFiltered(){
@@ -185,7 +212,11 @@ class FiltersPanel extends JPanel {
 		tipoviFilter.forEach( t -> sb.append(t.getOpis()+" "));
 		sb.append("\n Materijali: ");
 		materijaliFilter.forEach( t -> sb.append(t.getOpis()+" "));
+		sb.append("\n Cena od: "+cenaOd.getValue());
+		sb.append("\n Ceba do: "+cenaDo.getValue());
 		
 		JOptionPane.showConfirmDialog(null, sb.toString());
+		
+		//BeansGetter.stavkeGetters().getStavkaFiltered(bojeFilter, materijaliFilter, velicineFilter, tipoviFilter, (double)cenaOd.getValue(),(double)cenaDo.getValue(), showProdate);
 	}
 }

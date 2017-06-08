@@ -60,9 +60,8 @@ public class Dashboard extends JPanel{
 		 add(flow1);
 
 		 for(int i=0;i<licitirane.size();i++){
-			 s=licitirane.get(i);
-			 add(new SmallStavkaPanel(s));
-
+			 JPanel stavka=new SmallStavkaPanel(licitirane.get(i));
+			 flow1.add(stavka);
 		 }
 		 
 		 JLabel postavljeneL=new JLabel("Postavljene stavke: ");
@@ -72,11 +71,11 @@ public class Dashboard extends JPanel{
 		 flow2.setLayout(new FlowLayout());
 		 add(flow2);
 		 for(int i=0;i<postavljene.size();i++){
-			 s=postavljene.get(i);
-			 add(new SmallStavkaPanel(s));
+			 JPanel stavka=new SmallStavkaPanel(postavljene.get(i));
+			 flow2.add(stavka);
 		 }
 		 
 		// skrol.add(this);
 	 }
-	 
+
 }

@@ -25,7 +25,12 @@ public class VelicinaTim2 implements Serializable{
 		return id;
 	}
 
-	public String getOpis() {
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return opis;
+	}
+	public String getOpis(){
 		return opis;
 	}
 	public void setOpis(String opis) {

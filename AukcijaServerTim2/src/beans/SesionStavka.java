@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import model.CommonTim2;
 import model.KomentarTim2;
+import model.StavkaTim2;
 import model.UserTim2;
 
 @Stateful
@@ -27,6 +28,30 @@ public class SesionStavka implements SesionStavkaI {
 		TypedQuery<KomentarTim2> q = em.createNamedQuery("KomentarTim2.getSve", KomentarTim2.class);
 		q.setParameter("id", id);
 		return q.getResultList();
+	}
+	
+	
+	@Override
+	public void sacuvajKomentar(KomentarTim2 k) {
+		if(k!=null){
+			em.persist(k);
+		}
+	}
+
+	
+
+	@Override
+	public void sacuvajStavku(StavkaTim2 s) {
+		if(s!=null){
+			em.persist(s);
+		}
+		
+	}
+
+
+	@Override
+	public UserTim2 vratiUlogovanog() {
+		return korisnik;
 	}
 
 	// pokusava da uloguje korisnika

@@ -3,6 +3,9 @@ package dodavanjeStavke;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.naming.NamingException;
 import javax.swing.JButton;
@@ -14,6 +17,7 @@ import javax.swing.JTextField;
 import main.BeansGetter;
 import model.BojaTim2;
 import model.MaterijalTim2;
+import model.StavkaTim2;
 import model.TipTim2;
 import model.VelicinaTim2;
 
@@ -73,7 +77,7 @@ public class PodaciPanel extends JPanel {
 		gbc_lblNewLabel_2.gridy = 5;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<BojaTim2>comboBox = new JComboBox<>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -81,7 +85,7 @@ public class PodaciPanel extends JPanel {
 		gbc_comboBox.gridy = 5;
 		java.util.List<BojaTim2> l = BeansGetter.stavkeGetters().getBoje();
 		for(BojaTim2 li : l)
-			comboBox.addItem(li.getOpis());
+			comboBox.addItem(li);
 		add(comboBox, gbc_comboBox);
 		
 		JLabel lblNewLabel_3 = new JLabel("Materijal:");
@@ -91,7 +95,7 @@ public class PodaciPanel extends JPanel {
 		gbc_lblNewLabel_3.gridy = 7;
 		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		JComboBox<MaterijalTim2> comboBox_1 = new JComboBox<>();
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
@@ -99,7 +103,7 @@ public class PodaciPanel extends JPanel {
 		gbc_comboBox_1.gridy = 7;
 		java.util.List<MaterijalTim2> mat = BeansGetter.stavkeGetters().getMaterijali();
 		for(MaterijalTim2 li : mat)
-			comboBox_1.addItem(li.getOpis());
+			comboBox_1.addItem(li);
 		add(comboBox_1, gbc_comboBox_1);
 		
 		
@@ -110,7 +114,7 @@ public class PodaciPanel extends JPanel {
 		gbc_lblNewLabel_4.gridy = 9;
 		add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		JComboBox comboBox_2 = new JComboBox();
+		JComboBox<TipTim2> comboBox_2 = new JComboBox<>();
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
 		gbc_comboBox_2.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
@@ -118,7 +122,7 @@ public class PodaciPanel extends JPanel {
 		gbc_comboBox_2.gridy = 9;
 		java.util.List<TipTim2> tip = BeansGetter.stavkeGetters().getTipovi();
 		for(TipTim2 li : tip)
-			comboBox_2.addItem(li.getOpis());
+			comboBox_2.addItem(li);
 		add(comboBox_2, gbc_comboBox_2);
 		
 		JLabel lblNewLabel_5 = new JLabel("Velicnia:");
@@ -128,7 +132,7 @@ public class PodaciPanel extends JPanel {
 		gbc_lblNewLabel_5.gridy = 11;
 		add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
-		JComboBox comboBox_3 = new JComboBox();
+		JComboBox<VelicinaTim2> comboBox_3 = new JComboBox<>();
 		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
 		gbc_comboBox_3.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
@@ -136,7 +140,7 @@ public class PodaciPanel extends JPanel {
 		gbc_comboBox_3.gridy = 11;
 		java.util.List<VelicinaTim2> vel = BeansGetter.stavkeGetters().getVelicine();
 		for(VelicinaTim2 li : vel)
-			comboBox_3.addItem(li.getOpis());
+			comboBox_3.addItem(li);
 		add(comboBox_3, gbc_comboBox_3);
 		
 		JLabel lblNewLabel_6 = new JLabel("Minimalna cena:");
@@ -172,6 +176,25 @@ public class PodaciPanel extends JPanel {
 		textField_3.setColumns(10);
 		
 		JButton btnNewButton = new JButton("postavi");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StavkaTim2 s=new StavkaTim2();
+				s.setNaziv(textField.getText());
+				s.setOpis(textField_1.getText());
+				s.setDatumPostavljanja(new Date());
+				s.setAktuelnaCena(Integer.parseInt(textField_2.getText()));
+				s.setBoja(comboBox.getPrototypeDisplayValue());
+				s.setMaterijal(comboBox_1.getPrototypeDisplayValue());
+				s.setTip(comboBox_2.getPrototypeDisplayValue());
+				s.setVelicina(comboBox_3.getPrototypeDisplayValue());
+				try {
+					BeansGetter.sessionStavka().sacuvajStavku(s);
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton.gridx = 4;
