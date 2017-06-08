@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import model.CommonTim2;
 import model.KomentarTim2;
+import model.StavkaTim2;
 import model.UserTim2;
 
 @Stateful
@@ -19,7 +20,7 @@ public class SesionStavka implements SesionStavkaI {
 	@PersistenceContext(name = CommonTim2.persistanceName)
 	private EntityManager em;
 
-	private UserTim2 korisnik;
+	private UserTim2 korisnik= new UserTim2();
 	public static boolean ulogovan = false;
 
 	@Override
@@ -28,12 +29,38 @@ public class SesionStavka implements SesionStavkaI {
 		q.setParameter("id", id);
 		return q.getResultList();
 	}
+	
+	
+	@Override
+	public void sacuvajKomentar(KomentarTim2 k) {
+		if(k!=null){
+			em.persist(k);
+		}
+	}
+
+	
+
+	@Override
+	public void sacuvajStavku(StavkaTim2 s) {
+		if(s!=null){
+			em.persist(s);
+		}
+		
+	}
+
+
+	@Override
+	public UserTim2 vratiUlogovanog() {
+		return korisnik;
+	}
 
 	// pokusava da uloguje korisnika
 	@Override
-	public UserTim2 loginUser(String userName, char[] password) throws LosaLozinkaException {
-		UserTim2 k = em.find(UserTim2.class, userName);
-		if (korisnik != null) {
+	public UserTim2 loginUser(String userName, char[] password) throws LosaLozinkaException, NullPointerException {
+		TypedQuery<UserTim2> q = em.createNamedQuery("UserTim2.findUser", UserTim2.class);
+		q.setParameter("username", userName);
+		UserTim2 k = q.getSingleResult();
+		if (k != null) {
 			String str = "";
 			for (char c : password) {
 				str += c;
@@ -52,7 +79,8 @@ public class SesionStavka implements SesionStavkaI {
 				throw new LosaLozinkaException();
 			}
 		} else {
-			throw new NullPointerException();
+			System.out.println("Ne posotji user");
+			return null;
 		}
 	}
 

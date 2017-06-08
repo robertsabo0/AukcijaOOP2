@@ -5,9 +5,15 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	  @NamedQuery(name="UserTim2.findUser", query="SELECT u FROM UserTim2 u where u.username = :username")
+})
+
 public class UserTim2 implements Serializable{
 	
 	/**
