@@ -21,7 +21,7 @@ public class PanelKomentari extends JPanel {
 	public PanelKomentari() {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		List<KomentarTim2> kom=null;
-		try {
+		/*try {
 			kom=BeansGetter.sessionStavka().getSve();
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
@@ -39,7 +39,7 @@ public class PanelKomentari extends JPanel {
 			p.add(datum);
 			p.add(opis);
 			this.add(p);
-		}
+		}*/
 	}
 
 }
