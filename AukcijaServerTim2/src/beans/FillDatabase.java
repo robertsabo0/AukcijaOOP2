@@ -10,9 +10,11 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import model.BojaTim2;
 import model.CommonTim2;
+import model.KomentarTim2;
 import model.MaterijalTim2;
 import model.StavkaTim2;
 import model.TipTim2;
@@ -36,6 +38,13 @@ public class FillDatabase {
 	
 	@PostConstruct
 	public void postConstruct()  {
+		try {
+			this.dodajKomentar();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//popuniBazu();
 		if(em.find(UserTim2.class, "admin") == null){
 
@@ -64,6 +73,16 @@ public class FillDatabase {
 			s.setDatumPostavljanja(date);
 			em.persist(s);
 			System.out.println("Stavka ubacena");
+		}
+	}
+	public void dodajKomentar() throws ParseException{
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		Date datee = fmt.parse("2013-05-06");
+		for(int i=0;i<10;i++){
+			KomentarTim2 k=new KomentarTim2();
+			k.setPostaljeno(datee);
+			k.setSadrzaj("assfdghjgfdsdfgh");
+			em.persist(k);
 		}
 	}
 	private void fillVelicina() {
