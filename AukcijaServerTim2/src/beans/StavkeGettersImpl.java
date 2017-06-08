@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,8 +13,10 @@ import javax.persistence.TypedQuery;
 import model.BojaTim2;
 import model.CommonTim2;
 import model.MaterijalTim2;
+import model.PonudaTim2;
 import model.StavkaTim2;
 import model.TipTim2;
+import model.UserTim2;
 import model.VelicinaTim2;
 
 @Stateless
@@ -91,6 +94,23 @@ public class StavkeGettersImpl implements StavkeGetters{
 		TypedQuery<TipTim2> q = em.createNamedQuery("TipTim2.getAll", TipTim2.class);
 		List<TipTim2> l = q.getResultList();
 		return l;
+	}
+
+	@Override
+	public List<StavkaTim2> postavljeneStavke(String username) {
+		System.out.println("aaaaaaaaaaaaaaaa");
+		TypedQuery<StavkaTim2> q=em.createNamedQuery("StavkaTim2.getPostavljeneStavkeUsera", StavkaTim2.class);
+		q.setParameter("user", em.find(UserTim2.class, username));
+		return q.getResultList();
+		
+	}
+
+	@Override
+	public List<StavkaTim2> licitiraneStavke(String username) {
+		TypedQuery<StavkaTim2> q=em.createNamedQuery("StavkaTim2.getLicitiraneStavke", StavkaTim2.class);
+		q.setParameter("user", em.find(UserTim2.class, username));
+		return q.getResultList();
+		
 	}
 
 }

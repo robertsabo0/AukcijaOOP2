@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import model.BojaTim2;
 import model.CommonTim2;
 import model.MaterijalTim2;
+import model.PonudaTim2;
 import model.StavkaTim2;
 import model.TipTim2;
 import model.UserTim2;
@@ -35,8 +36,9 @@ public class FillDatabase {
 	
 	
 	@PostConstruct
-	public void postConstruct()  {
+	public void postConstruct() throws ParseException  {
 		//popuniBazu();
+		//popuniPonude();
 		if(em.find(UserTim2.class, "admin") == null){
 
 			System.out.println("Database is not filled yet!");
@@ -62,8 +64,17 @@ public class FillDatabase {
 			s.setAktuelnaCena(100);
 			s.setNaziv("asdasd");
 			s.setDatumPostavljanja(date);
+			s.setPostavljenoOdStrane(em.find(UserTim2.class, "admin"));
 			em.persist(s);
 			System.out.println("Stavka ubacena");
+		}
+	}
+	public void popuniPonude(){
+		for(int i=0;i<10;i++){
+			PonudaTim2 p=new PonudaTim2();
+			p.setUser(em.find(UserTim2.class, "admin"));
+			p.setVrednost(25);
+			em.persist(p);
 		}
 	}
 	private void fillVelicina() {

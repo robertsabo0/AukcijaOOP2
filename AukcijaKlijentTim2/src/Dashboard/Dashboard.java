@@ -1,6 +1,7 @@
 package Dashboard;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -34,6 +35,7 @@ import javax.swing.JScrollPane;
 import beans.StavkeGetters;
 import main.Aukcija;
 import model.StavkaTim2;
+import model.UserTim2;
 import prikazStavke.GlavniPanel;
 
 public class Dashboard extends JPanel{
@@ -77,12 +79,44 @@ public class Dashboard extends JPanel{
 	 
 	 public Dashboard() throws NamingException{
 		 this.setLayout(new FlowLayout());
-		 List<StavkaTim2> stavke=getDashboardStavka().getSve();
+		 
+		 List<StavkaTim2> licitirane=getDashboardStavka().licitiraneStavke("admin");
+		 List<StavkaTim2> postavljene=getDashboardStavka().postavljeneStavke("admin");
 		 JScrollPane skrol=new JScrollPane();
-		 for(int i=0;i<stavke.size();i++){
+		 JLabel l1=new JLabel("Licitirane stavke: ");
+		 add(l1);
+		 for(int i=0;i<licitirane.size();i++){
 			 JPanel stavka=new JPanel();
 			 stavka.setLayout(new BoxLayout(stavka, BoxLayout.Y_AXIS));
-			 s=stavke.get(i);
+			 s=licitirane.get(i);
+			 JLabel naziv=new JLabel("Naziv: "+s.getNaziv());
+			 JLabel cena;
+			 if(s.isProdata()){
+				 cena=new JLabel("Prodato za: "+s.getAktuelnaCena());
+				
+				
+			 }
+			 else{
+				 cena=new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
+				 cena.setBackground(Color.RED);
+				
+			 }
+			 
+			 JLabel	datum=new JLabel("Datum postavljanja: "+s.getDatumPostavljanja());
+			 dugme=new JButton("Prikazi");
+			 dugme.addActionListener(new ProsledjivanjeStavke(s));
+			 stavka.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
+			 stavka.add(naziv);
+			 stavka.add(cena);
+			 stavka.add(datum);
+			 stavka.add(dugme);
+			 add(stavka);
+		 }
+		 this.add(new JLabel("Postavljene stavke: "));
+		 for(int i=0;i<postavljene.size();i++){
+			 JPanel stavka=new JPanel();
+			 stavka.setLayout(new BoxLayout(stavka, BoxLayout.Y_AXIS));
+			 s=postavljene.get(i);
 			 JLabel naziv=new JLabel("Naziv: "+s.getNaziv());
 			 JLabel cena;
 			 if(s.isProdata()){
@@ -107,6 +141,7 @@ public class Dashboard extends JPanel{
 			 stavka.add(dugme);
 			 add(stavka);
 		 }
+		 
 		// skrol.add(this);
 	 }
 	 private class ProsledjivanjeStavke implements ActionListener{
