@@ -6,10 +6,12 @@ import javax.swing.JTextField;
 
 import com.sun.beans.editors.IntegerEditor;
 
+import main.BeansGetter;
 import model.StavkaTim2;
 
 import java.awt.Dimension;
 
+import javax.naming.NamingException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.FocusAdapter;
@@ -131,8 +133,6 @@ public class PanelOpis extends JPanel {
 					ex.getMessage();
 					textField_1.setText("");
 				}
-				System.out.println(a);
-				System.out.println(s.getAktuelnaCena());
 				if(s.getAktuelnaCena()>=a){
 					btnNewButton.setEnabled(false);
 				}else{
@@ -147,7 +147,23 @@ public class PanelOpis extends JPanel {
 		gbc_textField_1.gridy = 19;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		
+		/*try {
+			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog()) || s.isProdata()){
+				textField_1.setVisible(false);
+				btnNewButton.setVisible(false);
+				lblNewLabel_9.setVisible(false);
+			}else{
+				textField_1.setVisible(true);
+				btnNewButton.setVisible(false);
+				lblNewLabel_9.setVisible(true);
+			}
+		} catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(s.isProdata()){
+			lblNewLabel_8.setText("Proizvod je prodan za: "+s.getAktuelnaCena());
+		}*/
 	}
 
 }
