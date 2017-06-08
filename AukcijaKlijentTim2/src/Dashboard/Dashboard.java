@@ -69,7 +69,7 @@ public class Dashboard extends JPanel{
 		 postavljeneL.setHorizontalAlignment(SwingConstants.CENTER);
 		 add(postavljeneL);
 		 JPanel flow2=new JPanel();
-		 flow1.setLayout(new FlowLayout());
+		 flow2.setLayout(new FlowLayout());
 		 add(flow2);
 		 for(int i=0;i<postavljene.size();i++){
 			 s=postavljene.get(i);
