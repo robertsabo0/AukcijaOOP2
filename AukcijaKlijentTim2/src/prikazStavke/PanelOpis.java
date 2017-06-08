@@ -116,6 +116,18 @@ public class PanelOpis extends JPanel {
 		add(lblNewLabel_9, gbc_lblNewLabel_9);
 		
 		JButton btnNewButton = new JButton("Postavi");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Double a = Double.parseDouble(textField_1.getText());
+				s.setAktuelnaCena(a);
+				try {
+					BeansGetter.sessionStavka().izmeniStavku(s, BeansGetter.sessionStavka().vratiUlogovanog());
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridx = 3;
