@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-			  @NamedQuery(name="KomentarTim2.getSve", query="SELECT k FROM KomentarTim2 k")
+			  @NamedQuery(name="KomentarTim2.getSve", query="SELECT k FROM KomentarTim2 k where k.stavka.id = :id")
 })
 
 

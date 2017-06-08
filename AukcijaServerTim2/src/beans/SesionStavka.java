@@ -20,8 +20,9 @@ public class SesionStavka implements SesionStavkaI {
 	private EntityManager em;
 	
 	@Override
-	public List<KomentarTim2> getSve() {
+	public List<KomentarTim2> getSve(long id) {
 		TypedQuery<KomentarTim2> q=em.createNamedQuery("KomentarTim2.getSve", KomentarTim2.class);
+		q.setParameter("id", id);
 		return q.getResultList();
 	}
 	@Remove

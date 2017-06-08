@@ -30,6 +30,8 @@ public class GlavniPanel extends JPanel {
 	public GlavniPanel() throws NamingException{
 		setLayout(new BorderLayout());
 		PodaciPanel p=new PodaciPanel();
+		JLabel naslov=new JLabel("Unos novog artikla na aukciju: ");
+		add(naslov, BorderLayout.NORTH);
 		add(p, BorderLayout.CENTER);
 		
 

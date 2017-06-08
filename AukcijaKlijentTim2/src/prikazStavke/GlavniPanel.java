@@ -17,16 +17,17 @@ public class GlavniPanel extends JPanel {
 	 */
 	public GlavniPanel(StavkaTim2 s) {
 		this.s=s;
-		JScrollPane sp=new JScrollPane();
+		
 		//sp.setLayout(new BorderLayout());
 		setLayout(new BorderLayout());
 		PanelSlika slike=new PanelSlika();
-		PanelKomentari komentari=new PanelKomentari();
+		PanelKomentari komentari=new PanelKomentari(s);
 		PanelOpis opis=new PanelOpis(s);
 		add(opis, BorderLayout.CENTER);
 		add(slike, BorderLayout.WEST);
 		add(komentari, BorderLayout.SOUTH);
-		sp.add(this);
+		//JScrollPane sp=new JScrollPane(this);
+		//sp.add(this);
 		//sp.setVisible(true);
 	}
 }

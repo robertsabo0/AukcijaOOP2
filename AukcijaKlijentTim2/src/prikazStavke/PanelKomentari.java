@@ -12,17 +12,18 @@ import javax.swing.JPanel;
 
 import main.BeansGetter;
 import model.KomentarTim2;
+import model.StavkaTim2;
 
 public class PanelKomentari extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelKomentari() {
+	public PanelKomentari(StavkaTim2 s) {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		List<KomentarTim2> kom=null;
-		/*try {
-			kom=BeansGetter.sessionStavka().getSve();
+		try {
+			kom=BeansGetter.sessionStavka().getSve(s.getId());
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,7 +40,7 @@ public class PanelKomentari extends JPanel {
 			p.add(datum);
 			p.add(opis);
 			this.add(p);
-		}*/
+		}
 	}
 
 }

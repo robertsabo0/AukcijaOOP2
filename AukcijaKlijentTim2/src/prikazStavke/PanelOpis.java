@@ -19,6 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PanelOpis extends JPanel {
 	/**
@@ -111,7 +113,33 @@ public class PanelOpis extends JPanel {
 		gbc_lblNewLabel_9.gridy = 19;
 		add(lblNewLabel_9, gbc_lblNewLabel_9);
 		
+		JButton btnNewButton = new JButton("Postavi");
+		
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.gridx = 3;
+		gbc_btnNewButton.gridy = 21;
+		add(btnNewButton, gbc_btnNewButton);
+		btnNewButton.setEnabled(false);
 		textField_1 = new JTextField();
+		textField_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				int a=0;
+				try{
+				a=Integer.parseInt(textField_1.getText());
+				}catch(Exception ex){
+					ex.getMessage();
+					textField_1.setText("");
+				}
+				System.out.println(a);
+				System.out.println(s.getAktuelnaCena());
+				if(s.getAktuelnaCena()>=a){
+					btnNewButton.setEnabled(false);
+				}else{
+					btnNewButton.setEnabled(true);
+				}
+			}
+		});
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_1.anchor = GridBagConstraints.WEST;
@@ -119,65 +147,6 @@ public class PanelOpis extends JPanel {
 		gbc_textField_1.gridy = 19;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Postavi");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridx = 3;
-		gbc_btnNewButton.gridy = 21;
-		add(btnNewButton, gbc_btnNewButton);
-		
-		/*JLabel lblNewLabel = new JLabel("Naziv:"+s.getNaziv());
-		add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Opis:"+s.getOpis());
-		add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Boja:"+s.getBoja());
-		add(lblNewLabel_2);*/
-		
-		/*JLabel lblNewLabel_3 = new JLabel("Materijal:"+s.getMaterijal().getOpis());
-		add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Tip:"+s.getTip().getOpis());
-		add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_5 = new JLabel("Velicina:"+s.getVelicina().getOpis());
-		add(lblNewLabel_5);
-		
-		JLabel lblNewLabel_6 = new JLabel("Datum postavljanja:"+s.getDatumPostavljanja());
-		add(lblNewLabel_6);
-		
-		JLabel lblNewLabel_7 = new JLabel("Postavljeno od strane:"+s.getPostavljenoOdStrane().getUsername());
-		add(lblNewLabel_7);*/
-		
-		/*JLabel lblNewLabel_8 = new JLabel("Aktuelna cena:"+s.getAktuelnaCena());
-		add(lblNewLabel_8);
-		
-		JLabel lblNewLabel_9 = new JLabel("Postavi cenu:");
-		add(lblNewLabel_9);
-		
-		textField = new JTextField();
-		add(textField);
-		textField.setColumns(10);
-		textField.setText("0");
-		JButton btnNewButton = new JButton("Postavi");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		textField.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				int a=Integer.parseInt(textField.getText());
-				if(s.getAktuelnaCena()>a)
-					btnNewButton.setEnabled(true);
-			}
-		});
-		
-		
-		
-		add(btnNewButton);*/
 		
 	}
 
