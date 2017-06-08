@@ -19,7 +19,7 @@ public class SesionStavka implements SesionStavkaI {
 	@PersistenceContext(name = CommonTim2.persistanceName)
 	private EntityManager em;
 
-	private UserTim2 korisnik= new UserTim2();
+	private UserTim2 korisnik = new UserTim2();
 	public static boolean ulogovan = false;
 
 	@Override
@@ -48,7 +48,7 @@ public class SesionStavka implements SesionStavkaI {
 				korisnik.setPassword(k.getPassword());
 
 				ulogovan = true;
-				
+
 				return korisnik;
 			} else {
 				throw new LosaLozinkaException();
@@ -70,4 +70,33 @@ public class SesionStavka implements SesionStavkaI {
 		// TODO Auto-generated method stub
 		return ulogovan;
 	}
+
+	//izmenjuje korisnika
+	@Override
+	public boolean izmeniKorisnika(String ime, String prezime, char[] password, String eMail, String opis) {
+		if (ime != null)
+			korisnik.setIme(ime);
+
+		if (prezime != null)
+			korisnik.setPrezime(prezime);
+
+		if (eMail != null)
+			korisnik.setEmail(eMail);
+		if (opis != null)
+			korisnik.setOpis(opis);
+		if (password != null) {
+			String pas = "";
+			for (char c : password)
+				pas += c;
+			korisnik.setPassword(pas);
+		}
+		try{
+			em.merge(korisnik);
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 }

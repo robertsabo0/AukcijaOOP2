@@ -11,4 +11,5 @@ public interface SesionStavkaI {
 	public void logOut();
 	
 	public boolean getUlogovan();
+	public boolean izmeniKorisnika(String ime, String prezime, char[] password, String eMail, String opis);
 }

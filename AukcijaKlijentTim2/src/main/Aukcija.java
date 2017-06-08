@@ -21,7 +21,7 @@ public class Aukcija extends JFrame {
 	 * @throws NamingException 
 	 */
 	public static void main(String[] args) throws NamingException {
-		if(true)return;
+		//if(true)return;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
