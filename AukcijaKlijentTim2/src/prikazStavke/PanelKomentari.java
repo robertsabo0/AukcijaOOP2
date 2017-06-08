@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import main.BeansGetter;
 import model.KomentarTim2;
 import model.StavkaTim2;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PanelKomentari extends JPanel  {
 	private JTextField textField;
@@ -47,11 +49,13 @@ public class PanelKomentari extends JPanel  {
 			p.add(opis);
 			this.add(p);
 		}
+		
 		JPanel p1=new JPanel();
 		p1.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.add(p1);
 		
 		textField = new JTextField();
+		
 		p1.add(textField);
 		textField.setColumns(10);
 		
@@ -77,7 +81,16 @@ public class PanelKomentari extends JPanel  {
 				
 			}
 		});
+		btnNewButton.setEnabled(false);
 		p1.add(btnNewButton);
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnNewButton.setEnabled(true);
+			}
+		});
+		if(s.isProdata())
+			p1.setVisible(true);
 	}
 
 }

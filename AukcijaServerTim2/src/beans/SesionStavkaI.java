@@ -14,4 +14,5 @@ public interface SesionStavkaI {
 	public boolean getUlogovan();
 	public void sacuvajKomentar(KomentarTim2 k);
 	public void sacuvajStavku(StavkaTim2 s);
+	public void izmeniStavku(StavkaTim2 s, UserTim2 u);
 }

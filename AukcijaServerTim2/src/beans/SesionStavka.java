@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -11,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import model.CommonTim2;
 import model.KomentarTim2;
+import model.PonudaTim2;
 import model.StavkaTim2;
 import model.UserTim2;
 
@@ -31,6 +33,22 @@ public class SesionStavka implements SesionStavkaI {
 	}
 	
 	
+	@Override
+	public void izmeniStavku(StavkaTim2 s, UserTim2 u) {
+		// TODO Auto-generated method stub
+		if(s!=null){
+			em.merge(s);
+			em.flush();
+		}
+		PonudaTim2 p=new PonudaTim2();
+		p.setStavka(s);
+		p.setTimestamp(new Date());
+		p.setUser(u);
+		p.setVrednost(s.getAktuelnaCena());
+		em.persist(p);
+	}
+
+
 	@Override
 	public void sacuvajKomentar(KomentarTim2 k) {
 		if(k!=null){
