@@ -39,16 +39,20 @@ public class FillDatabase {
 	
 	@PostConstruct
 
-	public void postConstruct() throws ParseException  {
-//		try {
-//			this.dodajKomentar();
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+	public void postConstruct()  {
+		try {
+			this.dodajKomentar();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-
-		//popuniBazu();
+		try {
+			popuniBazu();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		popuniPonude();
 		if(em.find(UserTim2.class, "admin") == null){
 
@@ -92,11 +96,7 @@ public class FillDatabase {
 			p.setStavka(em.find(StavkaTim2.class, l1));
 			p.setStavka(em.find(StavkaTim2.class, l2));
 			em.persist(p);
-
-		
-	}
-
-		
+		}
 	
 
 	public void dodajKomentar() throws ParseException{
