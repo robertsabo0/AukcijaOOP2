@@ -1,6 +1,7 @@
 package prikazStavke;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
 
@@ -9,12 +10,17 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import main.BeansGetter;
 import model.KomentarTim2;
 import model.StavkaTim2;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelKomentari extends JPanel {
+	private JTextField textField;
 
 	/**
 	 * Create the panel.
@@ -41,6 +47,20 @@ public class PanelKomentari extends JPanel {
 			p.add(opis);
 			this.add(p);
 		}
+		JPanel p1=new JPanel();
+		p1.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.add(p1);
+		
+		textField = new JTextField();
+		p1.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Dodaj komentar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		p1.add(btnNewButton);
 	}
 
 }
