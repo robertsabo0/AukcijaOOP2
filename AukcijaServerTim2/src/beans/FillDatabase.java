@@ -38,6 +38,7 @@ public class FillDatabase {
 	
 	
 	@PostConstruct
+
 	public void postConstruct()  {
 		try {
 			this.dodajKomentar();
@@ -45,9 +46,14 @@ public class FillDatabase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//popuniBazu();
-		//popuniPonude();
+
+		try {
+			popuniBazu();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		popuniPonude();
 		if(em.find(UserTim2.class, "admin") == null){
 
 			System.out.println("Database is not filled yet!");
@@ -78,15 +84,21 @@ public class FillDatabase {
 			System.out.println("Stavka ubacena");
 		}
 	}
-
 	public void popuniPonude(){
-		for(int i=0;i<10;i++){
+		
 			PonudaTim2 p=new PonudaTim2();
+			Long l= (long) 42;
+			Long l1= (long) 43;
+			Long l2= (long) 44;
 			p.setUser(em.find(UserTim2.class, "admin"));
 			p.setVrednost(25);
+			p.setStavka(em.find(StavkaTim2.class, l));
+			p.setStavka(em.find(StavkaTim2.class, l1));
+			p.setStavka(em.find(StavkaTim2.class, l2));
 			em.persist(p);
 		}
-	}
+	
+
 	public void dodajKomentar() throws ParseException{
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		Date datee = fmt.parse("2013-05-06");
@@ -97,6 +109,7 @@ public class FillDatabase {
 			em.persist(k);
 		}
 	}
+	
 	private void fillVelicina() {
 		for(String s : velicina){
 			VelicinaTim2 b = new VelicinaTim2();

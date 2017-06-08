@@ -20,7 +20,7 @@ public class SesionStavka implements SesionStavkaI {
 	@PersistenceContext(name = CommonTim2.persistanceName)
 	private EntityManager em;
 
-	private UserTim2 korisnik;
+	private UserTim2 korisnik= new UserTim2();
 	public static boolean ulogovan = false;
 
 	@Override
@@ -56,9 +56,11 @@ public class SesionStavka implements SesionStavkaI {
 
 	// pokusava da uloguje korisnika
 	@Override
-	public UserTim2 loginUser(String userName, char[] password) throws LosaLozinkaException {
-		UserTim2 k = em.find(UserTim2.class, userName);
-		if (korisnik != null) {
+	public UserTim2 loginUser(String userName, char[] password) throws LosaLozinkaException, NullPointerException {
+		TypedQuery<UserTim2> q = em.createNamedQuery("UserTim2.findUser", UserTim2.class);
+		q.setParameter("username", userName);
+		UserTim2 k = q.getSingleResult();
+		if (k != null) {
 			String str = "";
 			for (char c : password) {
 				str += c;
@@ -77,7 +79,8 @@ public class SesionStavka implements SesionStavkaI {
 				throw new LosaLozinkaException();
 			}
 		} else {
-			throw new NullPointerException();
+			System.out.println("Ne posotji user");
+			return null;
 		}
 	}
 
