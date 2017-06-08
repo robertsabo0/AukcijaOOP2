@@ -80,13 +80,11 @@ public class Dashboard extends JPanel{
 	 
 	 public Dashboard() throws NamingException{
 		 this.setLayout(new FlowLayout());
-<<<<<<< HEAD
 		 
 		 List<StavkaTim2> licitirane=getDashboardStavka().licitiraneStavke("admin");
 		 List<StavkaTim2> postavljene=getDashboardStavka().postavljeneStavke("admin");
-=======
 		 List<StavkaTim2> stavke= BeansGetter.stavkeGetters().getSve();
->>>>>>> 95b2530d06f45c990b6dfbd62ee224382a4b7c1e
+		 
 		 JScrollPane skrol=new JScrollPane();
 		 JLabel l1=new JLabel("Licitirane stavke: ");
 		 add(l1);
