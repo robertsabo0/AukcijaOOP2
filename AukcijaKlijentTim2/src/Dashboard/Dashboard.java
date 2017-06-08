@@ -81,6 +81,7 @@ public class Dashboard extends JPanel{
 	 
 	 
 	 public Dashboard() throws NamingException{
+<<<<<<< HEAD
 		 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		 
@@ -97,6 +98,17 @@ public class Dashboard extends JPanel{
 		 JPanel flow1=new JPanel();
 		 flow1.setLayout(new FlowLayout());
 		 add(flow1);
+=======
+		 this.setLayout(new FlowLayout());
+		 
+		 List<StavkaTim2> licitirane=getDashboardStavka().licitiraneStavke("admin");
+		 List<StavkaTim2> postavljene=getDashboardStavka().postavljeneStavke("admin");
+		 List<StavkaTim2> stavke= BeansGetter.stavkeGetters().getSve();
+		 
+		 JScrollPane skrol=new JScrollPane();
+		 JLabel l1=new JLabel("Licitirane stavke: ");
+		 add(l1);
+>>>>>>> b135350337015a92b6a014f7d8d51144ecd638fb
 		 for(int i=0;i<licitirane.size();i++){
 			 JPanel stavka=new JPanel();
 			 stavka.setLayout(new BoxLayout(stavka, BoxLayout.Y_AXIS));
