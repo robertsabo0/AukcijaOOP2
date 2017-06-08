@@ -10,9 +10,11 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import model.BojaTim2;
 import model.CommonTim2;
+import model.KomentarTim2;
 import model.MaterijalTim2;
 import model.PonudaTim2;
 import model.StavkaTim2;
@@ -36,7 +38,18 @@ public class FillDatabase {
 	
 	
 	@PostConstruct
+<<<<<<< HEAD
 	public void postConstruct() throws ParseException  {
+=======
+	public void postConstruct()  {
+		try {
+			this.dodajKomentar();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+>>>>>>> 95b2530d06f45c990b6dfbd62ee224382a4b7c1e
 		//popuniBazu();
 		//popuniPonude();
 		if(em.find(UserTim2.class, "admin") == null){
@@ -69,12 +82,23 @@ public class FillDatabase {
 			System.out.println("Stavka ubacena");
 		}
 	}
+<<<<<<< HEAD
 	public void popuniPonude(){
 		for(int i=0;i<10;i++){
 			PonudaTim2 p=new PonudaTim2();
 			p.setUser(em.find(UserTim2.class, "admin"));
 			p.setVrednost(25);
 			em.persist(p);
+=======
+	public void dodajKomentar() throws ParseException{
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		Date datee = fmt.parse("2013-05-06");
+		for(int i=0;i<10;i++){
+			KomentarTim2 k=new KomentarTim2();
+			k.setPostaljeno(datee);
+			k.setSadrzaj("assfdghjgfdsdfgh");
+			em.persist(k);
+>>>>>>> 95b2530d06f45c990b6dfbd62ee224382a4b7c1e
 		}
 	}
 	private void fillVelicina() {
