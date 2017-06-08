@@ -11,15 +11,20 @@ public class BeansGetter {
 	private static StavkeGetters stavkeGetters;
 	private static SesionStavkaI s;
 	
-	public static StavkeGetters stavkeGetters() throws NamingException
+	public static StavkeGetters stavkeGetters()
 	{
-		if (stavkeGetters == null)
-		{
-			InitialContext ctx = new InitialContext();
-			String name = "ejb:/AukcijaServerTim2//StavkeGettersImpl!" + StavkeGetters.class.getName();
-			stavkeGetters = (StavkeGetters) ctx.lookup(name);
+		try{
+			if (stavkeGetters == null)
+			{
+				InitialContext ctx = new InitialContext();
+				String name = "ejb:/AukcijaServerTim2//StavkeGettersImpl!" + StavkeGetters.class.getName();
+				stavkeGetters = (StavkeGetters) ctx.lookup(name);
+			}
+			return stavkeGetters;
+		} catch (NamingException e) {
+			e.printStackTrace();
+			return null;
 		}
-		return stavkeGetters;
 	}
 	public static SesionStavkaI sessionStavka() throws NamingException
 	{

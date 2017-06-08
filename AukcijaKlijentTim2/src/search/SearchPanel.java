@@ -1,5 +1,7 @@
 package search;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -9,6 +11,7 @@ public class SearchPanel extends JPanel {
 	}
 	
 	SearchPanel(){
-		add(new JLabel("Hello, World!"));
+
+		add(new FiltersPanel());
 	}
 }
