@@ -1,12 +1,15 @@
 package search;
 
-import java.awt.Checkbox;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.BeansGetter;
@@ -22,11 +25,13 @@ class FiltersPanel extends JPanel {
 	TipTim2[] tipovi;
 	MaterijalTim2[] materijali;
 	
-	Checkbox[] bojeBoxes;
-	Checkbox[] velicineBoxes;
-	Checkbox[] tipoviBoxes;
-	Checkbox[] materijaliBoxes;
-	Checkbox showSold;
+	JCheckBox[] bojeBoxes;
+	JCheckBox[] velicineBoxes;
+	JCheckBox[] tipoviBoxes;
+	JCheckBox[] materijaliBoxes;
+	JCheckBox showSold;
+	
+	JButton showButton;
 	
 	public static void main(String[] args) {
 		TestFrame.main(args);
@@ -43,10 +48,10 @@ class FiltersPanel extends JPanel {
 		tipovi = tipoviList.toArray( new TipTim2[tipoviList.size()]);
 		materijali = materijaliList.toArray( new MaterijalTim2[materijaliList.size()]);
 		
-		bojeBoxes = new Checkbox[boje.length];
-		velicineBoxes = new Checkbox[velicine.length];
-		tipoviBoxes = new Checkbox[tipovi.length];
-		materijaliBoxes = new Checkbox[materijali.length];
+		bojeBoxes = new JCheckBox[boje.length];
+		velicineBoxes = new JCheckBox[velicine.length];
+		tipoviBoxes = new JCheckBox[tipovi.length];
+		materijaliBoxes = new JCheckBox[materijali.length];
 
 		initializeBoxes();
 		GridLayout gridLayout = new GridLayout(1, 5);
@@ -55,11 +60,11 @@ class FiltersPanel extends JPanel {
 		setLayout(gridLayout);		
 
 		JPanel bojePanel = new JPanel();
-		BoxLayout boxLayou = new BoxLayout(null, BoxLayout.Y_AXIS);
+		BoxLayout boxLayou = new BoxLayout(bojePanel, BoxLayout.Y_AXIS);
 		bojePanel.setLayout(boxLayou); 
 		bojePanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 		//bojePanel.add(Box.createVerticalStrut(25));
-		for(Checkbox  b : bojeBoxes){
+		for(JCheckBox  b : bojeBoxes){
 			bojePanel.add(b);
 			//bojePanel.add(Box.createVerticalStrut(25));
 		}
@@ -72,7 +77,7 @@ class FiltersPanel extends JPanel {
 		velicinePanel.setLayout(boxLayou); 
 		velicinePanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 		//velicinePanel.add(Box.createVerticalStrut(25));
-		for(Checkbox  b : velicineBoxes){
+		for(JCheckBox  b : velicineBoxes){
 			velicinePanel.add(b);
 			//velicinePanel.add(Box.createVerticalStrut(25));
 		}
@@ -85,7 +90,7 @@ class FiltersPanel extends JPanel {
 		tipoviPanel.setLayout(boxLayou); 
 		tipoviPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 		//tipoviPanel.add(Box.createVerticalStrut(25));
-		for(Checkbox  b : tipoviBoxes){
+		for(JCheckBox  b : tipoviBoxes){
 			tipoviPanel.add(b);
 			//tipoviPanel.add(Box.createVerticalStrut(25));
 		}
@@ -97,7 +102,7 @@ class FiltersPanel extends JPanel {
 		materijaliPanel.setLayout(boxLayou); 
 		materijaliPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 		//materijaliPanel.add(Box.createVerticalStrut(25));
-		for(Checkbox  b : materijaliBoxes){
+		for(JCheckBox  b : materijaliBoxes){
 			materijaliPanel.add(b);
 			//materijaliPanel.add(Box.createVerticalStrut(25));
 		}
@@ -113,26 +118,74 @@ class FiltersPanel extends JPanel {
 		ostaloPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 		ostaloPanel.add(Box.createVerticalGlue());
 		ostaloPanel.add(showSold);
-		//ostaloPanel.add(Box.createVerticalStrut(25));
+		ostaloPanel.add(showButton);
 		
 		add(ostaloPanel);
 		
 	}
 
 	private void initializeBoxes() {
-		showSold = new Checkbox("Prikazi prodate");
+		showSold = new JCheckBox("Prikazi prodate");
 		
 		for(int i = 0 ; i < bojeBoxes.length; i++){
-			bojeBoxes[i]= new Checkbox(boje[i].getOpis());
+			bojeBoxes[i]= new JCheckBox(boje[i].getOpis());
 		}
 		for(int i = 0 ; i < velicineBoxes.length; i++){
-			velicineBoxes[i]= new Checkbox(velicine[i].getOpis());
+			velicineBoxes[i]= new JCheckBox(velicine[i].getOpis());
 		}
 		for(int i = 0 ; i < tipoviBoxes.length; i++){
-			tipoviBoxes[i]= new Checkbox(tipovi[i].getOpis());
+			tipoviBoxes[i]= new JCheckBox(tipovi[i].getOpis());
 		}
 		for(int i = 0 ; i < materijaliBoxes.length; i++){
-			materijaliBoxes[i]= new Checkbox(materijali[i].getOpis());
+			materijaliBoxes[i]= new JCheckBox(materijali[i].getOpis());
 		}
+		
+		showButton = new JButton("Prikazi");
+		showButton.addActionListener(e -> showFiltered());
+	}
+	
+	public void showFiltered(){
+		boolean showProdate = showSold.isSelected();
+		
+		List<BojaTim2> bojeFilter = new ArrayList<>(boje.length);
+		
+		for(int i = 0 ; i < bojeBoxes.length; i++){
+			if(bojeBoxes[i].isSelected()){
+				bojeFilter.add(boje[i]);
+			}
+		}
+		
+		List<VelicinaTim2> velicineFilter = new ArrayList<>(velicine.length);
+		
+		for(int i = 0 ; i < velicineBoxes.length; i++){
+			if(velicineBoxes[i].isSelected())
+				velicineFilter.add(velicine[i]);
+		}
+		
+		List<TipTim2> tipoviFilter = new ArrayList<>(tipovi.length);
+		
+		for(int i = 0 ; i < tipoviBoxes.length; i++){
+			if(tipoviBoxes[i].isSelected())
+				tipoviFilter.add(tipovi[i]);
+		}
+		
+		List<MaterijalTim2> materijaliFilter = new ArrayList<>(materijali.length);
+		
+		for(int i = 0 ; i < materijaliBoxes.length; i++){
+			if(materijaliBoxes[i].isSelected())
+				materijaliFilter.add(materijali[i]);
+		}
+		
+		StringBuilder sb = new StringBuilder("Prikazi prodate: "+showProdate);
+		sb.append("\n Boje: ");
+		bojeFilter.forEach( t -> sb.append(t.getOpis()+" "));
+		sb.append("\n Velicine: ");
+		velicineFilter.forEach( t -> sb.append(t.getOpis()+" "));
+		sb.append("\n Tipovi: ");
+		tipoviFilter.forEach( t -> sb.append(t.getOpis()+" "));
+		sb.append("\n Materijali: ");
+		materijaliFilter.forEach( t -> sb.append(t.getOpis()+" "));
+		
+		JOptionPane.showConfirmDialog(null, sb.toString());
 	}
 }
