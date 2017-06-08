@@ -89,74 +89,16 @@ public class Dashboard extends JPanel{
 		 JLabel l1=new JLabel("Licitirane stavke: ");
 		 add(l1);
 		 for(int i=0;i<licitirane.size();i++){
-			 JPanel stavka=new JPanel();
-			 stavka.setLayout(new BoxLayout(stavka, BoxLayout.Y_AXIS));
 			 s=licitirane.get(i);
-			 JLabel naziv=new JLabel("Naziv: "+s.getNaziv());
-			 JLabel cena;
-			 if(s.isProdata()){
-				 cena=new JLabel("Prodato za: "+s.getAktuelnaCena());
-				
-				
-			 }
-			 else{
-				 cena=new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
-				 cena.setBackground(Color.RED);
-				
-			 }
-			 
-			 JLabel	datum=new JLabel("Datum postavljanja: "+s.getDatumPostavljanja());
-			 dugme=new JButton("Prikazi");
-			 dugme.addActionListener(new ProsledjivanjeStavke(s));
-			 stavka.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
-			 stavka.add(naziv);
-			 stavka.add(cena);
-			 stavka.add(datum);
-			 stavka.add(dugme);
-			 add(stavka);
+			 add(new SmallStavkaPanel(s));
 		 }
 		 this.add(new JLabel("Postavljene stavke: "));
 		 for(int i=0;i<postavljene.size();i++){
-			 JPanel stavka=new JPanel();
-			 stavka.setLayout(new BoxLayout(stavka, BoxLayout.Y_AXIS));
 			 s=postavljene.get(i);
-			 JLabel naziv=new JLabel("Naziv: "+s.getNaziv());
-			 JLabel cena;
-			 if(s.isProdata()){
-				 cena=new JLabel("Prodato za: "+s.getAktuelnaCena());
-				 cena.setBackground(Color.GREEN);
-				
-				
-			 }
-			 else{
-				 cena=new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
-				 cena.setBackground(Color.RED);
-				 cena.setOpaque(true);
-			 }
-			 
-			 JLabel	datum=new JLabel("Datum postavljanja: "+s.getDatumPostavljanja());
-			 dugme=new JButton("Prikazi");
-			 dugme.addActionListener(new ProsledjivanjeStavke(s));
-			 stavka.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
-			 stavka.add(naziv);
-			 stavka.add(cena);
-			 stavka.add(datum);
-			 stavka.add(dugme);
-			 add(stavka);
+			 add(new SmallStavkaPanel(s));
 		 }
 		 
 		// skrol.add(this);
 	 }
-	 private class ProsledjivanjeStavke implements ActionListener{
-		 StavkaTim2 s;
-		 public ProsledjivanjeStavke(StavkaTim2 s){
-			 this.s=s;
-		 }
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			GlavniPanel g=new GlavniPanel(s);
-			
-		}
-		 
-	 }
+	 
 }

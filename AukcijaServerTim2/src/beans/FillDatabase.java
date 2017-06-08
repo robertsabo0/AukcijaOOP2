@@ -46,7 +46,12 @@ public class FillDatabase {
 			e.printStackTrace();
 		}
 		
-		//popuniBazu();
+		try {
+			popuniBazu();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//popuniPonude();
 		if(em.find(UserTim2.class, "admin") == null){
 
