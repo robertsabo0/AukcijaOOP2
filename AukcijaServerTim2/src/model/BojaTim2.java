@@ -25,6 +25,12 @@ public class BojaTim2 implements Serializable{
 		return id;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return opis;
+	}
+
 	public String getOpis() {
 		return opis;
 	}

@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import beans.StavkeGetters;
 import main.BeansGetter;
+import main.OnlineBar;
 import model.StavkaTim2;
 
 public class Dashboard extends JPanel{
@@ -53,30 +54,29 @@ public class Dashboard extends JPanel{
 		 
 		 
 		 JLabel licitiraneL=new JLabel("Licitirane stavke: ");
-		 licitiraneL.setHorizontalAlignment(SwingConstants.CENTER);
+		 licitiraneL.setHorizontalAlignment(SwingConstants.LEADING);
 		 add(licitiraneL);
 		 JPanel flow1=new JPanel();
 		 flow1.setLayout(new FlowLayout());
 		 add(flow1);
 
 		 for(int i=0;i<licitirane.size();i++){
-			 s=licitirane.get(i);
-			 add(new SmallStavkaPanel(s));
-
+			 JPanel stavka=new SmallStavkaPanel(licitirane.get(i));
+			 flow1.add(stavka);
 		 }
 		 
 		 JLabel postavljeneL=new JLabel("Postavljene stavke: ");
-		 postavljeneL.setHorizontalAlignment(SwingConstants.CENTER);
+		 postavljeneL.setHorizontalAlignment(SwingConstants.LEADING);
 		 add(postavljeneL);
 		 JPanel flow2=new JPanel();
-		 flow1.setLayout(new FlowLayout());
+		 flow2.setLayout(new FlowLayout());
 		 add(flow2);
 		 for(int i=0;i<postavljene.size();i++){
-			 s=postavljene.get(i);
-			 add(new SmallStavkaPanel(s));
+			 JPanel stavka=new SmallStavkaPanel(postavljene.get(i));
+			 flow2.add(stavka);
 		 }
 		 
 		// skrol.add(this);
 	 }
-	 
+
 }

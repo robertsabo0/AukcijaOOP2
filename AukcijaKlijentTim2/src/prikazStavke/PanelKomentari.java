@@ -1,25 +1,27 @@
 package prikazStavke;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.NamingException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
 import main.BeansGetter;
 import model.KomentarTim2;
 import model.StavkaTim2;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class PanelKomentari extends JPanel {
+public class PanelKomentari extends JPanel  {
 	private JTextField textField;
 
 	/**
@@ -47,20 +49,48 @@ public class PanelKomentari extends JPanel {
 			p.add(opis);
 			this.add(p);
 		}
+		
 		JPanel p1=new JPanel();
 		p1.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.add(p1);
 		
 		textField = new JTextField();
+		
 		p1.add(textField);
 		textField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Dodaj komentar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				KomentarTim2 k=new KomentarTim2();
+				k.setSadrzaj(textField.getText());
+				k.setStavka(s);
+				k.setPostaljeno(new Date());
+				try {
+					k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					BeansGetter.sessionStavka().sacuvajKomentar(k);
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
+		btnNewButton.setEnabled(false);
 		p1.add(btnNewButton);
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnNewButton.setEnabled(true);
+			}
+		});
+		if(s.isProdata())
+			p1.setVisible(true);
 	}
 
 }
