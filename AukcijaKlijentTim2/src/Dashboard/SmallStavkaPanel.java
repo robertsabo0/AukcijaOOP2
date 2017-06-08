@@ -21,12 +21,13 @@ public class SmallStavkaPanel extends JPanel {
 		 JLabel cena;
 		 if(s.isProdata()){
 			 cena=new JLabel("Prodato za: "+s.getAktuelnaCena());
-			
+			 cena.setForeground(Color.RED);
 			
 		 }
 		 else{
 			 cena=new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
-			 cena.setBackground(Color.RED);
+			 cena.setForeground(Color.GREEN);
+			// cena.settex
 			
 		 }
 		 

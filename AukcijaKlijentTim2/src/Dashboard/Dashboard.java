@@ -1,5 +1,6 @@
 package Dashboard;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -31,6 +32,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import beans.StavkeGetters;
 import main.Aukcija;
@@ -79,20 +81,35 @@ public class Dashboard extends JPanel{
 	 
 	 
 	 public Dashboard() throws NamingException{
-		 this.setLayout(new FlowLayout());
+		 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 		 
-		 List<StavkaTim2> licitirane=getDashboardStavka().licitiraneStavke("admin");
-		 List<StavkaTim2> postavljene=getDashboardStavka().postavljeneStavke("admin");
+		 List<StavkaTim2> licitirane=BeansGetter.stavkeGetters().licitiraneStavke("admin");
+		 List<StavkaTim2> postavljene=BeansGetter.stavkeGetters().postavljeneStavke("admin");
+
 		 List<StavkaTim2> stavke= BeansGetter.stavkeGetters().getSve();
+
 		 
-		 JScrollPane skrol=new JScrollPane();
-		 JLabel l1=new JLabel("Licitirane stavke: ");
-		 add(l1);
+		 
+		 JLabel licitiraneL=new JLabel("Licitirane stavke: ");
+		 licitiraneL.setHorizontalAlignment(SwingConstants.CENTER);
+		 add(licitiraneL);
+		 JPanel flow1=new JPanel();
+		 flow1.setLayout(new FlowLayout());
+		 add(flow1);
+
 		 for(int i=0;i<licitirane.size();i++){
 			 s=licitirane.get(i);
 			 add(new SmallStavkaPanel(s));
+
 		 }
-		 this.add(new JLabel("Postavljene stavke: "));
+		 
+		 JLabel postavljeneL=new JLabel("Postavljene stavke: ");
+		 postavljeneL.setHorizontalAlignment(SwingConstants.CENTER);
+		 add(postavljeneL);
+		 JPanel flow2=new JPanel();
+		 flow1.setLayout(new FlowLayout());
+		 add(flow2);
 		 for(int i=0;i<postavljene.size();i++){
 			 s=postavljene.get(i);
 			 add(new SmallStavkaPanel(s));
