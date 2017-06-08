@@ -48,4 +48,7 @@ public class LoginUser {
 	public void logOut(){
 		ulogovan=false;
 	}
+	public UserTim2 getKorisnik(){
+		return korisnik;
+	}
 }
