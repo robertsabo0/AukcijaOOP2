@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.naming.NamingException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -19,9 +20,10 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import beans.LoginUser;
 import beans.LosaLozinkaException;
+import main.BeansGetter;
 import main.OnlineBar;
+import model.UserTim2;
 
 public class Login extends JPanel {
 
@@ -37,7 +39,7 @@ public class Login extends JPanel {
 	private JTextField textField_4;
 	private JTextField textField_1;
 	private JTextField textField_5;
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -174,20 +176,21 @@ public class Login extends JPanel {
 		btnUlogujSe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					LoginUser luser= new LoginUser();
-					try {
-						luser.loginUser(userNameField.getText(),passwordField.getPassword());
-						if (LoginUser.ulogovan){
-							frame.getJMenuBar().removeAll();
-							OnlineBar bar = new OnlineBar(frame);
-							frame.setJMenuBar(bar);
-						}
-					} catch (LosaLozinkaException e1) {
-						JOptionPane.showMessageDialog(null, "Pogresna sifra za korisnika");
-					}
+					UserTim2 user= BeansGetter.sessionStavka().loginUser(userNameField.getText(),passwordField.getPassword());
+						
+						/*if (BeansGetter.sessionStavka().getUlogovan()){
+								frame.getJMenuBar().removeAll();
+								OnlineBar bar = new OnlineBar(frame);
+								frame.setJMenuBar(bar);
+						}*/
 			
 				}catch(NullPointerException ex){
 					JOptionPane.showMessageDialog(null, "Korisnik s unetim korisnicnik imenom ne postoji");
+				}catch (LosaLozinkaException e1) {
+					JOptionPane.showMessageDialog(null, "Pogresna sifra za korisnika");
+				}catch (NamingException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 				}
 			}
 		});

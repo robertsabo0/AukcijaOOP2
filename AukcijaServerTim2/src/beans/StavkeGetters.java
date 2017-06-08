@@ -6,6 +6,7 @@ import model.BojaTim2;
 import model.MaterijalTim2;
 import model.StavkaTim2;
 import model.TipTim2;
+import model.UserTim2;
 import model.VelicinaTim2;
 
 public interface StavkeGetters {
@@ -25,5 +26,9 @@ public interface StavkeGetters {
 	public List<VelicinaTim2> getVelicine();
 	
 	public List<TipTim2> getTipovi();
+	
+	public List<StavkaTim2> postavljeneStavke(String username);
+	
+	public List<StavkaTim2> licitiraneStavke(String username);
 	
 }

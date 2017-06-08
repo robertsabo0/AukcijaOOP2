@@ -16,6 +16,7 @@ import model.BojaTim2;
 import model.CommonTim2;
 import model.KomentarTim2;
 import model.MaterijalTim2;
+import model.PonudaTim2;
 import model.StavkaTim2;
 import model.TipTim2;
 import model.UserTim2;
@@ -37,6 +38,9 @@ public class FillDatabase {
 	
 	
 	@PostConstruct
+<<<<<<< HEAD
+	public void postConstruct() throws ParseException  {
+=======
 	public void postConstruct()  {
 		try {
 			this.dodajKomentar();
@@ -45,7 +49,9 @@ public class FillDatabase {
 			e.printStackTrace();
 		}
 		
+>>>>>>> 95b2530d06f45c990b6dfbd62ee224382a4b7c1e
 		//popuniBazu();
+		//popuniPonude();
 		if(em.find(UserTim2.class, "admin") == null){
 
 			System.out.println("Database is not filled yet!");
@@ -71,10 +77,19 @@ public class FillDatabase {
 			s.setAktuelnaCena(100);
 			s.setNaziv("asdasd");
 			s.setDatumPostavljanja(date);
+			s.setPostavljenoOdStrane(em.find(UserTim2.class, "admin"));
 			em.persist(s);
 			System.out.println("Stavka ubacena");
 		}
 	}
+<<<<<<< HEAD
+	public void popuniPonude(){
+		for(int i=0;i<10;i++){
+			PonudaTim2 p=new PonudaTim2();
+			p.setUser(em.find(UserTim2.class, "admin"));
+			p.setVrednost(25);
+			em.persist(p);
+=======
 	public void dodajKomentar() throws ParseException{
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		Date datee = fmt.parse("2013-05-06");
@@ -83,6 +98,7 @@ public class FillDatabase {
 			k.setPostaljeno(datee);
 			k.setSadrzaj("assfdghjgfdsdfgh");
 			em.persist(k);
+>>>>>>> 95b2530d06f45c990b6dfbd62ee224382a4b7c1e
 		}
 	}
 	private void fillVelicina() {
