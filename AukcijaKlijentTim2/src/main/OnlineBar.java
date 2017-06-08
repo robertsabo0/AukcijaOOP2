@@ -20,7 +20,7 @@ public class OnlineBar extends JMenuBar {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JFrame frame;
+	private static JFrame frame;
 	
 	public OnlineBar(JFrame frame) {
 		this.frame = frame;
@@ -57,7 +57,7 @@ public class OnlineBar extends JMenuBar {
 		frame.setJMenuBar(menuBar);
 	}
 
-	public void postaviStranicu(JPanel stranica) {
+	public static void postaviStranicu(JPanel stranica) {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(stranica);
 		frame.getContentPane().repaint();

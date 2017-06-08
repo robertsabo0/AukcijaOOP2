@@ -50,6 +50,7 @@ public class SmallStavkaPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			GlavniPanel g=new GlavniPanel(s);
+			
 			OnlineBar.postaviStranicu(g);
 			
 		}
