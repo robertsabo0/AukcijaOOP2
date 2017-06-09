@@ -2,7 +2,6 @@ package registracija;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,12 +16,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Dashboard.Dashboard;
 import beans.LosUsernameException;
 import beans.LosaLozinkaException;
+import beans.NoUsernameException;
+import beans.PostojiUsernameException;
 import main.BeansGetter;
 import main.OnlineBar;
 import model.UserTim2;
@@ -37,11 +40,11 @@ public class Login extends JPanel {
 	private JTextField userNameField;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_1;
-	private JTextField textField_5;
+	private JTextField imeField2;
+	private JTextField prezimeField2;
+	private JTextField eMailField2;
+	private JTextField userNameFiled2;
+	private JTextField opisField2;
 
 	/**
 	 * Create the panel.
@@ -67,31 +70,49 @@ public class Login extends JPanel {
 
 		JLabel lblIme = new JLabel("Ime:");
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		imeField2 = new JTextField();
+		imeField2.setColumns(10);
 
 		JLabel lblPrezime = new JLabel("Prezime:");
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		prezimeField2 = new JTextField();
+		prezimeField2.setColumns(10);
 
 		JLabel lblEmail = new JLabel("E-mail:");
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
+		eMailField2 = new JTextField();
+		eMailField2.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		userNameFiled2 = new JTextField();
+		userNameFiled2.setColumns(10);
 
 		JLabel lblOpis = new JLabel("Opis:");
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		opisField2 = new JTextField();
+		opisField2.setColumns(10);
 
 		JButton btnRegistrujSe = new JButton("Registruj se");
 		btnRegistrujSe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				try {
+					UserTim2 user = BeansGetter.sessionStavka().registrujKorisnika(userNameFiled2.getText(), passwordField_1.getPassword(), imeField2.getText(), prezimeField2.getText(), eMailField2.getText(), opisField2.getText());
+					if (user != null) {
+						System.out.println("Ulogovao se");
+						new OnlineBar(frame);
+						JScrollPane sp = new JScrollPane(new Dashboard(),JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+						frame.getContentPane().removeAll();
+						frame.getContentPane().add(sp);
+						frame.getContentPane().repaint();
+						frame.getContentPane().revalidate();
+					}
+				} catch (NoUsernameException e1) {
+					JOptionPane.showMessageDialog(null, "Obavezno je uneti korisnicko ime!");
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PostojiUsernameException e1) {
+					JOptionPane.showMessageDialog(null, "Korisnicko ime je zauzeo, probajte ponovo!");
+				}
 			}
 		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -102,15 +123,15 @@ public class Login extends JPanel {
 								.addComponent(lblEmail).addComponent(lblOpis))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false).addComponent(btnRegistrujSe)
-								.addComponent(passwordField_1).addComponent(textField_2).addComponent(textField_3)
-								.addComponent(textField_5)
-								.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-								.addComponent(textField_1))
+								.addComponent(passwordField_1).addComponent(imeField2).addComponent(prezimeField2)
+								.addComponent(opisField2)
+								.addComponent(eMailField2, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+								.addComponent(userNameFiled2))
 						.addContainerGap(27, Short.MAX_VALUE)));
 		gl_panel_1
 				.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
 						.createSequentialGroup().addGap(24).addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								.addComponent(userNameFiled2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblUsername_1))
 						.addPreferredGap(ComponentPlacement.RELATED)
@@ -121,22 +142,22 @@ public class Login extends JPanel {
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
 								.createSequentialGroup()
 								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(imeField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblIme))
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(prezimeField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblPrezime))
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(eMailField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblEmail)))
 								.addGroup(gl_panel_1.createSequentialGroup().addGap(82)
 										.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-												.addComponent(textField_5, GroupLayout.PREFERRED_SIZE,
+												.addComponent(opisField2, GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 												.addComponent(lblOpis))))
 						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnRegistrujSe)
@@ -179,8 +200,11 @@ public class Login extends JPanel {
 					if (user != null) {
 						System.out.println("Ulogovao se");
 						new OnlineBar(frame);
-						frame.repaint();
-						frame.revalidate();
+						JScrollPane sp = new JScrollPane(new Dashboard(),JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+						frame.getContentPane().removeAll();
+						frame.getContentPane().add(sp);
+						frame.getContentPane().repaint();
+						frame.getContentPane().revalidate();
 					}
 					
 				} catch (LosaLozinkaException e1) {
@@ -245,8 +269,7 @@ public class Login extends JPanel {
 		JButton btnPresoci = new JButton("Presoci");
 		btnPresoci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ScrollPane sp = new ScrollPane();
-				sp.add(SearchPanel.showMe());				
+				JScrollPane sp = new JScrollPane(SearchPanel.showMe(),JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(sp);
 				frame.getContentPane().repaint();

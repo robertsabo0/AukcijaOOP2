@@ -116,18 +116,11 @@ public class SesionStavka implements SesionStavkaI {
 
 	// izmenjuje korisnika
 	@Override
-	public boolean izmeniKorisnika(String username, String ime, String prezime, char[] password, String eMail,
-			String opis) throws PostojiUsernameException {
+	public boolean izmeniKorisnika(String ime, String prezime, char[] password, String eMail,
+			String opis){
 		try {
 			korisnik = em.find(UserTim2.class, korisnik.getUsername());
 
-			if (!username.isEmpty()) {
-				if (em.contains(em.find(UserTim2.class, username))) {
-					throw new PostojiUsernameException();
-				} else{
-					korisnik.setUsername(username);
-				}
-			}
 			if (!ime.isEmpty())
 				korisnik.setIme(ime);
 
@@ -148,14 +141,49 @@ public class SesionStavka implements SesionStavkaI {
 			}
 
 			em.merge(korisnik);
-
-		} catch (PostojiUsernameException e) {
-			throw new PostojiUsernameException();
-			
+			em.flush();
+	
 		} catch (Exception e){
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public UserTim2 registrujKorisnika(String username, char[] password, String ime, String prezime, String eMail,
+			String opis) throws NoUsernameException, PostojiUsernameException {
+		try{
+			UserTim2 user = new UserTim2();
+			if (username.isEmpty()){
+				throw new NoUsernameException();
+			}else{
+				if (em.contains(em.find(UserTim2.class, username))){
+					throw new PostojiUsernameException();
+				}else{
+					user.setUsername(username);
+				}
+			}
+			user.setEmail(eMail);
+			user.setIme(ime);
+			user.setPrezime(prezime);
+			user.setOpis(opis);
+			String str="";
+			for (char c:password)
+				str+=c;
+			user.setPassword(str);
+			
+			em.persist(user);
+			em.flush();
+			
+			korisnik=user;
+			return korisnik;
+		} catch (NoUsernameException ex){
+			throw new NoUsernameException();
+		} catch (PostojiUsernameException ex2){
+			throw new PostojiUsernameException();
+		}catch (Exception e){
+			return null;
+		}
 	}
 
 }

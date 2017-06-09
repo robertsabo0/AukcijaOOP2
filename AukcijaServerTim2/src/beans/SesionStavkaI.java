@@ -9,10 +9,11 @@ import model.UserTim2;
 public interface SesionStavkaI {
 	public List<KomentarTim2> getSve(long id);
 	public UserTim2 loginUser(String userName, char[] password) throws LosaLozinkaException, LosUsernameException;
+	public UserTim2 registrujKorisnika (String username, char[] password, String ime, String prezime, String eMail, String opis) throws NoUsernameException,PostojiUsernameException;
 	public void logOut();
 	
 	public boolean getUlogovan();
-	public boolean izmeniKorisnika(String username, String ime, String prezime, char[] password, String eMail, String opis) throws PostojiUsernameException;
+	public boolean izmeniKorisnika(String ime, String prezime, char[] password, String eMail, String opis);
 	
 	public UserTim2 vratiUlogovanog();
 	public void sacuvajStavku(StavkaTim2 s);
