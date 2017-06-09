@@ -20,6 +20,8 @@ import model.MaterijalTim2;
 import model.StavkaTim2;
 import model.TipTim2;
 import model.VelicinaTim2;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PodaciPanel extends JPanel {
 	private JTextField textField;
@@ -94,6 +96,7 @@ public class PodaciPanel extends JPanel {
 		add(comboBox, gbc_comboBox);
 		
 		textField_4 = new JTextField();
+		
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
 		gbc_textField_4.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
@@ -103,6 +106,29 @@ public class PodaciPanel extends JPanel {
 		textField_4.setColumns(10);
 		
 		JButton btnNewButton_1 = new JButton("Nova boja");
+		btnNewButton_1.setEnabled(false);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BojaTim2 b=new BojaTim2();
+				String opis=textField_4.getText();
+				b.setOpis(opis);
+				BojaTim2 boja=null;
+				try {
+					boja=BeansGetter.sessionStavka().sacuvajBoju(b);
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				comboBox.addItem(boja);
+				comboBox.setSelectedItem(boja);
+			}
+		});
+		textField_4.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnNewButton_1.setEnabled(true);
+			}
+		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
@@ -130,6 +156,7 @@ public class PodaciPanel extends JPanel {
 		add(comboBox_1, gbc_comboBox_1);
 		
 		textField_5 = new JTextField();
+		
 		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
 		gbc_textField_5.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
@@ -139,6 +166,29 @@ public class PodaciPanel extends JPanel {
 		textField_5.setColumns(10);
 		
 		JButton btnNewButton_2 = new JButton("Novi materijal");
+		btnNewButton_2.setEnabled(false);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MaterijalTim2 m=new MaterijalTim2();
+				String opis=textField_5.getText();
+				m.setOpis(opis);
+				MaterijalTim2 mat=null;
+				try {
+					mat=BeansGetter.sessionStavka().sacuvajMaterija(m);
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				comboBox_1.addItem(mat);
+				comboBox_1.setSelectedItem(mat);
+			}
+		});
+		textField_5.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnNewButton_2.setEnabled(true);
+			}
+		});
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
 		gbc_btnNewButton_2.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);
@@ -167,12 +217,32 @@ public class PodaciPanel extends JPanel {
 		add(comboBox_2, gbc_comboBox_2);
 		
 		JButton btnNewButton_3 = new JButton("Novi tip");
+		btnNewButton_3.setEnabled(false);
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TipTim2 t=new TipTim2();
+				String opis=textField_6.getText();
+				t.setOpis(opis);
+				TipTim2 tip=null;
+				try {
+					tip=BeansGetter.sessionStavka().sacuvajTip(t);
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				comboBox_2.addItem(tip);
+				comboBox_2.setSelectedItem(tip);
 			}
 		});
 		
 		textField_6 = new JTextField();
+		textField_6.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnNewButton_3.setEnabled(true);
+			}
+		});
+		
 		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
 		gbc_textField_6.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
@@ -207,6 +277,10 @@ public class PodaciPanel extends JPanel {
 		add(comboBox_3, gbc_comboBox_3);
 		
 		textField_7 = new JTextField();
+	
+		
+		
+		
 		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
 		gbc_textField_7.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
@@ -216,6 +290,30 @@ public class PodaciPanel extends JPanel {
 		textField_7.setColumns(10);
 		
 		JButton btnNovaVelicina = new JButton("Nova velicina");
+		textField_7.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnNovaVelicina.setEnabled(true);
+			}
+		});
+		btnNovaVelicina.setEnabled(false);
+		btnNovaVelicina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VelicinaTim2 v=new VelicinaTim2();
+				String opis=textField_7.getText();
+				v.setOpis(opis);
+				VelicinaTim2 vel=null;
+				try {
+					vel=BeansGetter.sessionStavka().sacuvajVelicni(v);
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				comboBox_3.addItem(vel);
+				comboBox_3.setSelectedItem(vel);
+			}
+		});
+		
 		GridBagConstraints gbc_btnNovaVelicina = new GridBagConstraints();
 		gbc_btnNovaVelicina.anchor = GridBagConstraints.WEST;
 		gbc_btnNovaVelicina.insets = new Insets(0, 0, 5, 0);
