@@ -2,6 +2,7 @@ package registracija;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,10 +21,12 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import beans.LosUsernameException;
 import beans.LosaLozinkaException;
 import main.BeansGetter;
 import main.OnlineBar;
 import model.UserTim2;
+import search.SearchPanel;
 
 public class Login extends JPanel {
 
@@ -47,7 +50,7 @@ public class Login extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 
 		JSplitPane splitPane = new JSplitPane();
-		add(splitPane, BorderLayout.CENTER);
+		add(splitPane);
 
 		JPanel regPanel = new JPanel();
 		splitPane.setRightComponent(regPanel);
@@ -179,14 +182,14 @@ public class Login extends JPanel {
 						frame.repaint();
 						frame.revalidate();
 					}
-
-				} catch (NullPointerException ex) {
-					JOptionPane.showMessageDialog(null, "Korisnik s unetim korisnicnik imenom ne postoji");
+					
 				} catch (LosaLozinkaException e1) {
 					JOptionPane.showMessageDialog(null, "Pogresna sifra za korisnika");
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (LosUsernameException ex2){
+					JOptionPane.showMessageDialog(null, "Korisnik s unetim korisnicnik imenom ne postoji");
 				}
 			}
 		});
@@ -228,5 +231,28 @@ public class Login extends JPanel {
 
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_2.add(horizontalGlue_1);
+		
+		JPanel panel_4 = new JPanel();
+		add(panel_4, BorderLayout.SOUTH);
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
+		
+		Component horizontalGlue_4 = Box.createHorizontalGlue();
+		panel_4.add(horizontalGlue_4);
+		
+		JLabel lblUpozorenjeNeulogovanPosetilac = new JLabel("Upozorenje: Neulogovan posetilac moze samo da pretrazuje sadrzaj ");
+		panel_4.add(lblUpozorenjeNeulogovanPosetilac);
+		
+		JButton btnPresoci = new JButton("Presoci");
+		btnPresoci.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ScrollPane sp = new ScrollPane();
+				sp.add(SearchPanel.showMe());				
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(sp);
+				frame.getContentPane().repaint();
+				frame.getContentPane().revalidate();
+			}
+		});
+		panel_4.add(btnPresoci);
 	}
 }

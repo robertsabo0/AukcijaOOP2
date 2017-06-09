@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import beans.PostojiUsernameException;
 import main.BeansGetter;
 
 import javax.swing.JButton;
@@ -140,12 +141,16 @@ public class IzmeniProfil extends JPanel {
 		btnIzmeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					boolean izmeni= BeansGetter.sessionStavka().izmeniKorisnika(imeField.getText(), prezimeField.getText(), passwordField.getPassword(),eMailFiled.getText() , opisField.getText());
+					boolean izmeni= BeansGetter.sessionStavka().izmeniKorisnika(userNameField.getText(),imeField.getText(), prezimeField.getText(), passwordField.getPassword(),eMailFiled.getText() , opisField.getText());
 					if (izmeni)
 						JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
+					else
+						JOptionPane.showMessageDialog(null, "Niste uspeli izmeniti profil");
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (PostojiUsernameException e2){
+					JOptionPane.showMessageDialog(null, "Posotoji korisnik s tim korisnickim imenom, probajte drugo!");
 				}
 			}
 		});

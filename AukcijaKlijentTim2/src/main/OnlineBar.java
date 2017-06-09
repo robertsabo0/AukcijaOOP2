@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Component;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -75,8 +76,10 @@ public class OnlineBar extends JMenuBar {
 	}
 
 	public static void postaviStranicu(JPanel stranica) {
+		ScrollPane sp = new ScrollPane();
+		sp.add(stranica);
 		frame.getContentPane().removeAll();
-		frame.getContentPane().add(stranica);
+		frame.getContentPane().add(sp);
 		frame.getContentPane().repaint();
 		frame.getContentPane().revalidate();
 
