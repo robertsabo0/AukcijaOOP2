@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import registracija.Login;
@@ -49,12 +51,17 @@ public class OfflineBar extends JMenuBar {
 	}
 	
 	public void postaviStranicu(JPanel stranica) {
+		stranica.setPreferredSize(new Dimension(stranica.getWidth(), frame.getHeight()));
 		JScrollPane sp = new JScrollPane(stranica,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
+		
+		JScrollBar vertical = sp.getVerticalScrollBar();
+		vertical.setValue(vertical.getMaximum());
+		sp.setVerticalScrollBar(vertical);
+		
 		frame.getContentPane().removeAll();
-		frame.getContentPane().add(sp);
-		frame.getContentPane().repaint();
-		frame.getContentPane().revalidate();
+		frame.setContentPane(sp);
+		frame.repaint();
+		frame.revalidate();
 		
 	}
 }

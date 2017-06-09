@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.naming.NamingException;
@@ -47,18 +46,8 @@ public class Aukcija extends JFrame {
 		new OfflineBar(this);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(new Login(this));
 		
-		postaviStranicu(new Login(this));
-		
-	}
-
-	public void postaviStranicu(JPanel stranica) {
-		getContentPane().removeAll();
-		getContentPane().add(stranica);
-		getContentPane().repaint();
-		getContentPane().revalidate();
 		
 	}
 }
