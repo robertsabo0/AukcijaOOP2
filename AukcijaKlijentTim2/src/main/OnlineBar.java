@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Component;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +11,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
+import Dashboard.Dashboard;
 import registracija.IzmeniProfil;
 
 public class OnlineBar extends JMenuBar {
@@ -31,6 +32,8 @@ public class OnlineBar extends JMenuBar {
 
 		JMenu mnPocetna = new JMenu("Pocetna");
 		menuBar.add(mnPocetna);
+		mnPocetna.addActionListener(new PostavljanjeDashboarda());
+		
 
 		JMenu mnPretraga = new JMenu("Pretraga");
 		menuBar.add(mnPretraga);
@@ -76,13 +79,28 @@ public class OnlineBar extends JMenuBar {
 	}
 
 	public static void postaviStranicu(JPanel stranica) {
-		ScrollPane sp = new ScrollPane();
-		sp.add(stranica);
+		JScrollPane sp = new JScrollPane(stranica,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(sp);
 		frame.getContentPane().repaint();
 		frame.getContentPane().revalidate();
 
+	}
+	private class PostavljanjeDashboarda implements ActionListener{
+			
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Dashboard d=new Dashboard();
+				OnlineBar.postaviStranicu(d);
+			} catch (NamingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 }

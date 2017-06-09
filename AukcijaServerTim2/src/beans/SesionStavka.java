@@ -10,11 +10,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import model.BojaTim2;
 import model.CommonTim2;
 import model.KomentarTim2;
+import model.MaterijalTim2;
 import model.PonudaTim2;
 import model.StavkaTim2;
+import model.TipTim2;
 import model.UserTim2;
+import model.VelicinaTim2;
 
 @Stateful
 @Remote(SesionStavkaI.class)
@@ -52,6 +56,46 @@ public class SesionStavka implements SesionStavkaI {
 		if (k != null) {
 			em.persist(k);
 		}
+	}
+
+	@Override
+	public VelicinaTim2 sacuvajVelicni(VelicinaTim2 v) {
+		// TODO Auto-generated method stub
+		if(v!=null){
+			em.persist(v);
+			return v;
+		}
+		return null;
+	}
+
+	@Override
+	public BojaTim2 sacuvajBoju(BojaTim2 b) {
+		// TODO Auto-generated method stub
+		if(b!=null){
+			em.persist(b);
+			return b;
+		}
+		return null;
+	}
+
+	@Override
+	public TipTim2 sacuvajTip(TipTim2 t) {
+		// TODO Auto-generated method stub
+		if(t!=null){
+			em.persist(t);
+			return t;
+		}
+		return null;
+	}
+
+	@Override
+	public MaterijalTim2 sacuvajMaterija(MaterijalTim2 m) {
+		// TODO Auto-generated method stub
+		if(m!=null){
+			em.persist(m);
+			return m;
+		}
+		return null;
 	}
 
 	@Override
@@ -116,18 +160,11 @@ public class SesionStavka implements SesionStavkaI {
 
 	// izmenjuje korisnika
 	@Override
-	public boolean izmeniKorisnika(String username, String ime, String prezime, char[] password, String eMail,
-			String opis) throws PostojiUsernameException {
+	public boolean izmeniKorisnika(String ime, String prezime, char[] password, String eMail,
+			String opis){
 		try {
 			korisnik = em.find(UserTim2.class, korisnik.getUsername());
 
-			if (!username.isEmpty()) {
-				if (em.contains(em.find(UserTim2.class, username))) {
-					throw new PostojiUsernameException();
-				} else{
-					korisnik.setUsername(username);
-				}
-			}
 			if (!ime.isEmpty())
 				korisnik.setIme(ime);
 
@@ -148,14 +185,49 @@ public class SesionStavka implements SesionStavkaI {
 			}
 
 			em.merge(korisnik);
-
-		} catch (PostojiUsernameException e) {
-			throw new PostojiUsernameException();
-			
+			em.flush();
+	
 		} catch (Exception e){
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public UserTim2 registrujKorisnika(String username, char[] password, String ime, String prezime, String eMail,
+			String opis) throws NoUsernameException, PostojiUsernameException {
+		try{
+			UserTim2 user = new UserTim2();
+			if (username.isEmpty()){
+				throw new NoUsernameException();
+			}else{
+				if (em.contains(em.find(UserTim2.class, username))){
+					throw new PostojiUsernameException();
+				}else{
+					user.setUsername(username);
+				}
+			}
+			user.setEmail(eMail);
+			user.setIme(ime);
+			user.setPrezime(prezime);
+			user.setOpis(opis);
+			String str="";
+			for (char c:password)
+				str+=c;
+			user.setPassword(str);
+			
+			em.persist(user);
+			em.flush();
+			
+			korisnik=user;
+			return korisnik;
+		} catch (NoUsernameException ex){
+			throw new NoUsernameException();
+		} catch (PostojiUsernameException ex2){
+			throw new PostojiUsernameException();
+		}catch (Exception e){
+			return null;
+		}
 	}
 
 }
