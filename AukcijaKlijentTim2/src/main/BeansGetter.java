@@ -36,4 +36,5 @@ public class BeansGetter {
 		}
 		return s;
 	}
+	
 }

@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import registracija.Login;
+
 public class Aukcija extends JFrame {
 
 	/**
@@ -21,7 +23,7 @@ public class Aukcija extends JFrame {
 	 * @throws NamingException 
 	 */
 	public static void main(String[] args) throws NamingException {
-		if(true)return;
+		//if(true)return;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -49,7 +51,8 @@ public class Aukcija extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		repaint();
+		postaviStranicu(new Login(this));
+		
 	}
 
 	public void postaviStranicu(JPanel stranica) {
