@@ -263,10 +263,10 @@ public class PodaciPanel extends JPanel {
 				s.setOpis(textField_1.getText());
 				s.setDatumPostavljanja(new Date());
 				s.setAktuelnaCena(Integer.parseInt(textField_2.getText()));
-				s.setBoja(comboBox.getPrototypeDisplayValue());
-				s.setMaterijal(comboBox_1.getPrototypeDisplayValue());
-				s.setTip(comboBox_2.getPrototypeDisplayValue());
-				s.setVelicina(comboBox_3.getPrototypeDisplayValue());
+				s.setBoja(comboBox.getItemAt(comboBox.getSelectedIndex()));
+				s.setMaterijal(comboBox_1.getItemAt(comboBox_1.getSelectedIndex()));
+				s.setTip(comboBox_2.getItemAt(comboBox_2.getSelectedIndex()));
+				s.setVelicina(comboBox_3.getItemAt(comboBox_3.getSelectedIndex()));
 				try {
 					BeansGetter.sessionStavka().sacuvajStavku(s);
 				} catch (NamingException e1) {
