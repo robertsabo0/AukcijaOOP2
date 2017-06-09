@@ -1,13 +1,16 @@
 package search;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Dashboard.SmallStavkaPanel;
+import main.Aukcija;
 import model.StavkaTim2;
 
 public class SearchPanel extends JPanel {
@@ -30,23 +33,32 @@ public class SearchPanel extends JPanel {
 	SearchPanel(JFrame p){
 		parent = p;
 		setLayout(new BorderLayout());
-		JPanel filter = new FiltersPanel(this);
-		add(filter, BorderLayout.NORTH);
 		bot = new JPanel();
 		add(bot, BorderLayout.CENTER);
+		
+		JPanel filter = new FiltersPanel(this);
+		add(filter, BorderLayout.NORTH);
 	}
 	
 	public void addStavkes(List<StavkaTim2> stavke){
-		if(bot!=null)parent.remove(bot);
+		 remove(bot);
 		 bot=new JPanel();
 		 bot.setLayout(new FlowLayout());
-		 add(bot);
-
+		 bot.setPreferredSize(parent.getSize());
+		 bot.add((Component)Box.createHorizontalGlue());
 		 for(StavkaTim2 s : stavke){
 			 JPanel stavkaPanel=new SmallStavkaPanel(s);
 			 bot.add(stavkaPanel);
 		 }
-		 parent.repaint();
-		 parent.revalidate();
+
+		 add(bot);
+		 
+		 if(parent instanceof Aukcija)
+			 ((Aukcija)parent).postaviStranicu(this);
+		 else{
+			 
+			 parent.repaint();
+			 parent.revalidate();
+		 }
 	}
 }
