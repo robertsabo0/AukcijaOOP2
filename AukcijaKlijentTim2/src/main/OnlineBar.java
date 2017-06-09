@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
+import Dashboard.Dashboard;
 import registracija.IzmeniProfil;
 
 public class OnlineBar extends JMenuBar {
@@ -33,6 +34,8 @@ public class OnlineBar extends JMenuBar {
 
 		JMenu mnPocetna = new JMenu("Pocetna");
 		menuBar.add(mnPocetna);
+		mnPocetna.addActionListener(new PostavljanjeDashboarda());
+		
 
 		JMenu mnPretraga = new JMenu("Pretraga");
 		menuBar.add(mnPretraga);
@@ -90,6 +93,21 @@ public class OnlineBar extends JMenuBar {
 		frame.repaint();
 		frame.revalidate();
 
+	}
+	private class PostavljanjeDashboarda implements ActionListener{
+			
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Dashboard d=new Dashboard();
+				OnlineBar.postaviStranicu(d);
+			} catch (NamingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 }
