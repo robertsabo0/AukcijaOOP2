@@ -66,35 +66,35 @@ public class PanelOpis extends JPanel {
 		gbc_lblNewLabel_2.gridy = 5;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Materijal: "/*+s.getMaterijal().getOpis()*/);
+		JLabel lblNewLabel_3 = new JLabel("Materijal: "+s.getMaterijal().getOpis());
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 2;
 		gbc_lblNewLabel_3.gridy = 7;
 		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Tip: "/*+s.getTip().getOpis()*/);
+		JLabel lblNewLabel_4 = new JLabel("Tip: "+s.getTip().getOpis());
 		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
 		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_4.gridx = 2;
 		gbc_lblNewLabel_4.gridy = 9;
 		add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Velicina: "/*+s.getVelicina().getOpis()*/);
+		JLabel lblNewLabel_5 = new JLabel("Velicina: "+s.getVelicina().getOpis());
 		GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
 		gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_5.gridx = 2;
 		gbc_lblNewLabel_5.gridy = 11;
 		add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
-		JLabel lblNewLabel_6 = new JLabel("Datum postavljanja: "/*+s.getDatumPostavljanja()*/);
+		JLabel lblNewLabel_6 = new JLabel("Datum postavljanja: "+s.getDatumPostavljanja());
 		GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
 		gbc_lblNewLabel_6.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_6.gridx = 2;
 		gbc_lblNewLabel_6.gridy = 13;
 		add(lblNewLabel_6, gbc_lblNewLabel_6);
 		
-		JLabel lblNewLabel_7 = new JLabel("Postavljeno od strane: "/*+s.getPostavljenoOdStrane().getUsername()*/);
+		JLabel lblNewLabel_7 = new JLabel("Postavljeno od strane: "+s.getPostavljenoOdStrane().getUsername());
 		GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
 		gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_7.gridx = 2;

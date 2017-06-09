@@ -10,11 +10,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import model.BojaTim2;
 import model.CommonTim2;
 import model.KomentarTim2;
+import model.MaterijalTim2;
 import model.PonudaTim2;
 import model.StavkaTim2;
+import model.TipTim2;
 import model.UserTim2;
+import model.VelicinaTim2;
 
 @Stateful
 @Remote(SesionStavkaI.class)
@@ -52,6 +56,46 @@ public class SesionStavka implements SesionStavkaI {
 		if (k != null) {
 			em.persist(k);
 		}
+	}
+
+	@Override
+	public VelicinaTim2 sacuvajVelicni(VelicinaTim2 v) {
+		// TODO Auto-generated method stub
+		if(v!=null){
+			em.persist(v);
+			return v;
+		}
+		return null;
+	}
+
+	@Override
+	public BojaTim2 sacuvajBoju(BojaTim2 b) {
+		// TODO Auto-generated method stub
+		if(b!=null){
+			em.persist(b);
+			return b;
+		}
+		return null;
+	}
+
+	@Override
+	public TipTim2 sacuvajTip(TipTim2 t) {
+		// TODO Auto-generated method stub
+		if(t!=null){
+			em.persist(t);
+			return t;
+		}
+		return null;
+	}
+
+	@Override
+	public MaterijalTim2 sacuvajMaterija(MaterijalTim2 m) {
+		// TODO Auto-generated method stub
+		if(m!=null){
+			em.persist(m);
+			return m;
+		}
+		return null;
 	}
 
 	@Override
