@@ -46,7 +46,7 @@ public class Login extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Login(JFrame frame) {
+	public Login(final JFrame frame) {
 		setLayout(new BorderLayout(0, 0));
 
 		JSplitPane splitPane = new JSplitPane();
@@ -246,7 +246,7 @@ public class Login extends JPanel {
 		btnPresoci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ScrollPane sp = new ScrollPane();
-				sp.add(SearchPanel.showMe());				
+				sp.add(SearchPanel.showMe(frame));				
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(sp);
 				frame.getContentPane().repaint();

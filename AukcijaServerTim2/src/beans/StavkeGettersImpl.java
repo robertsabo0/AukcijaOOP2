@@ -1,6 +1,5 @@
 package beans;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javax.persistence.TypedQuery;
 import model.BojaTim2;
 import model.CommonTim2;
 import model.MaterijalTim2;
-import model.PonudaTim2;
 import model.StavkaTim2;
 import model.TipTim2;
 import model.UserTim2;

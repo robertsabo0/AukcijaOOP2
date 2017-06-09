@@ -14,13 +14,17 @@ import javax.swing.SwingConstants;
 
 import beans.StavkeGetters;
 import main.BeansGetter;
-import main.OnlineBar;
 import model.StavkaTim2;
 
 public class Dashboard extends JPanel{
 	
 	 
-	 StavkaTim2 s;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5771702808421735030L;
+	
+	StavkaTim2 s;
 	 JButton dugme;
 	 StavkeGetters dashStavka;
 	 
@@ -48,10 +52,6 @@ public class Dashboard extends JPanel{
 		 
 		 List<StavkaTim2> licitirane=BeansGetter.stavkeGetters().licitiraneStavke("admin");
 		 List<StavkaTim2> postavljene=BeansGetter.stavkeGetters().postavljeneStavke("admin");
-
-		 List<StavkaTim2> stavke= BeansGetter.stavkeGetters().getSve();
-
-		 
 		 
 		 JLabel licitiraneL=new JLabel("Licitirane stavke: ");
 		 licitiraneL.setHorizontalAlignment(SwingConstants.LEADING);

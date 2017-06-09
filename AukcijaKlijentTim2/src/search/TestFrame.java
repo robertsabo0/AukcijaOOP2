@@ -13,8 +13,8 @@ public class TestFrame extends JFrame{
 		JFrame f=new TestFrame();
 		f.setTitle("Aukcija");
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		f.setSize(600, 600);
-		f.setContentPane(SearchPanel.showMe());
+		f.setSize(200, 200);
+		f.setContentPane(SearchPanel.showMe(f));
 		f.pack();
 		f.setVisible(true);
 	}
