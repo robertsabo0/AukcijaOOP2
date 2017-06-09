@@ -10,11 +10,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import model.BojaTim2;
 import model.CommonTim2;
 import model.KomentarTim2;
+import model.MaterijalTim2;
 import model.PonudaTim2;
 import model.StavkaTim2;
+import model.TipTim2;
 import model.UserTim2;
+import model.VelicinaTim2;
 
 @Stateful
 @Remote(SesionStavkaI.class)
@@ -22,7 +26,7 @@ public class SesionStavka implements SesionStavkaI {
 	@PersistenceContext(name = CommonTim2.persistanceName)
 	private EntityManager em;
 
-	private UserTim2 korisnik= new UserTim2();
+	private UserTim2 korisnik = new UserTim2();
 	public static boolean ulogovan = false;
 
 	@Override
@@ -31,16 +35,15 @@ public class SesionStavka implements SesionStavkaI {
 		q.setParameter("id", id);
 		return q.getResultList();
 	}
-	
-	
+
 	@Override
 	public void izmeniStavku(StavkaTim2 s, UserTim2 u) {
 		// TODO Auto-generated method stub
-		if(s!=null){
+		if (s != null) {
 			em.merge(s);
 			em.flush();
 		}
-		PonudaTim2 p=new PonudaTim2();
+		PonudaTim2 p = new PonudaTim2();
 		p.setStavka(s);
 		p.setTimestamp(new Date());
 		p.setUser(u);
@@ -48,24 +51,60 @@ public class SesionStavka implements SesionStavkaI {
 		em.persist(p);
 	}
 
-
 	@Override
 	public void sacuvajKomentar(KomentarTim2 k) {
-		if(k!=null){
+		if (k != null) {
 			em.persist(k);
 		}
 	}
 
-	
+	@Override
+	public VelicinaTim2 sacuvajVelicni(VelicinaTim2 v) {
+		// TODO Auto-generated method stub
+		if(v!=null){
+			em.persist(v);
+			return v;
+		}
+		return null;
+	}
+
+	@Override
+	public BojaTim2 sacuvajBoju(BojaTim2 b) {
+		// TODO Auto-generated method stub
+		if(b!=null){
+			em.persist(b);
+			return b;
+		}
+		return null;
+	}
+
+	@Override
+	public TipTim2 sacuvajTip(TipTim2 t) {
+		// TODO Auto-generated method stub
+		if(t!=null){
+			em.persist(t);
+			return t;
+		}
+		return null;
+	}
+
+	@Override
+	public MaterijalTim2 sacuvajMaterija(MaterijalTim2 m) {
+		// TODO Auto-generated method stub
+		if(m!=null){
+			em.persist(m);
+			return m;
+		}
+		return null;
+	}
 
 	@Override
 	public void sacuvajStavku(StavkaTim2 s) {
-		if(s!=null){
+		if (s != null) {
 			em.persist(s);
 		}
-		
-	}
 
+	}
 
 	@Override
 	public UserTim2 vratiUlogovanog() {
@@ -74,16 +113,22 @@ public class SesionStavka implements SesionStavkaI {
 
 	// pokusava da uloguje korisnika
 	@Override
-	public UserTim2 loginUser(String userName, char[] password) throws LosaLozinkaException, NullPointerException {
+	public UserTim2 loginUser(String userName, char[] password) throws LosaLozinkaException, LosUsernameException {
 		TypedQuery<UserTim2> q = em.createNamedQuery("UserTim2.findUser", UserTim2.class);
 		q.setParameter("username", userName);
-		UserTim2 k = q.getSingleResult();
+		UserTim2 k = new UserTim2();
+		try {
+			k = q.getSingleResult();
+		} catch (Exception e) {
+			throw new LosUsernameException();
+		}
 		if (k != null) {
 			String str = "";
 			for (char c : password) {
 				str += c;
 			}
 			if (k.getPassword().equals(str)) {
+				korisnik.setUsername(k.getUsername());
 				korisnik.setEmail(k.getEmail());
 				korisnik.setIme(k.getIme());
 				korisnik.setPrezime(k.getPrezime());
@@ -91,19 +136,18 @@ public class SesionStavka implements SesionStavkaI {
 				korisnik.setPassword(k.getPassword());
 
 				ulogovan = true;
-				
+
 				return korisnik;
 			} else {
 				throw new LosaLozinkaException();
 			}
 		} else {
-			System.out.println("Ne posotji user");
 			return null;
 		}
 	}
 
-	@Override
 	@Remove
+	@Override
 	public void logOut() {
 		ulogovan = false;
 	}
@@ -113,4 +157,49 @@ public class SesionStavka implements SesionStavkaI {
 		// TODO Auto-generated method stub
 		return ulogovan;
 	}
+
+	// izmenjuje korisnika
+	@Override
+	public boolean izmeniKorisnika(String username, String ime, String prezime, char[] password, String eMail,
+			String opis) throws PostojiUsernameException {
+		try {
+			korisnik = em.find(UserTim2.class, korisnik.getUsername());
+
+			if (!username.isEmpty()) {
+				if (em.contains(em.find(UserTim2.class, username))) {
+					throw new PostojiUsernameException();
+				} else{
+					korisnik.setUsername(username);
+				}
+			}
+			if (!ime.isEmpty())
+				korisnik.setIme(ime);
+
+			if (!prezime.isEmpty())
+				korisnik.setPrezime(prezime);
+
+			if (!eMail.isEmpty())
+				korisnik.setEmail(eMail);
+
+			if (!opis.isEmpty())
+				korisnik.setOpis(opis);
+
+			String pas = "";
+			for (char c : password)
+				pas += c;
+			if (!pas.isEmpty()) {
+				korisnik.setPassword(pas);
+			}
+
+			em.merge(korisnik);
+
+		} catch (PostojiUsernameException e) {
+			throw new PostojiUsernameException();
+			
+		} catch (Exception e){
+			return false;
+		}
+		return true;
+	}
+
 }

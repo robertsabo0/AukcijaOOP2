@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Component;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -56,14 +57,32 @@ public class OnlineBar extends JMenuBar {
 		mnKorisnik.add(mntmPodesiProfil);
 		
 		JMenuItem mntmIzlogujSe = new JMenuItem("Izloguj se");
+		mntmIzlogujSe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					BeansGetter.sessionStavka().logOut();
+					new OfflineBar(frame);
+					frame.repaint();
+					frame.revalidate();
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		mnKorisnik.add(mntmIzlogujSe);
 		
 		frame.setJMenuBar(menuBar);
 	}
 
 	public static void postaviStranicu(JPanel stranica) {
+		ScrollPane sp = new ScrollPane();
+		sp.add(stranica);
 		frame.getContentPane().removeAll();
-		frame.getContentPane().add(stranica);
+		frame.getContentPane().add(sp);
 		frame.getContentPane().repaint();
 		frame.getContentPane().revalidate();
 
