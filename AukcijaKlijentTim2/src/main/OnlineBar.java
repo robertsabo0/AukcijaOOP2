@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 
 import Dashboard.Dashboard;
 import registracija.IzmeniProfil;
+import registracija.Login;
 
 public class OnlineBar extends JMenuBar {
 
@@ -66,8 +67,7 @@ public class OnlineBar extends JMenuBar {
 				try {
 					BeansGetter.sessionStavka().logOut();
 					new OfflineBar(frame);
-					frame.repaint();
-					frame.revalidate();
+					postaviStranicu(new Login(frame));
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
