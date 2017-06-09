@@ -1,14 +1,23 @@
 package registracija;
 
 import javax.swing.JPanel;
+import javax.naming.NamingException;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import beans.PostojiUsernameException;
+import main.BeansGetter;
+
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IzmeniProfil extends JPanel {
 
@@ -16,11 +25,11 @@ public class IzmeniProfil extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -2055820999086617818L;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField userNameField;
+	private JTextField imeField;
+	private JTextField prezimeField;
+	private JTextField eMailFiled;
+	private JTextField opisField;
 	private JPasswordField passwordField;
 
 	/**
@@ -40,30 +49,30 @@ public class IzmeniProfil extends JPanel {
 		
 		JLabel lblUsername = new JLabel("Username:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		userNameField = new JTextField();
+		userNameField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		imeField = new JTextField();
+		imeField.setColumns(10);
 		
 		JLabel lblIme = new JLabel("Ime:");
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		prezimeField = new JTextField();
+		prezimeField.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("E-mail:");
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
+		eMailFiled = new JTextField();
+		eMailFiled.setColumns(10);
 		
 		JLabel lblOpis = new JLabel("Opis:");
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		opisField = new JTextField();
+		opisField.setColumns(10);
 		
 		JLabel lblmoraBitiJedinstveno = new JLabel("(*Mora biti jedinstveno)");
 		
@@ -84,11 +93,11 @@ public class IzmeniProfil extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(passwordField)
-						.addComponent(textField_5)
-						.addComponent(textField_4)
-						.addComponent(textField_3)
-						.addComponent(textField_2)
-						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+						.addComponent(opisField)
+						.addComponent(eMailFiled)
+						.addComponent(prezimeField)
+						.addComponent(imeField)
+						.addComponent(userNameField, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
 					.addGap(18)
 					.addComponent(lblmoraBitiJedinstveno)
 					.addContainerGap(96, Short.MAX_VALUE))
@@ -98,7 +107,7 @@ public class IzmeniProfil extends JPanel {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(userNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblUsername)
 						.addComponent(lblmoraBitiJedinstveno))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -107,19 +116,19 @@ public class IzmeniProfil extends JPanel {
 						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(imeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblIme))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(prezimeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblPrezime))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(eMailFiled, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblEmail))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(opisField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblOpis))
 					.addContainerGap(44, Short.MAX_VALUE))
 		);
@@ -129,6 +138,22 @@ public class IzmeniProfil extends JPanel {
 		add(panel_1, BorderLayout.SOUTH);
 		
 		JButton btnIzmeni = new JButton("Izmeni");
+		btnIzmeni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					boolean izmeni= BeansGetter.sessionStavka().izmeniKorisnika(userNameField.getText(),imeField.getText(), prezimeField.getText(), passwordField.getPassword(),eMailFiled.getText() , opisField.getText());
+					if (izmeni)
+						JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
+					else
+						JOptionPane.showMessageDialog(null, "Niste uspeli izmeniti profil");
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (PostojiUsernameException e2){
+					JOptionPane.showMessageDialog(null, "Posotoji korisnik s tim korisnickim imenom, probajte drugo!");
+				}
+			}
+		});
 		panel_1.add(btnIzmeni);
 
 	}

@@ -1,9 +1,11 @@
 package main;
 
 import java.awt.Component;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.naming.NamingException;
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -20,7 +22,7 @@ public class OnlineBar extends JMenuBar {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JFrame frame;
+	private static JFrame frame;
 	
 	public OnlineBar(JFrame frame) {
 		this.frame = frame;
@@ -52,14 +54,32 @@ public class OnlineBar extends JMenuBar {
 		mnKorisnik.add(mntmPodesiProfil);
 		
 		JMenuItem mntmIzlogujSe = new JMenuItem("Izloguj se");
+		mntmIzlogujSe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					BeansGetter.sessionStavka().logOut();
+					new OfflineBar(frame);
+					frame.repaint();
+					frame.revalidate();
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		mnKorisnik.add(mntmIzlogujSe);
 		
 		frame.setJMenuBar(menuBar);
 	}
 
-	public void postaviStranicu(JPanel stranica) {
+	public static void postaviStranicu(JPanel stranica) {
+		ScrollPane sp = new ScrollPane();
+		sp.add(stranica);
 		frame.getContentPane().removeAll();
-		frame.getContentPane().add(stranica);
+		frame.getContentPane().add(sp);
 		frame.getContentPane().repaint();
 		frame.getContentPane().revalidate();
 
