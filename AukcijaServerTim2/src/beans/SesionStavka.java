@@ -26,7 +26,7 @@ public class SesionStavka implements SesionStavkaI {
 	@PersistenceContext(name = CommonTim2.persistanceName)
 	private EntityManager em;
 
-	private UserTim2 korisnik = new UserTim2();
+	private UserTim2 korisnik;
 	public static boolean ulogovan = false;
 
 	@Override
@@ -70,7 +70,7 @@ public class SesionStavka implements SesionStavkaI {
 	@Override
 	public VelicinaTim2 sacuvajVelicni(VelicinaTim2 v) {
 		// TODO Auto-generated method stub
-		if(v!=null){
+		if (v != null) {
 			em.persist(v);
 			return v;
 		}
@@ -80,7 +80,7 @@ public class SesionStavka implements SesionStavkaI {
 	@Override
 	public BojaTim2 sacuvajBoju(BojaTim2 b) {
 		// TODO Auto-generated method stub
-		if(b!=null){
+		if (b != null) {
 			em.persist(b);
 			return b;
 		}
@@ -90,7 +90,7 @@ public class SesionStavka implements SesionStavkaI {
 	@Override
 	public TipTim2 sacuvajTip(TipTim2 t) {
 		// TODO Auto-generated method stub
-		if(t!=null){
+		if (t != null) {
 			em.persist(t);
 			return t;
 		}
@@ -100,7 +100,7 @@ public class SesionStavka implements SesionStavkaI {
 	@Override
 	public MaterijalTim2 sacuvajMaterija(MaterijalTim2 m) {
 		// TODO Auto-generated method stub
-		if(m!=null){
+		if (m != null) {
 			em.persist(m);
 			return m;
 		}
@@ -123,6 +123,8 @@ public class SesionStavka implements SesionStavkaI {
 	// pokusava da uloguje korisnika
 	@Override
 	public UserTim2 loginUser(String userName, char[] password) throws LosaLozinkaException, LosUsernameException {
+		if (korisnik != null)
+			return null; // korisnik je vec ulogovan
 		TypedQuery<UserTim2> q = em.createNamedQuery("UserTim2.findUser", UserTim2.class);
 		q.setParameter("username", userName);
 		UserTim2 k = new UserTim2();
@@ -137,15 +139,8 @@ public class SesionStavka implements SesionStavkaI {
 				str += c;
 			}
 			if (k.getPassword().equals(str)) {
-				korisnik.setUsername(k.getUsername());
-				korisnik.setEmail(k.getEmail());
-				korisnik.setIme(k.getIme());
-				korisnik.setPrezime(k.getPrezime());
-				korisnik.setOpis(k.getOpis());
-				korisnik.setPassword(k.getPassword());
-
+				korisnik = k;
 				ulogovan = true;
-
 				return korisnik;
 			} else {
 				throw new LosaLozinkaException();
@@ -159,6 +154,7 @@ public class SesionStavka implements SesionStavkaI {
 	@Override
 	public void logOut() {
 		ulogovan = false;
+		korisnik = null;
 	}
 
 	@Override
@@ -169,74 +165,69 @@ public class SesionStavka implements SesionStavkaI {
 
 	// izmenjuje korisnika
 	@Override
-	public boolean izmeniKorisnika(String ime, String prezime, char[] password, String eMail,
-			String opis){
-		try {
-			korisnik = em.find(UserTim2.class, korisnik.getUsername());
-
-			if (!ime.isEmpty())
-				korisnik.setIme(ime);
-
-			if (!prezime.isEmpty())
-				korisnik.setPrezime(prezime);
-
-			if (!eMail.isEmpty())
-				korisnik.setEmail(eMail);
-
-			if (!opis.isEmpty())
-				korisnik.setOpis(opis);
-
-			String pas = "";
-			for (char c : password)
-				pas += c;
-			if (!pas.isEmpty()) {
-				korisnik.setPassword(pas);
-			}
-
-			em.merge(korisnik);
-			em.flush();
-	
-		} catch (Exception e){
+	public boolean izmeniKorisnika(String ime, String prezime, char[] password, String eMail, String opis, byte[] slika) {
+		if (korisnik == null)
 			return false;
+
+		if (!ime.isEmpty())
+			korisnik.setIme(ime);
+
+		if (!prezime.isEmpty())
+			korisnik.setPrezime(prezime);
+
+		if (!eMail.isEmpty())
+			korisnik.setEmail(eMail);
+
+		if (!opis.isEmpty())
+			korisnik.setOpis(opis);
+
+		String pas = "";
+		for (char c : password)
+			pas += c;
+		if (!pas.isEmpty()) {
+			korisnik.setPassword(pas);
 		}
+		
+		if(slika.length!=0){
+			korisnik.setSlika(slika);
+		}
+
+		em.merge(korisnik);
+		em.flush();
 		return true;
 	}
 
+	// registracija korisnika
 	@Override
 	public UserTim2 registrujKorisnika(String username, char[] password, String ime, String prezime, String eMail,
 			String opis) throws NoUsernameException, PostojiUsernameException {
-		try{
-			UserTim2 user = new UserTim2();
-			if (username.isEmpty()){
-				throw new NoUsernameException();
-			}else{
-				if (em.contains(em.find(UserTim2.class, username))){
-					throw new PostojiUsernameException();
-				}else{
-					user.setUsername(username);
-				}
-			}
-			user.setEmail(eMail);
-			user.setIme(ime);
-			user.setPrezime(prezime);
-			user.setOpis(opis);
-			String str="";
-			for (char c:password)
-				str+=c;
-			user.setPassword(str);
-			
-			em.persist(user);
-			em.flush();
-			
-			korisnik=user;
-			return korisnik;
-		} catch (NoUsernameException ex){
+		if (korisnik != null)
+			return null; // postoji registrovan korisnik trenutno na sistemu
+		
+		if (username.isEmpty()) {
 			throw new NoUsernameException();
-		} catch (PostojiUsernameException ex2){
-			throw new PostojiUsernameException();
-		}catch (Exception e){
-			return null;
+		} else {
+			if (em.contains(em.find(UserTim2.class, username))) {
+				throw new PostojiUsernameException();
+			} else {
+				korisnik = new UserTim2();
+				korisnik.setUsername(username);
+			}
 		}
+		korisnik.setEmail(eMail);
+		korisnik.setIme(ime);
+		korisnik.setPrezime(prezime);
+		korisnik.setOpis(opis);
+		String str = "";
+		for (char c : password)
+			str += c;
+		korisnik.setPassword(str);
+
+		em.persist(korisnik);
+		em.flush();
+
+		return korisnik;
+
 	}
 
 }

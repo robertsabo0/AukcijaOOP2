@@ -2,11 +2,8 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Image;
-import java.io.File;
 
 import javax.naming.NamingException;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -33,6 +30,7 @@ public class Aukcija extends JFrame {
 			public void run() {
 				try {
 					Aukcija frame = new Aukcija();
+					me = frame;
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +38,9 @@ public class Aukcija extends JFrame {
 			}
 		});
 	}
-
+	
+	public static Aukcija me;
+	
 	/**
 	 * Create the frame.
 	 */
