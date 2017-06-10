@@ -2,11 +2,9 @@ package main;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.enterprise.inject.spi.Bean;
 import javax.naming.NamingException;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -23,6 +21,7 @@ import Dashboard.Dashboard;
 import dodavanjeStavke.GlavniPanel;
 import registracija.IzmeniProfil;
 import registracija.Login;
+import search.SearchPanel;
 
 public class OnlineBar extends JMenuBar {
 
@@ -38,12 +37,15 @@ public class OnlineBar extends JMenuBar {
 
 		JMenuBar menuBar = new JMenuBar();
 
-		JMenu mnPocetna = new JMenu("Pocetna");
-		menuBar.add(mnPocetna);
+		JButton mnPocetna = new JButton("Pocetna");
 		mnPocetna.addActionListener(new PostavljanjeDashboarda());
+		menuBar.add(mnPocetna);
 		
 
-		JMenu mnPretraga = new JMenu("Pretraga");
+		JButton mnPretraga = new JButton("Pretraga");
+		mnPretraga.addActionListener(e -> {
+				OnlineBar.postaviStranicu(SearchPanel.showMe(frame));
+			});
 		menuBar.add(mnPretraga);
 		
 		JButton mnPostaviStavku  = new JButton ("Postavi stavku");
@@ -66,6 +68,7 @@ public class OnlineBar extends JMenuBar {
 		menuBar.add(mnKorisnik);
 
 		JPanel podesavanje = new IzmeniProfil();
+		postaviStranicu(podesavanje);
 		JMenuItem mntmPodesiProfil = new JMenuItem("Podesavanje profila");
 		mntmPodesiProfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -111,13 +114,9 @@ public class OnlineBar extends JMenuBar {
 			
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				Dashboard d=new Dashboard();
-				OnlineBar.postaviStranicu(d);
-			} catch (NamingException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			Dashboard d=new Dashboard();
+			OnlineBar.postaviStranicu(d);
+			
 			
 		}
 		

@@ -62,6 +62,7 @@ public class FillDatabase {
 			
 			UserTim2 i = new UserTim2();
 			i.setUsername("admin");
+			i.setPassword("admin");
 			em.persist(i);
 			
 			fillBoja();

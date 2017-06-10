@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import main.BeansGetter;
+import model.UserTim2;
 
 public class IzmeniProfil extends JPanel {
 
@@ -35,6 +36,8 @@ public class IzmeniProfil extends JPanel {
 	 * Create the panel.
 	 */
 	public IzmeniProfil() {
+		UserTim2 user = BeansGetter.sessionStavka().vratiUlogovanog();
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelNaslov = new JPanel();
@@ -46,26 +49,32 @@ public class IzmeniProfil extends JPanel {
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		
+		
 		JLabel lblPassword = new JLabel("Password:");
 		
 		imeField = new JTextField();
+		imeField.setText(user.getIme());
 		imeField.setColumns(10);
+		
 		
 		JLabel lblIme = new JLabel("Ime:");
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
 		
 		prezimeField = new JTextField();
+		prezimeField.setText(user.getPrezime());
 		prezimeField.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("E-mail:");
 		
 		eMailFiled = new JTextField();
+		eMailFiled.setText(user.getEmail());
 		eMailFiled.setColumns(10);
 		
 		JLabel lblOpis = new JLabel("Opis:");
 		
 		opisField = new JTextField();
+		opisField.setText(user.getOpis());
 		opisField.setColumns(10);
 		
 		passwordField = new JPasswordField();
@@ -78,14 +87,14 @@ public class IzmeniProfil extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblIme)
 						.addComponent(lblPrezime)
-						.addComponent(lblPassword)
+						//.addComponent(lblPassword)
 						.addComponent(lblEmail)
 						.addComponent(lblOpis))
 					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(prezimeField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 						.addComponent(imeField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+						//.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 						.addComponent(eMailFiled, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 						.addComponent(opisField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
 					.addGap(156))
@@ -102,10 +111,10 @@ public class IzmeniProfil extends JPanel {
 						.addComponent(prezimeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblPrezime))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPassword))
-					.addPreferredGap(ComponentPlacement.RELATED)
+					//.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						//.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+						//.addComponent(lblPassword))
+					//.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(eMailFiled, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblEmail))

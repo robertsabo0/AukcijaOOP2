@@ -30,8 +30,8 @@ public class OfflineBar extends JMenuBar {
 		
 		JMenuBar menuBar = new JMenuBar();
 		
-		JMenu mnPretraga = new JMenu("Pretraga");
-		menuBar.add(mnPretraga);
+		//JMenu mnPretraga = new JMenu("Pretraga");
+		//menuBar.add(mnPretraga);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
 		menuBar.add(horizontalGlue);
