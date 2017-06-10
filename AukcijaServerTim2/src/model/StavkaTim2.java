@@ -33,7 +33,7 @@ public class StavkaTim2 implements Serializable{
 	private String naziv;
 	private String opis;
 	private Date datumPostavljanja;
-	
+	private byte[] slika;
 	private boolean prodata;
 	private double aktuelnaCena;
 	
@@ -82,7 +82,13 @@ public class StavkaTim2 implements Serializable{
 	public String getNaziv() {
 		return naziv;
 	}
-
+	public byte[] getSlika() {
+		return slika;
+	}
+	
+	public void setSlika(byte[] slika) {
+		this.slika = slika;
+	}
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
 	}

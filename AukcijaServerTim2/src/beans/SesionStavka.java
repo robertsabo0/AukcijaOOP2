@@ -70,6 +70,7 @@ public class SesionStavka implements SesionStavkaI {
 	@Override
 	public VelicinaTim2 sacuvajVelicni(VelicinaTim2 v) {
 		// TODO Auto-generated method stub
+		
 		if (v != null) {
 			em.persist(v);
 			return v;
