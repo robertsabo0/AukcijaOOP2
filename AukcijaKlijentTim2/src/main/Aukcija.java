@@ -14,7 +14,7 @@ import registracija.Login;
 
 public class Aukcija extends JFrame {
 
-	/**
+	/**f
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;

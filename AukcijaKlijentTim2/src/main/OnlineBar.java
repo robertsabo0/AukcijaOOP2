@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.naming.NamingException;
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -16,6 +17,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import Dashboard.Dashboard;
+import dodavanjeStavke.GlavniPanel;
 import registracija.IzmeniProfil;
 import registracija.Login;
 
@@ -41,7 +43,8 @@ public class OnlineBar extends JMenuBar {
 		JMenu mnPretraga = new JMenu("Pretraga");
 		menuBar.add(mnPretraga);
 		
-		JMenu mnPostaviStavku  = new JMenu ("Postavi stavku");
+		JButton mnPostaviStavku  = new JButton ("Postavi stavku");
+		mnPostaviStavku.addActionListener(new PostavljenjeUnosaStavke());
 		menuBar.add(mnPostaviStavku);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
@@ -101,6 +104,21 @@ public class OnlineBar extends JMenuBar {
 			try {
 				Dashboard d=new Dashboard();
 				OnlineBar.postaviStranicu(d);
+			} catch (NamingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+		
+	}
+	private class PostavljenjeUnosaStavke implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				GlavniPanel g=new GlavniPanel();
+				OnlineBar.postaviStranicu(g);
 			} catch (NamingException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
