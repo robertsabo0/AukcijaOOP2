@@ -269,7 +269,7 @@ public class Login extends JPanel {
 		JButton btnPresoci = new JButton("Presoci");
 		btnPresoci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				postaviStranicu(SearchPanel.showMe());
+				//postaviStranicu(SearchPanel.showMe());
 			}
 		});
 		panel_4.add(btnPresoci);

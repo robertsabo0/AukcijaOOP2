@@ -159,8 +159,8 @@ public class PanelOpis extends JPanel {
 		gbc_textField_1.gridy = 19;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		/*try {
-			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog()) || s.isProdata()){
+		try {
+			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog()) || s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
 				textField_1.setVisible(false);
 				btnNewButton.setVisible(false);
 				lblNewLabel_9.setVisible(false);
@@ -174,8 +174,8 @@ public class PanelOpis extends JPanel {
 			e1.printStackTrace();
 		}
 		if(s.isProdata()){
-			lblNewLabel_8.setText("Proizvod je prodan za: "+s.getAktuelnaCena());
-		}*/
+			lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
+		}
 	}
 
 }
