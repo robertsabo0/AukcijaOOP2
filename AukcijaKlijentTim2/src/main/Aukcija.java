@@ -49,12 +49,9 @@ public class Aukcija extends JFrame {
 		new OfflineBar(this);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-<<<<<<< HEAD
-		setContentPane(contentPane);
-		//contentPane.setLayout(new BorderLayout(0, 0));
-=======
+
 		setContentPane(new Login(this));
->>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
+
 		
 		
 	}

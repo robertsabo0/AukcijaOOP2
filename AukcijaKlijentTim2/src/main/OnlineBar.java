@@ -1,11 +1,8 @@
 package main;
 
 import java.awt.Component;
-<<<<<<< HEAD
-import java.awt.ScrollPane;
-=======
 import java.awt.Dimension;
->>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,11 +13,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-<<<<<<< HEAD
-=======
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
->>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
 
 import Dashboard.Dashboard;
 import registracija.IzmeniProfil;
@@ -88,10 +82,9 @@ public class OnlineBar extends JMenuBar {
 	}
 
 	public static void postaviStranicu(JPanel stranica) {
-<<<<<<< HEAD
-		ScrollPane sp = new ScrollPane();
-		sp.add(stranica);
-=======
+
+		
+
 		stranica.setPreferredSize(new Dimension(stranica.getWidth(),frame.getHeight()));
 		JScrollPane sp = new JScrollPane(stranica,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
@@ -99,7 +92,7 @@ public class OnlineBar extends JMenuBar {
 		vertical.setValue(vertical.getMaximum());
 		sp.setVerticalScrollBar(vertical);
 		
->>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
+
 		frame.getContentPane().removeAll();
 		frame.setContentPane(sp);
 		frame.repaint();

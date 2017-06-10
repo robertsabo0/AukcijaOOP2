@@ -50,8 +50,8 @@ public class Dashboard extends JPanel{
 		 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		 
-		 List<StavkaTim2> licitirane=BeansGetter.stavkeGetters().licitiraneStavke("admin");
-		 List<StavkaTim2> postavljene=BeansGetter.stavkeGetters().postavljeneStavke("admin");
+		 List<StavkaTim2> licitirane=BeansGetter.stavkeGetters().licitiraneStavke(BeansGetter.sessionStavka().vratiUlogovanog().getUsername());
+		 List<StavkaTim2> postavljene=BeansGetter.stavkeGetters().postavljeneStavke(BeansGetter.sessionStavka().vratiUlogovanog().getUsername());
 		 
 		 JLabel licitiraneL=new JLabel("Licitirane stavke: ");
 		 licitiraneL.setHorizontalAlignment(SwingConstants.LEADING);

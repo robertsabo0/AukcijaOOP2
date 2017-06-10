@@ -39,9 +39,9 @@ public class FillDatabase {
 	@PostConstruct
 
 	public void postConstruct()  {
-<<<<<<< HEAD
+
 		//dodajKorisnika();
-		try {
+		/*try {
 			this.dodajKomentar();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -53,10 +53,9 @@ public class FillDatabase {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		popuniPonude();
-=======
->>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
+		}*/
+		//popuniPonude();
+
 		if(em.find(UserTim2.class, "admin") == null){
 
 			System.out.println("Database is not filled yet!");
