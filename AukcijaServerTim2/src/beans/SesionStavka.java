@@ -50,6 +50,15 @@ public class SesionStavka implements SesionStavkaI {
 		p.setVrednost(s.getAktuelnaCena());
 		em.persist(p);
 	}
+	
+	@Override
+	public void prodataStavka(StavkaTim2 s) {
+		if(s !=null){
+			em.merge(s);
+			em.flush();
+		}
+		
+	}
 
 	@Override
 	public void sacuvajKomentar(KomentarTim2 k) {

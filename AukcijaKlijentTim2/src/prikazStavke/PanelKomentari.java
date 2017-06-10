@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,6 +21,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class PanelKomentari extends JPanel  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 
 	/**
@@ -37,10 +40,10 @@ public class PanelKomentari extends JPanel  {
 		for(KomentarTim2 k: kom){
 			JPanel p=new JPanel();
 			p.setBorder(BorderFactory.createLineBorder(Color.black));
-			//JLabel postavio=new JLabel(k.getPostaljvenoOdStrane().getUsername());
+			JLabel postavio=new JLabel(k.getPostaljvenoOdStrane().getUsername());
 			JLabel datum= new JLabel(k.getPostaljeno().toString());
 			JLabel opis=new JLabel(k.getSadrzaj());
-			//p.add(postavio);
+			p.add(postavio);
 			p.add(datum);
 			p.add(opis);
 			this.add(p);
