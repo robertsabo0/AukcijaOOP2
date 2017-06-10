@@ -105,7 +105,7 @@ public class Login extends JPanel {
 							passwordField_1.getPassword(), imeField2.getText(), prezimeField2.getText(),
 							eMailField2.getText(), opisField2.getText());
 					if (user != null) {
-						System.out.println("Ulogovao se");
+						System.out.println("Registovao se");
 						new OnlineBar(frame);
 						postaviStranicu(new Dashboard());
 					}
