@@ -366,6 +366,12 @@ public class PodaciPanel extends JPanel {
 				s.setTip(comboBox_2.getItemAt(comboBox_2.getSelectedIndex()));
 				s.setVelicina(comboBox_3.getItemAt(comboBox_3.getSelectedIndex()));
 				try {
+					s.setPostavljenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
+				} catch (NamingException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				try {
 					BeansGetter.sessionStavka().sacuvajStavku(s);
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block

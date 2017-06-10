@@ -54,11 +54,11 @@ public class SearchPanel extends JPanel {
 		 add(bot);
 		 
 		 if(parent instanceof Aukcija)
-			 ((Aukcija)parent).postaviStranicu(this);
-		 else{
+			// ((Aukcija)parent).postaviStranicu(this);
+		 //else{
 			 
 			 parent.repaint();
 			 parent.revalidate();
-		 }
+		 //}
 	}
 }
