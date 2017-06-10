@@ -1,17 +1,23 @@
 package main;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.io.File;
 
 import javax.naming.NamingException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import registracija.Login;
 
 public class Aukcija extends JFrame {
 
-	/**
+	/**f
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -44,11 +50,27 @@ public class Aukcija extends JFrame {
 		setBounds(100, 100, 636, 466);
 
 		new OfflineBar(this);
-		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 		setContentPane(new Login(this));
+
 		
 		
+	}
+	
+	public void postaviStranicu(JPanel stranica) {
+		stranica.setPreferredSize(new Dimension(stranica.getWidth(), getHeight()));
+		JScrollPane sp = new JScrollPane(stranica, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		JScrollBar vertical = sp.getVerticalScrollBar();
+		vertical.setValue(vertical.getMaximum());
+		sp.setVerticalScrollBar(vertical);
+		
+		getContentPane().removeAll();
+		setContentPane(sp);
+		repaint();
+		revalidate();
 	}
 }

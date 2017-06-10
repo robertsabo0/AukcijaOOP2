@@ -66,21 +66,21 @@ public class PanelOpis extends JPanel {
 		gbc_lblNewLabel_2.gridy = 5;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Materijal: "+s.getMaterijal().getOpis());
+		JLabel lblNewLabel_3 = new JLabel("Materijal: "+s.getMaterijal());
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 2;
 		gbc_lblNewLabel_3.gridy = 7;
 		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Tip: "+s.getTip().getOpis());
+		JLabel lblNewLabel_4 = new JLabel("Tip: "+s.getTip());
 		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
 		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_4.gridx = 2;
 		gbc_lblNewLabel_4.gridy = 9;
 		add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Velicina: "+s.getVelicina().getOpis());
+		JLabel lblNewLabel_5 = new JLabel("Velicina: "+s.getVelicina());
 		GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
 		gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_5.gridx = 2;
@@ -93,13 +93,14 @@ public class PanelOpis extends JPanel {
 		gbc_lblNewLabel_6.gridx = 2;
 		gbc_lblNewLabel_6.gridy = 13;
 		add(lblNewLabel_6, gbc_lblNewLabel_6);
-		
+		if(s.getPostavljenoOdStrane()!=null){
 		JLabel lblNewLabel_7 = new JLabel("Postavljeno od strane: "+s.getPostavljenoOdStrane().getUsername());
 		GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
 		gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_7.gridx = 2;
 		gbc_lblNewLabel_7.gridy = 15;
 		add(lblNewLabel_7, gbc_lblNewLabel_7);
+		}
 		
 		JLabel lblNewLabel_8 = new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
 		GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
@@ -120,14 +121,17 @@ public class PanelOpis extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Double a = Double.parseDouble(textField_1.getText());
 				s.setAktuelnaCena(a);
-				try {
-					BeansGetter.sessionStavka().izmeniStavku(s, BeansGetter.sessionStavka().vratiUlogovanog());
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				BeansGetter.sessionStavka().izmeniStavku(s, BeansGetter.sessionStavka().vratiUlogovanog());
+				
 			}
 		});
+		
+		JButton btnPrihvati = new JButton("Prihvati");
+		GridBagConstraints gbc_btnPrihvati = new GridBagConstraints();
+		gbc_btnPrihvati.insets = new Insets(0, 0, 0, 5);
+		gbc_btnPrihvati.gridx = 2;
+		gbc_btnPrihvati.gridy = 21;
+		add(btnPrihvati, gbc_btnPrihvati);
 		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridx = 3;
@@ -159,23 +163,27 @@ public class PanelOpis extends JPanel {
 		gbc_textField_1.gridy = 19;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		/*try {
-			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog()) || s.isProdata()){
+		System.out.println(s.getPostavljenoOdStrane().getUsername());
+		System.out.println(BeansGetter.sessionStavka().vratiUlogovanog());
+			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername()) || s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
+				
 				textField_1.setVisible(false);
-				btnNewButton.setVisible(false);
 				lblNewLabel_9.setVisible(false);
+				btnNewButton.setVisible(false);
+				btnPrihvati.addActionListener(
+						e -> {s.setProdata(true);
+						BeansGetter.sessionStavka().prodataStavka(s);
+						lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
+				});
 			}else{
 				textField_1.setVisible(true);
-				btnNewButton.setVisible(false);
+				btnNewButton.setVisible(true);
 				lblNewLabel_9.setVisible(true);
 			}
-		} catch (NamingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		if(s.isProdata()){
-			lblNewLabel_8.setText("Proizvod je prodan za: "+s.getAktuelnaCena());
-		}*/
+			lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
+		}
 	}
 
 }

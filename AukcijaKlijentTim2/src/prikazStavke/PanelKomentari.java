@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,6 +21,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class PanelKomentari extends JPanel  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 
 	/**
@@ -30,21 +33,17 @@ public class PanelKomentari extends JPanel  {
 	public PanelKomentari(StavkaTim2 s) {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		List<KomentarTim2> kom=null;
-		try {
-			kom=BeansGetter.sessionStavka().getSve(s.getId());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		kom=BeansGetter.sessionStavka().getSve(s.getId());
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		for(KomentarTim2 k: kom){
 			JPanel p=new JPanel();
 			p.setBorder(BorderFactory.createLineBorder(Color.black));
-			//JLabel postavio=new JLabel(k.getPostaljvenoOdStrane().getUsername());
+			JLabel postavio=new JLabel(k.getPostaljvenoOdStrane().getUsername());
 			JLabel datum= new JLabel(k.getPostaljeno().toString());
 			JLabel opis=new JLabel(k.getSadrzaj());
-			//p.add(postavio);
+			p.add(postavio);
 			p.add(datum);
 			p.add(opis);
 			this.add(p);
@@ -66,18 +65,10 @@ public class PanelKomentari extends JPanel  {
 				k.setSadrzaj(textField.getText());
 				k.setStavka(s);
 				k.setPostaljeno(new Date());
-				try {
-					k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					BeansGetter.sessionStavka().sacuvajKomentar(k);
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
+				
+				BeansGetter.sessionStavka().sacuvajKomentar(k);
+				
 				
 			}
 		});
@@ -91,6 +82,14 @@ public class PanelKomentari extends JPanel  {
 		});
 		if(s.isProdata())
 			p1.setVisible(true);
+			if(s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
+				textField.setVisible(false);
+				btnNewButton.setVisible(false);
+			}else{
+				textField.setVisible(true);
+				btnNewButton.setVisible(true);
+			}
+		
 	}
 
 }

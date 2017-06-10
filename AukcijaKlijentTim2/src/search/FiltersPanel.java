@@ -55,6 +55,7 @@ class FiltersPanel extends JPanel {
 	
 	FiltersPanel(SearchPanel parent){
 		this.parent = parent;
+		
 		List<BojaTim2> bojeList = BeansGetter.stavkeGetters().getBoje();
 		List<VelicinaTim2> velicineList= BeansGetter.stavkeGetters().getVelicine();
 		List<TipTim2> tipoviList = BeansGetter.stavkeGetters().getTipovi();
@@ -85,8 +86,6 @@ class FiltersPanel extends JPanel {
 		}
 		bojePanel.add(Box.createVerticalGlue());
 		bojePanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
-		bojePanel.setMinimumSize(new Dimension(100, 100));
-		bojePanel.setSize(bojePanel.getMinimumSize());
 		add(bojePanel);
 		add(Box.createHorizontalGlue());
 		
@@ -99,10 +98,6 @@ class FiltersPanel extends JPanel {
 		}
 		velicinePanel.add(Box.createVerticalGlue());
 		velicinePanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
-
-		velicinePanel.setMinimumSize(new Dimension(100, 100));
-		velicinePanel.setSize(velicinePanel.getMinimumSize());
-		
 		add(velicinePanel);
 		add(Box.createHorizontalGlue());
 		
@@ -116,10 +111,6 @@ class FiltersPanel extends JPanel {
 		}
 		tipoviPanel.add(Box.createVerticalGlue());
 		tipoviPanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
-
-		tipoviPanel.setMinimumSize(new Dimension(100, 100));
-		tipoviPanel.setSize(tipoviPanel.getMinimumSize());
-		
 		add(tipoviPanel);
 		add(Box.createHorizontalGlue());
 		
@@ -132,10 +123,6 @@ class FiltersPanel extends JPanel {
 		}
 		materijaliPanel.add(Box.createVerticalGlue());
 		materijaliPanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
-
-		materijaliPanel.setMinimumSize(new Dimension(100, 100));
-		materijaliPanel.setSize(materijaliPanel.getMinimumSize());
-		
 		add(materijaliPanel);
 		add(Box.createHorizontalGlue());
 		
@@ -163,15 +150,10 @@ class FiltersPanel extends JPanel {
 		ostaloPanel.add(boxDo);
 		
 		ostaloPanel.add(showSold);
-		ostaloPanel.add(showButton);
-
-		ostaloPanel.setMinimumSize(new Dimension(100, 100));
-		ostaloPanel.setSize(ostaloPanel.getMinimumSize());
-		
-		setMinimumSize(new Dimension(500, 100));
-		setSize(getMinimumSize());
+		ostaloPanel.add(showButton);		
 		add(ostaloPanel);
-		add(Box.createHorizontalStrut(20));
+		
+		showFiltered();
 	}
 
 	private void initializeBoxes() {
@@ -197,7 +179,6 @@ class FiltersPanel extends JPanel {
 		showButton = new JButton("Prikazi");
 		showButton.addActionListener(e -> showFiltered());
 		
-		showFiltered();
 	}
 	
 	public void showFiltered(){

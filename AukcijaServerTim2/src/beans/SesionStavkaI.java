@@ -27,4 +27,5 @@ public interface SesionStavkaI {
 	public TipTim2 sacuvajTip(TipTim2 t);
 	public MaterijalTim2 sacuvajMaterija(MaterijalTim2 m);
 	public VelicinaTim2 sacuvajVelicni(VelicinaTim2 v);
+	public void prodataStavka(StavkaTim2 s);
 }

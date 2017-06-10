@@ -26,15 +26,20 @@ public class BeansGetter {
 			return null;
 		}
 	}
-	public static SesionStavkaI sessionStavka() throws NamingException
+	public static SesionStavkaI sessionStavka()
 	{
-		if (s == null)
-		{
-			InitialContext ctx = new InitialContext();
-			String name = "ejb:/AukcijaServerTim2//SesionStavka!" + SesionStavkaI.class.getName()+"?stateful";
-			s = (SesionStavkaI) ctx.lookup(name);
+		try{
+			if (s == null)
+			{
+				InitialContext ctx = new InitialContext();
+				String name = "ejb:/AukcijaServerTim2//SesionStavka!" + SesionStavkaI.class.getName()+"?stateful";
+				s = (SesionStavkaI) ctx.lookup(name);
+			}
+			return s;
+		} catch (NamingException e) {
+			e.printStackTrace();
+			return null;
 		}
-		return s;
 	}
 	
 }

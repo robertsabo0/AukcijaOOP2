@@ -10,7 +10,6 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 
 import model.BojaTim2;
 import model.CommonTim2;
@@ -40,12 +39,30 @@ public class FillDatabase {
 	@PostConstruct
 
 	public void postConstruct()  {
+
+		//dodajKorisnika();
+		/*try {
+			this.dodajKomentar();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			popuniBazu();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		//popuniPonude();
+
 		if(em.find(UserTim2.class, "admin") == null){
 
 			System.out.println("Database is not filled yet!");
 			
 			UserTim2 i = new UserTim2();
 			i.setUsername("admin");
+			i.setPassword("admin");
 			em.persist(i);
 			
 			fillBoja();
@@ -56,7 +73,13 @@ public class FillDatabase {
 		}
 		System.out.println("Database is filled!");
 	}
-
+	
+	public void dodajKorisnika(){
+		UserTim2 user=new UserTim2();
+		user.setUsername("Stefan");
+		user.setPassword("password");
+		em.persist(user);
+	}
 	public void popuniBazu() throws ParseException{
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = fmt.parse("2013-05-06");

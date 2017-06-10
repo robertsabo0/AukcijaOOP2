@@ -16,8 +16,7 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
 			  @NamedQuery(name="StavkaTim2.getPostavljeneStavkeUsera", query="SELECT s FROM StavkaTim2 s where s.postavljenoOdStrane=:user"),
-			  @NamedQuery(name="StavkaTim2.getLicitiraneStavke", 
-			  query="SELECT s FROM StavkaTim2 s JOIN s.nudio n where n.user = :user"),
+			  @NamedQuery(name="StavkaTim2.getLicitiraneStavke", query="SELECT DISTINCT s FROM StavkaTim2 s JOIN s.nudio n where n.user = :user"),
 			  @NamedQuery(name="StavkaTim2.getSve", query="SELECT s FROM StavkaTim2 s")
 })
 public class StavkaTim2 implements Serializable{
