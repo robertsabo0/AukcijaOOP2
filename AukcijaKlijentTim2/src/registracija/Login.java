@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.naming.NamingException;
 import javax.swing.Box;
@@ -115,6 +116,9 @@ public class Login extends JPanel {
 					e1.printStackTrace();
 				} catch (PostojiUsernameException e1) {
 					JOptionPane.showMessageDialog(null, "Korisnicko ime je zauzeo, probajte ponovo!");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -213,6 +217,9 @@ public class Login extends JPanel {
 					e1.printStackTrace();
 				} catch (LosUsernameException ex2) {
 					JOptionPane.showMessageDialog(null, "Korisnik s unetim korisnicnik imenom ne postoji");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});

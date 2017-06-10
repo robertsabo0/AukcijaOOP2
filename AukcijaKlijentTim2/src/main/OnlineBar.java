@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.enterprise.inject.spi.Bean;
 import javax.naming.NamingException;
@@ -119,7 +120,7 @@ public class OnlineBar extends JMenuBar {
 			try {
 				Dashboard d=new Dashboard();
 				OnlineBar.postaviStranicu(d);
-			} catch (NamingException e1) {
+			} catch (NamingException | IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
