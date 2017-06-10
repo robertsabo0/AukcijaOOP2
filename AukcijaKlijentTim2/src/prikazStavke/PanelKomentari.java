@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+import main.Aukcija;
 import main.BeansGetter;
 import model.KomentarTim2;
 import model.StavkaTim2;
@@ -69,7 +69,6 @@ public class PanelKomentari extends JPanel  {
 				
 				BeansGetter.sessionStavka().sacuvajKomentar(k);
 				
-				
 			}
 		});
 		btnNewButton.setEnabled(false);
@@ -83,11 +82,9 @@ public class PanelKomentari extends JPanel  {
 		if(s.isProdata())
 			p1.setVisible(true);
 			if(s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
-				textField.setVisible(false);
-				btnNewButton.setVisible(false);
+				p1.setVisible(false);
 			}else{
-				textField.setVisible(true);
-				btnNewButton.setVisible(true);
+				p1.setVisible(true);
 			}
 		
 	}

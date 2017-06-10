@@ -122,7 +122,7 @@ public class PanelOpis extends JPanel {
 				Double a = Double.parseDouble(textField_1.getText());
 				s.setAktuelnaCena(a);
 				BeansGetter.sessionStavka().izmeniStavku(s, BeansGetter.sessionStavka().vratiUlogovanog());
-				
+				lblNewLabel_8.setText("Aktuelna cena: "+s.getAktuelnaCena());
 			}
 		});
 		
@@ -163,8 +163,6 @@ public class PanelOpis extends JPanel {
 		gbc_textField_1.gridy = 19;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		System.out.println(s.getPostavljenoOdStrane().getUsername());
-		System.out.println(BeansGetter.sessionStavka().vratiUlogovanog());
 			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername()) || s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
 				
 				textField_1.setVisible(false);
@@ -174,6 +172,7 @@ public class PanelOpis extends JPanel {
 						e -> {s.setProdata(true);
 						BeansGetter.sessionStavka().prodataStavka(s);
 						lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
+						btnPrihvati.setVisible(false);
 				});
 			}else{
 				textField_1.setVisible(true);
@@ -183,6 +182,7 @@ public class PanelOpis extends JPanel {
 		
 		if(s.isProdata()){
 			lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
+			btnPrihvati.setVisible(false);
 		}
 	}
 
