@@ -23,6 +23,7 @@ import Dashboard.Dashboard;
 import dodavanjeStavke.GlavniPanel;
 import registracija.IzmeniProfil;
 import registracija.Login;
+import search.SearchPanel;
 
 public class OnlineBar extends JMenuBar {
 
@@ -38,12 +39,15 @@ public class OnlineBar extends JMenuBar {
 
 		JMenuBar menuBar = new JMenuBar();
 
-		JMenu mnPocetna = new JMenu("Pocetna");
-		menuBar.add(mnPocetna);
+		JButton mnPocetna = new JButton("Pocetna");
 		mnPocetna.addActionListener(new PostavljanjeDashboarda());
+		menuBar.add(mnPocetna);
 		
 
-		JMenu mnPretraga = new JMenu("Pretraga");
+		JButton mnPretraga = new JButton("Pretraga");
+		mnPretraga.addActionListener(e -> {
+				OnlineBar.postaviStranicu(SearchPanel.showMe(frame));
+			});
 		menuBar.add(mnPretraga);
 		
 		JButton mnPostaviStavku  = new JButton ("Postavi stavku");
@@ -66,6 +70,7 @@ public class OnlineBar extends JMenuBar {
 		menuBar.add(mnKorisnik);
 
 		JPanel podesavanje = new IzmeniProfil();
+		postaviStranicu(podesavanje);
 		JMenuItem mntmPodesiProfil = new JMenuItem("Podesavanje profila");
 		mntmPodesiProfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
