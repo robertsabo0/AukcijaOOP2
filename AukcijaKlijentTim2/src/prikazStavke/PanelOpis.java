@@ -66,7 +66,7 @@ public class PanelOpis extends JPanel {
 		gbc_lblNewLabel_2.gridy = 5;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Materijal: "+s.getMaterijal().getOpis());
+		/*JLabel lblNewLabel_3 = new JLabel("Materijal: "+s.getMaterijal().getOpis());
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 2;
@@ -99,7 +99,7 @@ public class PanelOpis extends JPanel {
 		gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_7.gridx = 2;
 		gbc_lblNewLabel_7.gridy = 15;
-		add(lblNewLabel_7, gbc_lblNewLabel_7);
+		add(lblNewLabel_7, gbc_lblNewLabel_7);*/
 		
 		JLabel lblNewLabel_8 = new JLabel("Aktuelna cena: "+s.getAktuelnaCena());
 		GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
@@ -159,14 +159,14 @@ public class PanelOpis extends JPanel {
 		gbc_textField_1.gridy = 19;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		try {
+		/*try {
 			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog()) || s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
 				textField_1.setVisible(false);
 				btnNewButton.setVisible(false);
 				lblNewLabel_9.setVisible(false);
 			}else{
 				textField_1.setVisible(true);
-				btnNewButton.setVisible(false);
+				btnNewButton.setVisible(true);
 				lblNewLabel_9.setVisible(true);
 			}
 		} catch (NamingException e1) {
@@ -175,7 +175,7 @@ public class PanelOpis extends JPanel {
 		}
 		if(s.isProdata()){
 			lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
-		}
+		}*/
 	}
 
 }
