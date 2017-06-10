@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+import main.Aukcija;
 import main.BeansGetter;
 import model.KomentarTim2;
 import model.StavkaTim2;
@@ -22,6 +21,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class PanelKomentari extends JPanel  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 
 	/**
@@ -37,10 +40,10 @@ public class PanelKomentari extends JPanel  {
 		for(KomentarTim2 k: kom){
 			JPanel p=new JPanel();
 			p.setBorder(BorderFactory.createLineBorder(Color.black));
-			//JLabel postavio=new JLabel(k.getPostaljvenoOdStrane().getUsername());
+			JLabel postavio=new JLabel(k.getPostaljvenoOdStrane().getUsername());
 			JLabel datum= new JLabel(k.getPostaljeno().toString());
 			JLabel opis=new JLabel(k.getSadrzaj());
-			//p.add(postavio);
+			p.add(postavio);
 			p.add(datum);
 			p.add(opis);
 			this.add(p);
@@ -54,7 +57,6 @@ public class PanelKomentari extends JPanel  {
 		
 		p1.add(textField);
 		textField.setColumns(10);
-		
 		JButton btnNewButton = new JButton("Dodaj komentar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -65,8 +67,7 @@ public class PanelKomentari extends JPanel  {
 				k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
 				
 				BeansGetter.sessionStavka().sacuvajKomentar(k);
-				
-				
+				Aukcija.me.postaviStranicu(new GlavniPanel(s));
 			}
 		});
 		btnNewButton.setEnabled(false);
@@ -80,11 +81,9 @@ public class PanelKomentari extends JPanel  {
 		if(s.isProdata())
 			p1.setVisible(true);
 			if(s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
-				textField.setVisible(false);
-				btnNewButton.setVisible(false);
+				p1.setVisible(false);
 			}else{
-				textField.setVisible(true);
-				btnNewButton.setVisible(true);
+				p1.setVisible(true);
 			}
 		
 	}

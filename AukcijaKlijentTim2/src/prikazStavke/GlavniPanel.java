@@ -4,10 +4,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
+
 import model.StavkaTim2;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Component;
+import javax.swing.Box;
 
 
 public class GlavniPanel extends JPanel {
@@ -24,5 +28,6 @@ public class GlavniPanel extends JPanel {
 		add(opis, BorderLayout.CENTER);
 		add(slike, BorderLayout.WEST);
 		add(komentari, BorderLayout.SOUTH);
+		
 	}
 }

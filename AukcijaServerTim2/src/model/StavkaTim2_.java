@@ -6,7 +6,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2017-06-07T10:02:17.167+0200")
+@Generated(value="Dali", date="2017-06-10T17:58:45.636+0200")
 @StaticMetamodel(StavkaTim2.class)
 public class StavkaTim2_ {
 	public static volatile SingularAttribute<StavkaTim2, Long> id;
@@ -21,4 +21,5 @@ public class StavkaTim2_ {
 	public static volatile SingularAttribute<StavkaTim2, VelicinaTim2> velicina;
 	public static volatile SingularAttribute<StavkaTim2, TipTim2> tip;
 	public static volatile ListAttribute<StavkaTim2, PonudaTim2> nudio;
+	public static volatile SingularAttribute<StavkaTim2, byte[]> slika;
 }

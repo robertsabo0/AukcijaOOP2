@@ -15,11 +15,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.Aukcija;
 import main.OnlineBar;
 import model.StavkaTim2;
 import prikazStavke.GlavniPanel;
 
 public class SmallStavkaPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5107207492932900321L;
 	JButton dugme;
 	public SmallStavkaPanel(StavkaTim2 s) {
 		 setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -38,7 +43,7 @@ public class SmallStavkaPanel extends JPanel {
 		 }
 		 BufferedImage slika=null;;
 		try {
-			slika = ImageIO.read(new File("Desktop/upit.jpg"));
+			slika = ImageIO.read(new File("images.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +68,7 @@ public class SmallStavkaPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			GlavniPanel g=new GlavniPanel(s);
 			
-			OnlineBar.postaviStranicu(g);
+			Aukcija.me.postaviStranicu(g);
 			
 		}
 		 

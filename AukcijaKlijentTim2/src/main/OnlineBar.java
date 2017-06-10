@@ -2,12 +2,9 @@ package main;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
-import javax.enterprise.inject.spi.Bean;
 import javax.naming.NamingException;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -117,13 +114,9 @@ public class OnlineBar extends JMenuBar {
 			
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				Dashboard d=new Dashboard();
-				OnlineBar.postaviStranicu(d);
-			} catch (NamingException | IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			Dashboard d=new Dashboard();
+			OnlineBar.postaviStranicu(d);
+			
 			
 		}
 		

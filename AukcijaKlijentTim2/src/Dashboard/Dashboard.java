@@ -2,10 +2,8 @@ package Dashboard;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.io.IOException;
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,7 +45,7 @@ public class Dashboard extends JPanel{
 			});
 		}
 	 
-	 public Dashboard() throws NamingException, IOException{
+	 public Dashboard(){
 		 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		 

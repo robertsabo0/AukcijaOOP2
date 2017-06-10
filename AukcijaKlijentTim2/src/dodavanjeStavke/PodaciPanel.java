@@ -350,7 +350,7 @@ public class PodaciPanel extends JPanel {
 				s.setMaterijal(comboBox_1.getItemAt(comboBox_1.getSelectedIndex()));
 				s.setTip(comboBox_2.getItemAt(comboBox_2.getSelectedIndex()));
 				s.setVelicina(comboBox_3.getItemAt(comboBox_3.getSelectedIndex()));
-				
+				s.setPostavljenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
 				BeansGetter.sessionStavka().sacuvajStavku(s);
 				
 			}
