@@ -30,12 +30,8 @@ public class PanelKomentari extends JPanel  {
 	public PanelKomentari(StavkaTim2 s) {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		List<KomentarTim2> kom=null;
-		try {
-			kom=BeansGetter.sessionStavka().getSve(s.getId());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		kom=BeansGetter.sessionStavka().getSve(s.getId());
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		for(KomentarTim2 k: kom){
@@ -66,18 +62,10 @@ public class PanelKomentari extends JPanel  {
 				k.setSadrzaj(textField.getText());
 				k.setStavka(s);
 				k.setPostaljeno(new Date());
-				try {
-					k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					BeansGetter.sessionStavka().sacuvajKomentar(k);
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
+				
+				BeansGetter.sessionStavka().sacuvajKomentar(k);
+				
 				
 			}
 		});
@@ -91,6 +79,14 @@ public class PanelKomentari extends JPanel  {
 		});
 		if(s.isProdata())
 			p1.setVisible(true);
+			if(s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
+				textField.setVisible(false);
+				btnNewButton.setVisible(false);
+			}else{
+				textField.setVisible(true);
+				btnNewButton.setVisible(true);
+			}
+		
 	}
 
 }

@@ -113,12 +113,8 @@ public class PodaciPanel extends JPanel {
 				String opis=textField_4.getText();
 				b.setOpis(opis);
 				BojaTim2 boja=null;
-				try {
-					boja=BeansGetter.sessionStavka().sacuvajBoju(b);
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				boja=BeansGetter.sessionStavka().sacuvajBoju(b);
+				
 				comboBox.addItem(boja);
 				comboBox.setSelectedItem(boja);
 			}
@@ -173,12 +169,8 @@ public class PodaciPanel extends JPanel {
 				String opis=textField_5.getText();
 				m.setOpis(opis);
 				MaterijalTim2 mat=null;
-				try {
-					mat=BeansGetter.sessionStavka().sacuvajMaterija(m);
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				mat=BeansGetter.sessionStavka().sacuvajMaterija(m);
+				
 				comboBox_1.addItem(mat);
 				comboBox_1.setSelectedItem(mat);
 			}
@@ -224,12 +216,8 @@ public class PodaciPanel extends JPanel {
 				String opis=textField_6.getText();
 				t.setOpis(opis);
 				TipTim2 tip=null;
-				try {
-					tip=BeansGetter.sessionStavka().sacuvajTip(t);
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				tip=BeansGetter.sessionStavka().sacuvajTip(t);
+				
 				comboBox_2.addItem(tip);
 				comboBox_2.setSelectedItem(tip);
 			}
@@ -303,12 +291,9 @@ public class PodaciPanel extends JPanel {
 				String opis=textField_7.getText();
 				v.setOpis(opis);
 				VelicinaTim2 vel=null;
-				try {
-					vel=BeansGetter.sessionStavka().sacuvajVelicni(v);
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+				vel=BeansGetter.sessionStavka().sacuvajVelicni(v);
+				
 				comboBox_3.addItem(vel);
 				comboBox_3.setSelectedItem(vel);
 			}
@@ -365,18 +350,9 @@ public class PodaciPanel extends JPanel {
 				s.setMaterijal(comboBox_1.getItemAt(comboBox_1.getSelectedIndex()));
 				s.setTip(comboBox_2.getItemAt(comboBox_2.getSelectedIndex()));
 				s.setVelicina(comboBox_3.getItemAt(comboBox_3.getSelectedIndex()));
-				try {
-					s.setPostavljenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
-				} catch (NamingException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				try {
-					BeansGetter.sessionStavka().sacuvajStavku(s);
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+				BeansGetter.sessionStavka().sacuvajStavku(s);
+				
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

@@ -2,8 +2,11 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.io.File;
 
 import javax.naming.NamingException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
