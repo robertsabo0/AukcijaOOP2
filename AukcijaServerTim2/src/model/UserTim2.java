@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-	  @NamedQuery(name="UserTim2.findUser", query="SELECT u FROM UserTim2 u where u.username = :username")
+	  @NamedQuery(name="UserTim2.findUser", query="SELECT u FROM UserTim2 u where u.username = :username"),
 })
 
 public class UserTim2 implements Serializable{
@@ -28,6 +28,7 @@ public class UserTim2 implements Serializable{
 	private String email;
 	private String opis;
 	private String password;
+	private byte[] slika;
 	
 	// TODO: dopuniti potrebnim podacima pri 
 	// 		 izradi dela za registaciju
@@ -74,7 +75,13 @@ public class UserTim2 implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public byte[] getSlika() {
+		return slika;
+	}
 	
+	public void setSlika(byte[] slika) {
+		this.slika = slika;
+	}
 	public List<StavkaTim2> getPostavio() {
 		return postavio;
 	}

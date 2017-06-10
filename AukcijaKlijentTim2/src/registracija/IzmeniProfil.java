@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.naming.NamingException;
-import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import main.BeansGetter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class IzmeniProfil extends JPanel {
 
@@ -30,6 +32,8 @@ public class IzmeniProfil extends JPanel {
 	private JTextField eMailFiled;
 	private JTextField opisField;
 	private JPasswordField passwordField;
+	
+	private byte[] slika;
 
 	/**
 	 * Create the panel.
@@ -70,12 +74,31 @@ public class IzmeniProfil extends JPanel {
 		
 		passwordField = new JPasswordField();
 		
+		JButton btnPretrazi = new JButton("Pretrazi");
+		btnPretrazi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFileChooser fc = new JFileChooser();
+				fc.setCurrentDirectory(new java.io.File("."));
+				fc.setDialogTitle("Pretrazivac");
+				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				if (fc.showOpenDialog(btnPretrazi)== JFileChooser.APPROVE_OPTION){
+					System.out.println(fc.getSelectedFile().getAbsolutePath());
+					slika = fc.getSelectedFile().getAbsolutePath().getBytes();
+				}
+			}
+		});
+		
+		
+		JLabel lblIzaberiSliku = new JLabel("Izaberi sliku:");
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(68)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblIzaberiSliku)
 						.addComponent(lblIme)
 						.addComponent(lblPrezime)
 						.addComponent(lblPassword)
@@ -83,11 +106,13 @@ public class IzmeniProfil extends JPanel {
 						.addComponent(lblOpis))
 					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(prezimeField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addComponent(imeField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addComponent(eMailFiled, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addComponent(opisField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.LEADING)
+							.addComponent(prezimeField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+							.addComponent(imeField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+							.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+							.addComponent(eMailFiled, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+							.addComponent(opisField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnPretrazi, Alignment.TRAILING))
 					.addGap(156))
 		);
 		gl_panel.setVerticalGroup(
@@ -113,7 +138,11 @@ public class IzmeniProfil extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(opisField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblOpis))
-					.addContainerGap(81, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnPretrazi)
+						.addComponent(lblIzaberiSliku))
+					.addContainerGap(196, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		
@@ -133,7 +162,7 @@ public class IzmeniProfil extends JPanel {
 		btnIzmeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					boolean izmeni= BeansGetter.sessionStavka().izmeniKorisnika(imeField.getText(), prezimeField.getText(), passwordField.getPassword(),eMailFiled.getText() , opisField.getText());
+					boolean izmeni= BeansGetter.sessionStavka().izmeniKorisnika(imeField.getText(), prezimeField.getText(), passwordField.getPassword(),eMailFiled.getText() , opisField.getText(), slika);
 					if (izmeni)
 						JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
 					else
