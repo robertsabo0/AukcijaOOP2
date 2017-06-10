@@ -49,7 +49,7 @@ public class Aukcija extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		//contentPane.setLayout(new BorderLayout(0, 0));
 		
 		postaviStranicu(new Login(this));
 		
