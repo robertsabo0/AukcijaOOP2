@@ -134,6 +134,7 @@ public class PanelOpis extends JPanel {
 		add(btnPrihvati, gbc_btnPrihvati);
 		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 21;
 		add(btnNewButton, gbc_btnNewButton);
@@ -163,8 +164,9 @@ public class PanelOpis extends JPanel {
 		gbc_textField_1.gridy = 19;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
+		System.out.println(s.getPostavljenoOdStrane().getUsername());
+		System.out.println(BeansGetter.sessionStavka().vratiUlogovanog().getUsername());
 			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername()) || s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
-				
 				textField_1.setVisible(false);
 				lblNewLabel_9.setVisible(false);
 				btnNewButton.setVisible(false);
@@ -178,6 +180,7 @@ public class PanelOpis extends JPanel {
 				textField_1.setVisible(true);
 				btnNewButton.setVisible(true);
 				lblNewLabel_9.setVisible(true);
+				btnPrihvati.setVisible(false);
 			}
 		
 		if(s.isProdata()){

@@ -57,7 +57,6 @@ public class PanelKomentari extends JPanel  {
 		
 		p1.add(textField);
 		textField.setColumns(10);
-		
 		JButton btnNewButton = new JButton("Dodaj komentar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -68,7 +67,7 @@ public class PanelKomentari extends JPanel  {
 				k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
 				
 				BeansGetter.sessionStavka().sacuvajKomentar(k);
-				
+				Aukcija.me.postaviStranicu(new GlavniPanel(s));
 			}
 		});
 		btnNewButton.setEnabled(false);

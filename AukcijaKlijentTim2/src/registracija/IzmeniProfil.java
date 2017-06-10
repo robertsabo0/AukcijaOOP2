@@ -161,16 +161,11 @@ public class IzmeniProfil extends JPanel {
 		JButton btnIzmeni = new JButton("Izmeni");
 		btnIzmeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
 					boolean izmeni= BeansGetter.sessionStavka().izmeniKorisnika(imeField.getText(), prezimeField.getText(), passwordField.getPassword(),eMailFiled.getText() , opisField.getText(), slika);
 					if (izmeni)
 						JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
 					else
 						JOptionPane.showMessageDialog(null, "Niste uspeli izmeniti profil");
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			}
 		});
 		panel_1.add(btnIzmeni);
