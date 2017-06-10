@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.Aukcija;
 import main.OnlineBar;
 import model.StavkaTim2;
 import prikazStavke.GlavniPanel;
@@ -67,7 +68,7 @@ public class SmallStavkaPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			GlavniPanel g=new GlavniPanel(s);
 			
-			OnlineBar.postaviStranicu(g);
+			Aukcija.me.postaviStranicu(g);
 			
 		}
 		 
