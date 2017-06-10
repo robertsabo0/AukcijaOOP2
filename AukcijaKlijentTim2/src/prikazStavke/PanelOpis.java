@@ -120,12 +120,8 @@ public class PanelOpis extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Double a = Double.parseDouble(textField_1.getText());
 				s.setAktuelnaCena(a);
-				try {
-					BeansGetter.sessionStavka().izmeniStavku(s, BeansGetter.sessionStavka().vratiUlogovanog());
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				BeansGetter.sessionStavka().izmeniStavku(s, BeansGetter.sessionStavka().vratiUlogovanog());
+				
 			}
 		});
 		

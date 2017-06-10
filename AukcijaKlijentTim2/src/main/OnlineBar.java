@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.enterprise.inject.spi.Bean;
 import javax.naming.NamingException;
 import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -46,7 +48,16 @@ public class OnlineBar extends JMenuBar {
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		menuBar.add(horizontalGlue);
-
+		
+		String ulogovankao = "Ulogovan korisnik: ";
+		ulogovankao += BeansGetter.sessionStavka().vratiUlogovanog().getUsername();
+		
+		
+		JLabel label = new JLabel(ulogovankao);
+		menuBar.add(label);
+		
+		menuBar.add(Box.createHorizontalStrut(10));
+		
 		JMenu mnKorisnik = new JMenu("Korisnik");
 		menuBar.add(mnKorisnik);
 
@@ -64,15 +75,9 @@ public class OnlineBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					BeansGetter.sessionStavka().logOut();
-					new OfflineBar(frame);
-					postaviStranicu(new Login(frame));
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
+				BeansGetter.sessionStavka().logOut();
+				new OfflineBar(frame);
+				postaviStranicu(new Login(frame));
 			}
 		});
 		mnKorisnik.add(mntmIzlogujSe);
