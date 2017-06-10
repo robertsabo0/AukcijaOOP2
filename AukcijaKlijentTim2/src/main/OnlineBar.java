@@ -1,7 +1,11 @@
 package main;
 
 import java.awt.Component;
+<<<<<<< HEAD
 import java.awt.ScrollPane;
+=======
+import java.awt.Dimension;
+>>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,9 +16,15 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+<<<<<<< HEAD
+=======
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+>>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
 
 import Dashboard.Dashboard;
 import registracija.IzmeniProfil;
+import registracija.Login;
 
 public class OnlineBar extends JMenuBar {
 
@@ -26,7 +36,7 @@ public class OnlineBar extends JMenuBar {
 	private static JFrame frame;
 	
 	public OnlineBar(JFrame frame) {
-		this.frame = frame;
+		OnlineBar.frame = frame;
 
 		JMenuBar menuBar = new JMenuBar();
 
@@ -64,8 +74,7 @@ public class OnlineBar extends JMenuBar {
 				try {
 					BeansGetter.sessionStavka().logOut();
 					new OfflineBar(frame);
-					frame.repaint();
-					frame.revalidate();
+					postaviStranicu(new Login(frame));
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -79,12 +88,22 @@ public class OnlineBar extends JMenuBar {
 	}
 
 	public static void postaviStranicu(JPanel stranica) {
+<<<<<<< HEAD
 		ScrollPane sp = new ScrollPane();
 		sp.add(stranica);
+=======
+		stranica.setPreferredSize(new Dimension(stranica.getWidth(),frame.getHeight()));
+		JScrollPane sp = new JScrollPane(stranica,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		JScrollBar vertical = sp.getVerticalScrollBar();
+		vertical.setValue(vertical.getMaximum());
+		sp.setVerticalScrollBar(vertical);
+		
+>>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
 		frame.getContentPane().removeAll();
-		frame.getContentPane().add(sp);
-		frame.getContentPane().repaint();
-		frame.getContentPane().revalidate();
+		frame.setContentPane(sp);
+		frame.repaint();
+		frame.revalidate();
 
 	}
 	private class PostavljanjeDashboarda implements ActionListener{

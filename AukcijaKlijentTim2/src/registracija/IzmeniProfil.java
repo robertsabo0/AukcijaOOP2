@@ -17,7 +17,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import beans.PostojiUsernameException;
 import main.BeansGetter;
 
 public class IzmeniProfil extends JPanel {
@@ -120,13 +119,11 @@ public class IzmeniProfil extends JPanel {
 		
 		JPanel panelSlika = new JPanel();
 		add(panelSlika, BorderLayout.WEST);
-		
-		
-		panelSlika.setLayout(new BoxLayout(panelSlika, BoxLayout.X_AXIS));
 		ImageIcon image = new ImageIcon("noImage.png");
+		panelSlika.setLayout(new BorderLayout(0, 0));
 		JLabel lblImage = new JLabel();
 		lblImage.setIcon(image);
-		panelSlika.add(lblImage);
+		panelSlika.add(lblImage, BorderLayout.NORTH);
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.SOUTH);

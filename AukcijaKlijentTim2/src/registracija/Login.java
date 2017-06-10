@@ -2,6 +2,7 @@ package registracija;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
@@ -45,11 +47,14 @@ public class Login extends JPanel {
 	private JTextField eMailField2;
 	private JTextField userNameFiled2;
 	private JTextField opisField2;
+	
+	private JFrame frame;
 
 	/**
 	 * Create the panel.
 	 */
 	public Login(JFrame frame) {
+		this.frame=frame;
 		setLayout(new BorderLayout(0, 0));
 
 		JSplitPane splitPane = new JSplitPane();
@@ -95,15 +100,13 @@ public class Login extends JPanel {
 		btnRegistrujSe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					UserTim2 user = BeansGetter.sessionStavka().registrujKorisnika(userNameFiled2.getText(), passwordField_1.getPassword(), imeField2.getText(), prezimeField2.getText(), eMailField2.getText(), opisField2.getText());
+					UserTim2 user = BeansGetter.sessionStavka().registrujKorisnika(userNameFiled2.getText(),
+							passwordField_1.getPassword(), imeField2.getText(), prezimeField2.getText(),
+							eMailField2.getText(), opisField2.getText());
 					if (user != null) {
 						System.out.println("Ulogovao se");
 						new OnlineBar(frame);
-						JScrollPane sp = new JScrollPane(new Dashboard(),JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-						frame.getContentPane().removeAll();
-						frame.getContentPane().add(sp);
-						frame.getContentPane().repaint();
-						frame.getContentPane().revalidate();
+						postaviStranicu(new Dashboard());
 					}
 				} catch (NoUsernameException e1) {
 					JOptionPane.showMessageDialog(null, "Obavezno je uneti korisnicko ime!");
@@ -147,8 +150,8 @@ public class Login extends JPanel {
 										.addComponent(lblIme))
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(prezimeField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
+										.addComponent(prezimeField2, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblPrezime))
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
@@ -200,19 +203,15 @@ public class Login extends JPanel {
 					if (user != null) {
 						System.out.println("Ulogovao se");
 						new OnlineBar(frame);
-						JScrollPane sp = new JScrollPane(new Dashboard(),JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-						frame.getContentPane().removeAll();
-						frame.getContentPane().add(sp);
-						frame.getContentPane().repaint();
-						frame.getContentPane().revalidate();
+						postaviStranicu(new Dashboard());
 					}
-					
+
 				} catch (LosaLozinkaException e1) {
 					JOptionPane.showMessageDialog(null, "Pogresna sifra za korisnika");
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} catch (LosUsernameException ex2){
+				} catch (LosUsernameException ex2) {
 					JOptionPane.showMessageDialog(null, "Korisnik s unetim korisnicnik imenom ne postoji");
 				}
 			}
@@ -255,27 +254,39 @@ public class Login extends JPanel {
 
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_2.add(horizontalGlue_1);
-		
+
 		JPanel panel_4 = new JPanel();
 		add(panel_4, BorderLayout.SOUTH);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
-		
+
 		Component horizontalGlue_4 = Box.createHorizontalGlue();
 		panel_4.add(horizontalGlue_4);
-		
-		JLabel lblUpozorenjeNeulogovanPosetilac = new JLabel("Upozorenje: Neulogovan posetilac moze samo da pretrazuje sadrzaj ");
+
+		JLabel lblUpozorenjeNeulogovanPosetilac = new JLabel(
+				"Upozorenje: Neulogovan posetilac moze samo da pretrazuje sadrzaj ");
 		panel_4.add(lblUpozorenjeNeulogovanPosetilac);
-		
+
 		JButton btnPresoci = new JButton("Presoci");
 		btnPresoci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JScrollPane sp = new JScrollPane(SearchPanel.showMe(),JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-				frame.getContentPane().removeAll();
-				frame.getContentPane().add(sp);
-				frame.getContentPane().repaint();
-				frame.getContentPane().revalidate();
+				postaviStranicu(SearchPanel.showMe(frame));
 			}
 		});
 		panel_4.add(btnPresoci);
+	}
+
+	public void postaviStranicu(JPanel stranica) {
+		stranica.setPreferredSize(new Dimension(stranica.getWidth(), frame.getHeight()));
+		JScrollPane sp = new JScrollPane(stranica, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		JScrollBar vertical = sp.getVerticalScrollBar();
+		vertical.setValue(vertical.getMaximum());
+		sp.setVerticalScrollBar(vertical);
+		
+		frame.getContentPane().removeAll();
+		frame.setContentPane(sp);
+		frame.repaint();
+		frame.revalidate();
 	}
 }

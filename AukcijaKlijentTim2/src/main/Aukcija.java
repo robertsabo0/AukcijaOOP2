@@ -1,11 +1,13 @@
 package main;
 
-import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.naming.NamingException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import registracija.Login;
@@ -45,21 +47,30 @@ public class Aukcija extends JFrame {
 		setBounds(100, 100, 636, 466);
 
 		new OfflineBar(this);
-		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+<<<<<<< HEAD
 		setContentPane(contentPane);
 		//contentPane.setLayout(new BorderLayout(0, 0));
+=======
+		setContentPane(new Login(this));
+>>>>>>> e196035994186919f1f0cbfca1495b89aeab59d8
 		
-		postaviStranicu(new Login(this));
 		
 	}
-
+	
 	public void postaviStranicu(JPanel stranica) {
-		getContentPane().removeAll();
-		getContentPane().add(stranica);
-		getContentPane().repaint();
-		getContentPane().revalidate();
+		stranica.setPreferredSize(new Dimension(stranica.getWidth(), getHeight()));
+		JScrollPane sp = new JScrollPane(stranica, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
+		JScrollBar vertical = sp.getVerticalScrollBar();
+		vertical.setValue(vertical.getMaximum());
+		sp.setVerticalScrollBar(vertical);
+		
+		getContentPane().removeAll();
+		setContentPane(sp);
+		repaint();
+		revalidate();
 	}
 }
