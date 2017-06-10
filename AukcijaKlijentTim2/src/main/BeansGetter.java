@@ -2,7 +2,6 @@ package main;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import beans.SesionStavka;
 import beans.SesionStavkaI;
 import beans.StavkeGetters;
 
@@ -32,7 +31,7 @@ public class BeansGetter {
 			if (s == null)
 			{
 				InitialContext ctx = new InitialContext();
-				String name = "ejb:/AukcijaServerTim2//SesionStavka!" + SesionStavkaI.class.getName()+"?stateful";
+				String name = "ejb:/AukcijaServerTim2//SesionStavkaImpl!" + SesionStavkaI.class.getName()+"?stateful";
 				s = (SesionStavkaI) ctx.lookup(name);
 			}
 			return s;
@@ -40,6 +39,10 @@ public class BeansGetter {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	public static void logOut() {
+		s.logOut();
+		s = null;
 	}
 	
 }
