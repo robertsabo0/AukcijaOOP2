@@ -111,14 +111,8 @@ public class Login extends JPanel {
 					}
 				} catch (NoUsernameException e1) {
 					JOptionPane.showMessageDialog(null, "Obavezno je uneti korisnicko ime!");
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				} catch (PostojiUsernameException e1) {
 					JOptionPane.showMessageDialog(null, "Korisnicko ime je zauzeo, probajte ponovo!");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 			}
 		});
@@ -212,14 +206,8 @@ public class Login extends JPanel {
 
 				} catch (LosaLozinkaException e1) {
 					JOptionPane.showMessageDialog(null, "Pogresna sifra za korisnika");
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				} catch (LosUsernameException ex2) {
 					JOptionPane.showMessageDialog(null, "Korisnik s unetim korisnicnik imenom ne postoji");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 			}
 		});
