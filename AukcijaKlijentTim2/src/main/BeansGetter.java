@@ -31,7 +31,7 @@ public class BeansGetter {
 			if (s == null)
 			{
 				InitialContext ctx = new InitialContext();
-				String name = "ejb:/AukcijaServerTim2//SesionStavkaImpl!" + SesionStavkaI.class.getName()+"?stateful";
+				String name = "ejb:/AukcijaServerTim2//SesionStavka!" + SesionStavkaI.class.getName()+"?stateful";
 				s = (SesionStavkaI) ctx.lookup(name);
 			}
 			return s;
