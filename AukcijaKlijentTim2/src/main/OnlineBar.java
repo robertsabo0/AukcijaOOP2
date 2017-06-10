@@ -2,12 +2,14 @@ package main;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.enterprise.inject.spi.Bean;
 import javax.naming.NamingException;
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -18,6 +20,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import Dashboard.Dashboard;
+import dodavanjeStavke.GlavniPanel;
 import registracija.IzmeniProfil;
 import registracija.Login;
 
@@ -43,7 +46,8 @@ public class OnlineBar extends JMenuBar {
 		JMenu mnPretraga = new JMenu("Pretraga");
 		menuBar.add(mnPretraga);
 		
-		JMenu mnPostaviStavku  = new JMenu ("Postavi stavku");
+		JButton mnPostaviStavku  = new JButton ("Postavi stavku");
+		mnPostaviStavku.addActionListener(new PostavljenjeUnosaStavke());
 		menuBar.add(mnPostaviStavku);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
@@ -86,6 +90,9 @@ public class OnlineBar extends JMenuBar {
 	}
 
 	public static void postaviStranicu(JPanel stranica) {
+
+		
+
 		stranica.setPreferredSize(new Dimension(stranica.getWidth(),frame.getHeight()));
 		JScrollPane sp = new JScrollPane(stranica,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
@@ -93,6 +100,7 @@ public class OnlineBar extends JMenuBar {
 		vertical.setValue(vertical.getMaximum());
 		sp.setVerticalScrollBar(vertical);
 		
+
 		frame.getContentPane().removeAll();
 		frame.setContentPane(sp);
 		frame.repaint();
@@ -106,6 +114,21 @@ public class OnlineBar extends JMenuBar {
 			try {
 				Dashboard d=new Dashboard();
 				OnlineBar.postaviStranicu(d);
+			} catch (NamingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+		
+	}
+	private class PostavljenjeUnosaStavke implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				GlavniPanel g=new GlavniPanel();
+				OnlineBar.postaviStranicu(g);
 			} catch (NamingException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

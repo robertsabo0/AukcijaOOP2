@@ -17,7 +17,7 @@ import registracija.Login;
 
 public class Aukcija extends JFrame {
 
-	/**
+	/**f
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -52,7 +52,9 @@ public class Aukcija extends JFrame {
 		new OfflineBar(this);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 		setContentPane(new Login(this));
+
 		
 		
 	}

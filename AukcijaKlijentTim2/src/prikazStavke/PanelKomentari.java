@@ -79,6 +79,14 @@ public class PanelKomentari extends JPanel  {
 		});
 		if(s.isProdata())
 			p1.setVisible(true);
+			if(s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
+				textField.setVisible(false);
+				btnNewButton.setVisible(false);
+			}else{
+				textField.setVisible(true);
+				btnNewButton.setVisible(true);
+			}
+		
 	}
 
 }
