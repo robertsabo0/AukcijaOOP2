@@ -242,7 +242,7 @@ public class SesionStavka implements SesionStavkaI {
 		TypedQuery<PonudaTim2> q = em.createNamedQuery("PonudaTim2.getKupac", PonudaTim2.class);
 		q.setParameter("stavka", s);
 		List<PonudaTim2> lis = q.getResultList();
-		PonudaTim2 rez = lis.get(0);
+		PonudaTim2 rez = lis.isEmpty()?null:lis.get(0);
 		return rez;
 	}
 

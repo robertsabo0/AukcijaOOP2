@@ -1,6 +1,7 @@
 package prikazStavke;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -34,15 +35,15 @@ public class PanelKomentari extends JPanel  {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		List<KomentarTim2> kom=null;
 		kom=BeansGetter.sessionStavka().getSve(s.getId());
-		
+		setSize(new Dimension(200, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		for(KomentarTim2 k: kom){
 			JPanel p=new JPanel();
 			p.setBorder(BorderFactory.createLineBorder(Color.black));
-			JLabel postavio=new JLabel(k.getPostaljvenoOdStrane().getUsername());
-			JLabel datum= new JLabel(k.getPostaljeno().toString());
-			JLabel opis=new JLabel(k.getSadrzaj());
+			JLabel postavio=new JLabel("Postavio: "+k.getPostaljvenoOdStrane().getUsername()+", ");
+			JLabel datum= new JLabel("Vreme postavljanja: "+k.getPostaljeno().toString()+", ");
+			JLabel opis=new JLabel("Opis: "+ k.getSadrzaj());
 			p.add(postavio);
 			p.add(datum);
 			p.add(opis);
@@ -67,6 +68,7 @@ public class PanelKomentari extends JPanel  {
 				k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
 				
 				BeansGetter.sessionStavka().sacuvajKomentar(k);
+				
 				Aukcija.me.postaviStranicu(new GlavniPanel(s));
 			}
 		});
