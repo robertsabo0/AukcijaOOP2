@@ -48,7 +48,7 @@ public class IzmeniProfil extends JPanel {
 	private JTextField opisField;
 	private JPasswordField passwordField;
 	private UserTim2 korisnik = BeansGetter.sessionStavka().vratiUlogovanog();
-	private JPanel panelSlika;
+	private JPanel panelSlika = new JPanel();
 	
 	private byte[] slika;
 
@@ -228,7 +228,7 @@ public class IzmeniProfil extends JPanel {
 				if (izmeni){
 					JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
 					postaviSliku(slika);
-					Aukcija.me.postaviStranicu(ovaj);
+					Aukcija.postaviStranicu(ovaj);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Niste uspeli izmeniti profil");
@@ -280,7 +280,7 @@ public class IzmeniProfil extends JPanel {
 			JLabel lblNewLabel = new JLabel();
 			lblNewLabel.setIcon(i);
 			
-			panelSlika = new JPanel();
+			panelSlika.removeAll();
 			panelSlika.add(lblNewLabel, BorderLayout.NORTH);
 			panelSlika.setPreferredSize(new Dimension(120, getHeight()));
 			add(panelSlika, BorderLayout.WEST);
