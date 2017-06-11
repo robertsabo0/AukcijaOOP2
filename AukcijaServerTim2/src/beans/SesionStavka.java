@@ -1,5 +1,7 @@
 package beans;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -8,9 +10,11 @@ import javax.ejb.Remote;
 import javax.ejb.Remove;
 import javax.ejb.Startup;
 import javax.ejb.Stateful;
+import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.swing.ImageIcon;
 
 import model.BojaTim2;
 import model.CommonTim2;
