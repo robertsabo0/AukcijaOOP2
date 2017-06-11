@@ -1,20 +1,14 @@
 package beans;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Remote;
 import javax.ejb.Remove;
-import javax.ejb.Startup;
 import javax.ejb.Stateful;
-import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.swing.ImageIcon;
 
 import model.BojaTim2;
 import model.CommonTim2;
@@ -195,7 +189,7 @@ public class SesionStavka implements SesionStavkaI {
 			korisnik.setPassword(pas);
 		}
 		
-		if(slika.length!=0){
+		if(slika!= null){
 			korisnik.setSlika(slika);
 		}
 
@@ -225,6 +219,7 @@ public class SesionStavka implements SesionStavkaI {
 		korisnik.setIme(ime);
 		korisnik.setPrezime(prezime);
 		korisnik.setOpis(opis);
+		
 		String str = "";
 		for (char c : password)
 			str += c;

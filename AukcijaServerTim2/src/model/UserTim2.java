@@ -10,8 +10,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import org.hibernate.validator.constraints.Length;
-
 @Entity
 @NamedQueries({
 	  @NamedQuery(name="UserTim2.findUser", query="SELECT u FROM UserTim2 u where u.username = :username"),
@@ -31,6 +29,8 @@ public class UserTim2 implements Serializable{
 	private String email;
 	private String opis;
 	private String password;
+	
+	@Column(columnDefinition="VARBINARY(4096)")
 	private byte[] slika;
 	
 	// TODO: dopuniti potrebnim podacima pri 

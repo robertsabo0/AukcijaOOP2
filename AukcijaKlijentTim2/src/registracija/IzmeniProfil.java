@@ -1,10 +1,8 @@
 package registracija;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +17,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -32,8 +29,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import main.Aukcija;
 import main.BeansGetter;
 import model.UserTim2;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class IzmeniProfil extends JPanel {
 
@@ -47,7 +47,8 @@ public class IzmeniProfil extends JPanel {
 	private JTextField opisField;
 	private JPasswordField passwordField;
 	private UserTim2 korisnik = BeansGetter.sessionStavka().vratiUlogovanog();
-
+	private JPanel panelSlika;
+	
 	private byte[] slika;
 
 	/**
@@ -56,6 +57,8 @@ public class IzmeniProfil extends JPanel {
 	public IzmeniProfil() {
 		setLayout(new BorderLayout(0, 0));
 		
+		JButton btnIzmeni = new JButton("Izmeni");
+		btnIzmeni.setEnabled(false);
 		JPanel panelNaslov = new JPanel();
 		add(panelNaslov, BorderLayout.NORTH);
 
@@ -68,31 +71,67 @@ public class IzmeniProfil extends JPanel {
 		JLabel lblPassword = new JLabel("Password:");
 
 		imeField = new JTextField();
+		imeField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnIzmeni.setEnabled(true);
+			}
+		});
 		imeField.setColumns(10);
+		imeField.setText(korisnik.getIme());
 
 		JLabel lblIme = new JLabel("Ime:");
 
 		JLabel lblPrezime = new JLabel("Prezime:");
 
 		prezimeField = new JTextField();
+		prezimeField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnIzmeni.setEnabled(true);
+			}
+		});
 		prezimeField.setColumns(10);
+		prezimeField.setText(korisnik.getPrezime());
 
 		JLabel lblEmail = new JLabel("E-mail:");
 
 		eMailFiled = new JTextField();
+		eMailFiled.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnIzmeni.setEnabled(true);
+			}
+		});
 		eMailFiled.setColumns(10);
+		eMailFiled.setText(korisnik.getPassword());
 
 		JLabel lblOpis = new JLabel("Opis:");
 
 		opisField = new JTextField();
+		opisField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnIzmeni.setEnabled(true);
+			}
+		});
 		opisField.setColumns(10);
+		opisField.setText(korisnik.getOpis());
 
 		passwordField = new JPasswordField();
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				btnIzmeni.setEnabled(true);
+			}
+		});
+		passwordField.setText(korisnik.getPassword());
 
 		JButton btnPretrazi = new JButton("Pretrazi");
 		btnPretrazi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				btnIzmeni.setEnabled(true);
 				JFileChooser fc = new JFileChooser();
 				fc.setCurrentDirectory(new java.io.File("."));
 				fc.setDialogTitle("Pretrazivac");
@@ -100,13 +139,13 @@ public class IzmeniProfil extends JPanel {
 				if (fc.showOpenDialog(btnPretrazi) == JFileChooser.APPROVE_OPTION) {
 					System.out.println(fc.getSelectedFile().getAbsolutePath());
 					Path p = Paths.get(fc.getSelectedFile().getPath());
-					
-					//slika = 
+
+					// slika =
 					BufferedImage img;
-					try{
-						img = resize(ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(p))),75,100);
+					try {
+						img = resize(ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(p))), 75, 100);
 						slika = imageToByteArray(img);
-					}catch (Exception e2){
+					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
 				}
@@ -161,42 +200,25 @@ public class IzmeniProfil extends JPanel {
 						.addComponent(btnPretrazi).addComponent(lblIzaberiSliku))
 				.addContainerGap(196, Short.MAX_VALUE)));
 		panel.setLayout(gl_panel);
-
-		JPanel panelSlika = new JPanel();
-		panelSlika.setBorder(BorderFactory.createLineBorder(Color.black));
-		panelSlika.setPreferredSize(new Dimension(150, getHeight()));
-		add(panelSlika, BorderLayout.WEST);
-		BufferedImage img;
-		ImageIcon  i = null;
-		JLabel lblSlika = new JLabel();
-		try {
-			img = ImageIO.read(new ByteArrayInputStream(korisnik.getSlika()));
-			
-			if (img != null) {
-				i = new ImageIcon((Image)img);
-				lblSlika.setIcon(i);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		panelSlika.add(lblSlika, BorderLayout.NORTH);
-		panelSlika.setLayout(new BorderLayout(0, 0));
 		
+		if (korisnik.getSlika() != null){
+			postaviSliku();
+		}
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.SOUTH);
-
-		JButton btnIzmeni = new JButton("Izmeni");
+		
+		final JPanel ovaj = this;
+		
 		btnIzmeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean izmeni = BeansGetter.sessionStavka().izmeniKorisnika(imeField.getText(), prezimeField.getText(),
 						passwordField.getPassword(), eMailFiled.getText(), opisField.getText(), slika);
-				if (izmeni)
+				if (izmeni){
 					JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
+					Aukcija.me.postaviStranicu(ovaj);
+				}
 				else
 					JOptionPane.showMessageDialog(null, "Niste uspeli izmeniti profil");
-				repaint();
-				revalidate();
 			}
 		});
 		panel_1.add(btnIzmeni);
@@ -212,25 +234,55 @@ public class IzmeniProfil extends JPanel {
 
 	}
 	
-	public static BufferedImage resize(BufferedImage img, int newW, int newH) {  
-	    int w = img.getWidth();  
-	    int h = img.getHeight();  
-	    BufferedImage dimg = new BufferedImage(newW, newH, img.getType());  
-	    Graphics2D g = dimg.createGraphics();  
-	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-	    RenderingHints.VALUE_INTERPOLATION_BILINEAR);  
-	    g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);  
-	    g.dispose();  
-	    return dimg;  
-	} 
-
+	//smanjuje velicinu slike
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+		int w = img.getWidth();
+		int h = img.getHeight();
+		BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
+		Graphics2D g = dimg.createGraphics();
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);
+		g.dispose();
+		return dimg;
+	}
+	
+	//prebacuje sliku u niz
 	static byte[] imageToByteArray(BufferedImage image) {
-	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-	    try {
-	        ImageIO.write(image, "png", stream);
-	    } catch(IOException e) {
-	        throw new RuntimeException(e);
-	    }
-	    return stream.toByteArray();
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		try {
+			ImageIO.write(image, "png", stream);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return stream.toByteArray();
+	}
+	
+	//postavlja sliku na panel
+	public void postaviSliku() {
+		BufferedImage img;
+		try {
+			img = ImageIO.read(new ByteArrayInputStream(korisnik.getSlika()));
+			
+			ImageIcon i = new ImageIcon(img);
+			JLabel lblNewLabel = new JLabel();
+			lblNewLabel.setIcon(i);
+			
+			panelSlika = new JPanel();
+			panelSlika.add(lblNewLabel, BorderLayout.NORTH);
+			panelSlika.setPreferredSize(new Dimension(120, getHeight()));
+			add(panelSlika, BorderLayout.WEST);
+			
+			panelSlika.repaint();
+			panelSlika.revalidate();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	private void prefarbajSliku() {
+		// TODO Auto-generated method stub
+		
 	}
 }
