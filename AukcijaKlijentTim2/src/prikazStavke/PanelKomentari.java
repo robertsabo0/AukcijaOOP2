@@ -68,8 +68,9 @@ public class PanelKomentari extends JPanel  {
 				k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
 				
 				BeansGetter.sessionStavka().sacuvajKomentar(k);
-				
-				Aukcija.me.postaviStranicu(new GlavniPanel(s));
+
+				Aukcija.postaviStranicu(new GlavniPanel(s));
+
 			}
 		});
 		btnNewButton.setEnabled(false);
