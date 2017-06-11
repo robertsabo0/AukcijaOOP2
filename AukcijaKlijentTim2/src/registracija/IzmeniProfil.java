@@ -49,7 +49,7 @@ public class IzmeniProfil extends JPanel {
 	private JPasswordField passwordField;
 	private UserTim2 korisnik = BeansGetter.sessionStavka().vratiUlogovanog();
 	private JPanel panelSlika = new JPanel();
-	
+
 	private byte[] slika;
 
 	/**
@@ -146,8 +146,12 @@ public class IzmeniProfil extends JPanel {
 					try {
 						img = resize(ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(p))), 75, 100);
 						slika = imageToByteArray(img);
-					} catch (Exception e2) {
+
+					} catch (NullPointerException ee){
+						JOptionPane.showMessageDialog(null,"Losa slika!");
+					}catch (Exception e2) {
 						e2.printStackTrace();
+					
 					}
 				}
 			}
@@ -235,15 +239,6 @@ public class IzmeniProfil extends JPanel {
 			}
 		});
 		panel_1.add(btnIzmeni);
-
-		JButton btnTest = new JButton("Test");
-		btnTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TestFrame tf = new TestFrame();
-				tf.setVisible(true);
-			}
-		});
-		panel_1.add(btnTest);
 
 	}
 	

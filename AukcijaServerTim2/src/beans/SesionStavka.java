@@ -201,7 +201,7 @@ public class SesionStavka implements SesionStavkaI {
 	// registracija korisnika
 	@Override
 	public UserTim2 registrujKorisnika(String username, char[] password, String ime, String prezime, String eMail,
-			String opis) throws NoUsernameException, PostojiUsernameException {
+			String opis, byte[] slika) throws NoUsernameException, PostojiUsernameException {
 		if (korisnik != null)
 			return null; // postoji registrovan korisnik trenutno na sistemu
 		
@@ -219,6 +219,7 @@ public class SesionStavka implements SesionStavkaI {
 		korisnik.setIme(ime);
 		korisnik.setPrezime(prezime);
 		korisnik.setOpis(opis);
+		korisnik.setSlika(slika);
 		
 		String str = "";
 		for (char c : password)

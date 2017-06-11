@@ -2,24 +2,26 @@ package registracija;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import javax.naming.NamingException;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -49,7 +51,7 @@ public class Login extends JPanel {
 	private JTextField eMailField2;
 	private JTextField userNameFiled2;
 	private JTextField opisField2;
-	
+	private byte[] slika;
 	private JFrame frame;
 
 	/**
@@ -104,7 +106,7 @@ public class Login extends JPanel {
 				try {
 					UserTim2 user = BeansGetter.sessionStavka().registrujKorisnika(userNameFiled2.getText(),
 							passwordField_1.getPassword(), imeField2.getText(), prezimeField2.getText(),
-							eMailField2.getText(), opisField2.getText());
+							eMailField2.getText(), opisField2.getText(), slika);
 					if (user != null) {
 						System.out.println("Registovao se");
 						new OnlineBar(frame);
@@ -117,53 +119,100 @@ public class Login extends JPanel {
 				}
 			}
 		});
+		
+		JButton btnPretrazi = new JButton("Pretrazi");
+		btnPretrazi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();
+				fc.setCurrentDirectory(new java.io.File("."));
+				fc.setDialogTitle("Pretrazivac");
+				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				if (fc.showOpenDialog(btnPretrazi) == JFileChooser.APPROVE_OPTION) {
+					System.out.println(fc.getSelectedFile().getAbsolutePath());
+					Path p = Paths.get(fc.getSelectedFile().getPath());
+
+					// slika =
+					BufferedImage img;
+					try {
+						img = IzmeniProfil.resize(ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(p))), 75, 100);
+						slika = IzmeniProfil.imageToByteArray(img);
+
+					} catch (NullPointerException ee){
+						JOptionPane.showMessageDialog(null,"Losa slika!");
+					}catch (Exception e2) {
+						e2.printStackTrace();
+					
+					}
+				}
+			}
+		});
+		
+		JLabel lblSlika = new JLabel("Slika:");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup().addGap(37)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING).addComponent(lblUsername_1)
-								.addComponent(lblPassword_1).addComponent(lblIme).addComponent(lblPrezime)
-								.addComponent(lblEmail).addComponent(lblOpis))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false).addComponent(btnRegistrujSe)
-								.addComponent(passwordField_1).addComponent(imeField2).addComponent(prezimeField2)
-								.addComponent(opisField2)
-								.addComponent(eMailField2, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-								.addComponent(userNameFiled2))
-						.addContainerGap(27, Short.MAX_VALUE)));
-		gl_panel_1
-				.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
-						.createSequentialGroup().addGap(24).addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(userNameFiled2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUsername_1))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING).addComponent(lblPassword_1)
-								.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, 18,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
-								.createSequentialGroup()
-								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(imeField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblIme))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(prezimeField2, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblPrezime))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(eMailField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblEmail)))
-								.addGroup(gl_panel_1.createSequentialGroup().addGap(82)
-										.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-												.addComponent(opisField2, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblOpis))))
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnRegistrujSe)
-						.addContainerGap(58, Short.MAX_VALUE)));
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(37)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblUsername_1)
+						.addComponent(lblPassword_1)
+						.addComponent(lblIme)
+						.addComponent(lblPrezime)
+						.addComponent(lblEmail)
+						.addComponent(lblOpis)
+						.addComponent(lblSlika))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(passwordField_1)
+							.addComponent(imeField2)
+							.addComponent(prezimeField2)
+							.addComponent(opisField2)
+							.addComponent(eMailField2, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+							.addComponent(userNameFiled2))
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(btnPretrazi, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnRegistrujSe, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addContainerGap(198, Short.MAX_VALUE))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(24)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(userNameFiled2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblUsername_1))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblPassword_1)
+						.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(imeField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblIme))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(prezimeField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPrezime))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(eMailField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblEmail)))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(82)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(opisField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblOpis))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnPretrazi)
+						.addComponent(lblSlika))
+					.addGap(8)
+					.addComponent(btnRegistrujSe)
+					.addContainerGap(159, Short.MAX_VALUE))
+		);
 		panel_1.setLayout(gl_panel_1);
 
 		JPanel panel_3 = new JPanel();
