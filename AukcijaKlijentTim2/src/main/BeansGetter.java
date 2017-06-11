@@ -2,7 +2,6 @@ package main;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import beans.SesionStavka;
 import beans.SesionStavkaI;
 import beans.StavkeGetters;
 
@@ -40,6 +39,10 @@ public class BeansGetter {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	public static void logOut() {
+		s.logOut();
+		s = null;
 	}
 	
 }
