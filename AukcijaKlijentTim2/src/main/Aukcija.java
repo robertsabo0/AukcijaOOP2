@@ -1,12 +1,10 @@
 package main;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.naming.NamingException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
@@ -19,14 +17,13 @@ public class Aukcija extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	public static Aukcija me;
+	private static Aukcija me;
 
 	/**
 	 * Launch the application.
 	 * @throws NamingException 
 	 */
 	public static void main(String[] args){
-		//if(true)return;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -40,9 +37,6 @@ public class Aukcija extends JFrame {
 		});
 	}
 	
-	/**
-	 * Create the frame.
-	 */
 	public Aukcija() {
 		setTitle("Aukcija");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,13 +55,8 @@ public class Aukcija extends JFrame {
 		return me.getContentPane().getWidth();
 	}
 	public static void postaviStranicu(JPanel stranica) {
-		//stranica.setPreferredSize(new Dimension(me.getWidth(), (int) stranica.getPreferredSize().getHeight() + 600));
 		JScrollPane sp = new JScrollPane(stranica, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
-		//JScrollBar vertical = sp.getVerticalScrollBar();
-		//vertical.setValue(vertical.getMaximum());
-		//sp.setVerticalScrollBar(vertical);
 		
 		me.getContentPane().removeAll();
 		me.setContentPane(sp);

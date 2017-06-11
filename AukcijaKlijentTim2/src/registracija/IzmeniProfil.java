@@ -215,7 +215,7 @@ public class IzmeniProfil extends JPanel {
 						passwordField.getPassword(), eMailFiled.getText(), opisField.getText(), slika);
 				if (izmeni){
 					JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
-					Aukcija.me.postaviStranicu(ovaj);
+					Aukcija.postaviStranicu(ovaj);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Niste uspeli izmeniti profil");
