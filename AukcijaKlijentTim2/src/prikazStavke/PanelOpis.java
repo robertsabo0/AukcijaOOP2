@@ -45,7 +45,8 @@ public class PanelOpis extends JPanel {
 		gbc_lblNewLabel.gridy = 1;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Opis: "+s.getOpis());
+		JLabel lblNewLabel_1 = new JLabel("<html><p>Opis:</p>"
+				+ "<p>"+s.getOpis()+"</p></html>");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 2;
