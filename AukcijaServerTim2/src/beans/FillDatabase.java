@@ -56,8 +56,11 @@ public class FillDatabase {
 
 	public void postConstruct() throws ParseException  {
 		
-		
-		
+		if(false)
+		{		SesionStavka ses = new SesionStavka();
+		ses.em = em;
+		//ses.getKupac(em.find(StavkaTim2.class, ));
+		}
 
 		if(em.find(UserTim2.class, "admin") == null){
 

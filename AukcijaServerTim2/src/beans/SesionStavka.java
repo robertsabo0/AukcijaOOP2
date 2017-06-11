@@ -3,8 +3,10 @@ package beans;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Remote;
 import javax.ejb.Remove;
+import javax.ejb.Startup;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,7 +26,7 @@ import model.VelicinaTim2;
 @Remote(SesionStavkaI.class)
 public class SesionStavka implements SesionStavkaI {
 	@PersistenceContext(name = CommonTim2.persistanceName)
-	private EntityManager em;
+	public EntityManager em; // TODO
 
 	private UserTim2 korisnik;
 	public static boolean ulogovan = false;
@@ -229,6 +231,15 @@ public class SesionStavka implements SesionStavkaI {
 
 		return korisnik;
 
+	}
+
+	@Override
+	public PonudaTim2 getKupac(StavkaTim2 s) {
+		TypedQuery<PonudaTim2> q = em.createNamedQuery("PonudaTim2.getKupac", PonudaTim2.class);
+		q.setParameter("stavka", s);
+		List<PonudaTim2> lis = q.getResultList();
+		PonudaTim2 rez = lis.isEmpty()?null:lis.get(0);
+		return rez;
 	}
 
 }

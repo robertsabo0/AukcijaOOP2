@@ -5,6 +5,7 @@ import java.util.List;
 import model.BojaTim2;
 import model.KomentarTim2;
 import model.MaterijalTim2;
+import model.PonudaTim2;
 import model.StavkaTim2;
 import model.TipTim2;
 import model.UserTim2;
@@ -28,4 +29,6 @@ public interface SesionStavkaI {
 	public MaterijalTim2 sacuvajMaterija(MaterijalTim2 m);
 	public VelicinaTim2 sacuvajVelicni(VelicinaTim2 v);
 	public void prodataStavka(StavkaTim2 s);
+	
+	public PonudaTim2 getKupac(StavkaTim2 s);
 }

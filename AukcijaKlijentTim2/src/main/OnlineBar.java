@@ -78,15 +78,12 @@ public class OnlineBar extends JMenuBar {
 		mnKorisnik.add(mntmPodesiProfil);
 		
 		JMenuItem mntmIzlogujSe = new JMenuItem("Izloguj se");
-		mntmIzlogujSe.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				BeansGetter.sessionStavka().logOut();
+		mntmIzlogujSe.addActionListener( e -> {
+				BeansGetter.logOut();
 				new OfflineBar(frame);
 				postaviStranicu(new Login(frame));
 			}
-		});
+		);
 		mnKorisnik.add(mntmIzlogujSe);
 		
 		frame.setJMenuBar(menuBar);

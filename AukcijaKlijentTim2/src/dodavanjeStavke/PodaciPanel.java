@@ -22,10 +22,10 @@ import model.TipTim2;
 import model.VelicinaTim2;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JTextArea;
 
 public class PodaciPanel extends JPanel {
 	private JTextField textField;
-	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
@@ -39,9 +39,9 @@ public class PodaciPanel extends JPanel {
 	public PodaciPanel() throws NamingException {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 101, 90, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, -7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Naziv:");
@@ -62,19 +62,22 @@ public class PodaciPanel extends JPanel {
 		
 		JLabel lblNewLabel_1 = new JLabel("Opis:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.anchor = GridBagConstraints.NORTH;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 2;
 		gbc_lblNewLabel_1.gridy = 3;
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 4;
-		gbc_textField_1.gridy = 3;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		JTextArea textArea = new JTextArea();
+		textArea.setColumns(20);
+		textArea.setLineWrap(true);
+		textArea.setRows(3);
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.insets = new Insets(0, 0, 5, 5);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 4;
+		gbc_textArea.gridy = 3;
+		add(textArea, gbc_textArea);
 		
 		JLabel lblNewLabel_2 = new JLabel("Boja:");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
@@ -343,7 +346,7 @@ public class PodaciPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				StavkaTim2 s=new StavkaTim2();
 				s.setNaziv(textField.getText());
-				s.setOpis(textField_1.getText());
+				s.setOpis(textArea.getText());
 				s.setDatumPostavljanja(new Date());
 				s.setAktuelnaCena(Integer.parseInt(textField_2.getText()));
 				s.setBoja(comboBox.getItemAt(comboBox.getSelectedIndex()));
