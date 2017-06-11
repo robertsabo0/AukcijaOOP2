@@ -201,16 +201,6 @@ public class IzmeniProfil extends JPanel {
 			}
 		});
 		panel_1.add(btnIzmeni);
-
-		JButton btnTest = new JButton("Test");
-		btnTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TestFrame tf = new TestFrame();
-				tf.setVisible(true);
-			}
-		});
-		panel_1.add(btnTest);
-
 	}
 	
 	public static BufferedImage resize(BufferedImage img, int newW, int newH) {  

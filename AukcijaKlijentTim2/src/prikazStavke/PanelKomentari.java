@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,11 +33,13 @@ public class PanelKomentari extends JPanel  {
 	 * Create the panel.
 	 */
 	public PanelKomentari(StavkaTim2 s) {
-		setBorder(BorderFactory.createLineBorder(Color.black));
+		//setBorder(BorderFactory.createLineBorder(Color.black));
 		List<KomentarTim2> kom=null;
 		kom=BeansGetter.sessionStavka().getSve(s.getId());
 		setSize(new Dimension(200, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		add(Box.createVerticalStrut(10));
 		
 		for(KomentarTim2 k: kom){
 			JPanel p=new JPanel();
