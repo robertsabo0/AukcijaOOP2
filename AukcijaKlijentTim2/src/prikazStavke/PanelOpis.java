@@ -166,6 +166,14 @@ public class PanelOpis extends JPanel {
 						BeansGetter.sessionStavka().prodataStavka(s);
 						lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
 						btnPrihvati.setVisible(false);
+						if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername())){
+							if(BeansGetter.sessionStavka().getKupac(s)!=null){
+								PonudaTim2 ponuda=BeansGetter.sessionStavka().getKupac(s);
+								if(ponuda.getVrednost()==s.getAktuelnaCena()){
+									lblNewLabel_8.setText("Proizvod je prodat: "+ponuda.getUser().getIme()+" "+ponuda.getUser().getPrezime()+"(Username: "+ponuda.getUser().getUsername()+") za: "+s.getAktuelnaCena());
+								}	
+							}
+						}
 				});
 			}else{
 				textField_1.setVisible(true);
@@ -173,15 +181,24 @@ public class PanelOpis extends JPanel {
 				lblNewLabel_9.setVisible(true);
 				btnPrihvati.setVisible(false);
 			}
-		
+			if(BeansGetter.sessionStavka().getKupac(s)!=null && s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername())){
+				btnPrihvati.setVisible(true);
+			}else
+				btnPrihvati.setVisible(false);
 		if(s.isProdata()){
+			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername())){
+				PonudaTim2 ponuda=BeansGetter.sessionStavka().getKupac(s);
+				if(BeansGetter.sessionStavka().getKupac(s)!=null){
+					if(ponuda.getVrednost()==s.getAktuelnaCena()){
+						lblNewLabel_8.setText("Proizvod je prodat: "+ponuda.getUser().getIme()+" "+ponuda.getUser().getPrezime()+"(Username: "+ponuda.getUser().getUsername()+") za: "+s.getAktuelnaCena());
+					}
+				}
+			}else{
 			lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
 			btnPrihvati.setVisible(false);
+			}
 		}
-		if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername())){
-			//PonudaTim2 ponuda=BeansGetter.sessionStavka().getKupac(s);
-			//lblNewLabel_8.setText("Proizvod je prodat: "+ponuda.user.getIme()+" "+ponuda.getUser().getPrezime()+"(Username: "+ponuda.getUser().getUsername()+") za: "+s.getAktuelnaCena());
-		}
+		
 	}
 	
 }

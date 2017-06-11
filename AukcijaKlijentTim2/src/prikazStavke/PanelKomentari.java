@@ -40,9 +40,9 @@ public class PanelKomentari extends JPanel  {
 		for(KomentarTim2 k: kom){
 			JPanel p=new JPanel();
 			p.setBorder(BorderFactory.createLineBorder(Color.black));
-			JLabel postavio=new JLabel(k.getPostaljvenoOdStrane().getUsername());
-			JLabel datum= new JLabel(k.getPostaljeno().toString());
-			JLabel opis=new JLabel(k.getSadrzaj());
+			JLabel postavio=new JLabel("Postavio: "+k.getPostaljvenoOdStrane().getUsername()+", ");
+			JLabel datum= new JLabel("Vreme postavljanja: "+k.getPostaljeno().toString()+", ");
+			JLabel opis=new JLabel("Opis: "+ k.getSadrzaj());
 			p.add(postavio);
 			p.add(datum);
 			p.add(opis);
