@@ -7,8 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
-@Entity
+@Entity //PonudaTim2.getKupac
+@NamedQueries({
+	  @NamedQuery(name="PonudaTim2.getKupac", query="SELECT p FROM PonudaTim2 p WHERE p.stavka=:stavka ORDER BY p.timestamp DESC")
+})
 public class PonudaTim2 implements Serializable {
 	/**
 	 * 
