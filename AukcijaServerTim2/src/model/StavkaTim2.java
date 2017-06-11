@@ -1,6 +1,5 @@
 package model;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -9,6 +8,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,6 +34,7 @@ public class StavkaTim2 implements Serializable{
 	private String naziv;
 	private String opis;
 	private Date datumPostavljanja;
+	@Lob
 	private byte[] slika;
 	private boolean prodata;
 	private double aktuelnaCena;
