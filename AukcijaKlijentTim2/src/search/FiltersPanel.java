@@ -1,10 +1,6 @@
 package search;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +9,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -72,8 +67,8 @@ class FiltersPanel extends JPanel {
 		materijaliBoxes = new JCheckBox[materijali.length];
 
 		initializeBoxes();
-		BoxLayout gridLayout = new BoxLayout(this, BoxLayout.X_AXIS);
-		setLayout(gridLayout);		
+		BoxLayout boxLayout = new BoxLayout(this, BoxLayout.X_AXIS);
+		setLayout(boxLayout);		
 
 		JPanel bojePanel = new JPanel();
 		BoxLayout boxLayou = new BoxLayout(bojePanel, BoxLayout.Y_AXIS);

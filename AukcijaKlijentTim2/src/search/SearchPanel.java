@@ -1,13 +1,8 @@
 package search;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -18,9 +13,6 @@ import model.StavkaTim2;
 
 public class SearchPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8938800055710281067L;
 
 	public static void main(String[] args) {
@@ -44,7 +36,6 @@ public class SearchPanel extends JPanel {
 		add(filter, BorderLayout.NORTH);
 		
 		 bot=new JPanel();
-		 //FlowLayout f=new FlowLayout();
 		 bot.setLayout(new CustomFlowLayout());
 		 for(StavkaTim2 s : stavke){
 			 JPanel stavkaPanel=new SmallStavkaPanel(s);

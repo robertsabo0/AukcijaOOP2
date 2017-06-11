@@ -41,6 +41,7 @@ public class SmallStavkaPanel extends JPanel {
 			// cena.settex
 			
 		 }
+		 JLabel postavljenoOd = new JLabel("Postavljeno od strane: "+s.getPostavljenoOdStrane().getUsername());
 		 BufferedImage slika=null;;
 		try {
 			slika = ImageIO.read(new File("images.jpg"));
@@ -55,6 +56,7 @@ public class SmallStavkaPanel extends JPanel {
 		 this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
 		 this.add(slikaL);
 		 this.add(naziv);
+		 this.add(postavljenoOd);
 		 this.add(cena);
 		 this.add(datum);
 		 this.add(dugme);
