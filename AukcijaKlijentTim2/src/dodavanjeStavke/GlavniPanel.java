@@ -1,27 +1,17 @@
 package dodavanjeStavke;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.naming.NamingException;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import main.BeansGetter;
-import model.BojaTim2;
-import model.MaterijalTim2;
-import model.TipTim2;
-import model.VelicinaTim2;
 
 public class GlavniPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_6;
-	private JTextField textField_7;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7382394229602793645L;
 
 	/**
 	 * Create the panel.

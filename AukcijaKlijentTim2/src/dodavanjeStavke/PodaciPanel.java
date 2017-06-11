@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -39,6 +40,10 @@ import java.nio.file.Paths;
 import javax.swing.JTextArea;
 
 public class PodaciPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4484267064173570292L;
 	private JTextField textField;
 	private JTextField textField_2;
 	private JTextField textField_4;
@@ -383,14 +388,17 @@ public class PodaciPanel extends JPanel {
 		gbc_lblNewLabel_7.gridy = 15;
 		add(lblNewLabel_7, gbc_lblNewLabel_7);
 		
-		JButton btnNewButton = new JButton("postavi");
+		JButton btnNewButton = new JButton("Postavi oglas");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StavkaTim2 s=new StavkaTim2();
 				s.setNaziv(textField.getText());
 				s.setOpis(textArea.getText());
 				s.setDatumPostavljanja(new Date());
-				s.setAktuelnaCena(Integer.parseInt(textField_2.getText()));
+				String cena = textField_2.getText();
+				if(cena == null || cena.equals(""))
+					cena = "0";
+				s.setAktuelnaCena(Double.parseDouble(cena));
 				s.setBoja(comboBox.getItemAt(comboBox.getSelectedIndex()));
 				s.setMaterijal(comboBox_1.getItemAt(comboBox_1.getSelectedIndex()));
 				s.setTip(comboBox_2.getItemAt(comboBox_2.getSelectedIndex()));
@@ -398,11 +406,11 @@ public class PodaciPanel extends JPanel {
 				s.setPostavljenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
 				s.setSlika(slika);
 				BeansGetter.sessionStavka().sacuvajStavku(s);
-				
+				JOptionPane.showMessageDialog(null, "Uspesno ste postavili oglas", "", JOptionPane.INFORMATION_MESSAGE, null);
 			}
 		});
 		
-		JButton btnNewButton_4 = new JButton("dodaj");
+		JButton btnNewButton_4 = new JButton("Odaberi sliku");
 		btnNewButton_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
