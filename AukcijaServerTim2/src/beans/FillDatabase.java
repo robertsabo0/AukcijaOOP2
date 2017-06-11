@@ -1,5 +1,6 @@
 package beans;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,16 +32,16 @@ public class FillDatabase {
 	private EntityManager em;
 
 	private String[] bojeStr ={"crna", "bela", "zuta", "crvena", "zelena", "crvena","braon", "ljubicasta"};
-	private String[] velicinaStr ={"XS", "S", "M", "L", "XL", "XXL", "37", "38", "39", "40", "41", "42", "43", "44", "45"};
-	private String[] tipoviStr ={"majica", "pantalone","kosulja","haljina", "sako","sorc", "suknja",
-							"patike", "cipele", "papuce", "sandale", "cizme", "zimska obuca", "stikle"};
+	private String[] velicinaStr ={"M", "L", "XL","38", "39", "41", "42", "43"};
+	private String[] tipoviStr ={"majica", "pantalone","kosulja","haljina", "sako",
+							"patike", "cipele", "papuce"};
 	private String[] materijaliStr ={"koza", "skaj", "pamuk", "teksas", "likra", "lan", "keper"};
 	private UserTim2[] useri;
-	private String[] naziviStr={"sorc", "prsluk", "pantalone", "majica", "kosulja", "kaput", "patike", "papuce", "cipele", "farmerice"};
+	private String[] naziviStr={ "pantalone", "majica", "kosulja", "kaput", "patike", "papuce", "cipele", "farmerice"};
 	
 	private String[] komentariStr={"ok", "uzasno je", "lose je", "dobro je", "dobar kvalitet"};
 	
-	private Double[] ponudeD={100.0, 500.0, 750.0, 1000.0, 2000.0, 2456.0, 3334.0};
+	private Double[] ponudeD={(double) 100, (double) 500, (double)750, (double)1000, (double)2000, (double)2456, (double)3334};
 	
 			
 	private BojaTim2[] boje;
@@ -95,7 +96,7 @@ public class FillDatabase {
 		
 		UserTim2 user1=new UserTim2();
 		user1.setUsername("Robii");
-		user1.setPassword("peder");
+		user1.setPassword("password");
 		user1.setIme("Robert");
 		user1.setPrezime("Sabo");
 		user1.setEmail("robert.sabo@gmail.com");
@@ -103,7 +104,7 @@ public class FillDatabase {
 		useri[1]=user1;
 		
 		UserTim2 user2=new UserTim2();
-		user2.setUsername("pane");
+		user2.setUsername("Pane");
 		user2.setPassword("pane");
 		user2.setIme("Pane");
 		user2.setPrezime("Odalovic");
@@ -118,7 +119,7 @@ public class FillDatabase {
 		for(int i=0;i<10;i++){
 			StavkaTim2 s=new StavkaTim2();
 			double r = Math.random();
-			s.setAktuelnaCena(Math.random()*1000);
+			s.setAktuelnaCena(Math.round(r*10000));
 			s.setNaziv(naziviStr[(int)(r*naziviStr.length)]);
 			s.setMaterijal(materijali[(int)(r*materijali.length)]);
 			s.setBoja(boje[(int) (r*boje.length)]);
@@ -138,11 +139,11 @@ public class FillDatabase {
 		ponude=new PonudaTim2[ponudeD.length];
 		int c=0;
 		double r=Math.random();
-		PonudaTim2 p=new PonudaTim2();
 
 		for(Double d: ponudeD){	
+			PonudaTim2 p=new PonudaTim2();
 			StavkaTim2 stavka = stavke[(int)(r*stavke.length)];
-			
+			stavka.setAktuelnaCena(stavka.getAktuelnaCena()+d);
 			UserTim2 user=stavka.getPostavljenoOdStrane();
 			
 			UserTim2 user1=useri[(int)(r*useri.length)];
@@ -151,13 +152,13 @@ public class FillDatabase {
 				r=Math.random();
 				user1=useri[(int)(r*useri.length)];
 			}
-			
-			p.setVrednost(d);
+			p.setVrednost(Math.round(stavka.getAktuelnaCena()));
 			p.setTimestamp(new Date());
 			p.setUser(user1);
 			p.setStavka(stavka);
 			
 			em.persist(p);
+			ponude[c++]=p;
 		}
 	}
 	
