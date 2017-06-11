@@ -417,7 +417,7 @@ public class PodaciPanel extends JPanel {
 					//slika = 
 					BufferedImage img;
 					try{
-						img = resize(ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(p))),75,100);
+						img = resize(ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(p))),150,150);
 						slika = imageToByteArray(img);
 					}catch (Exception e2){
 						e2.printStackTrace();
