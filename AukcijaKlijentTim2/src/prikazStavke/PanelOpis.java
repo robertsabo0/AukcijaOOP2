@@ -1,28 +1,21 @@
 package prikazStavke;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import com.sun.beans.editors.IntegerEditor;
-
-import main.BeansGetter;
-import model.StavkaTim2;
-
-import java.awt.Dimension;
-
-import javax.naming.NamingException;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import main.BeansGetter;
+import model.PonudaTim2;
+import model.StavkaTim2;
 
 public class PanelOpis extends JPanel {
 	/**
@@ -185,6 +178,10 @@ public class PanelOpis extends JPanel {
 			lblNewLabel_8.setText("Proizvod je prodat za: "+s.getAktuelnaCena());
 			btnPrihvati.setVisible(false);
 		}
+		if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername())){
+			//PonudaTim2 ponuda=BeansGetter.sessionStavka().getKupac(s);
+			//lblNewLabel_8.setText("Proizvod je prodat: "+ponuda.user.getIme()+" "+ponuda.getUser().getPrezime()+"(Username: "+ponuda.getUser().getUsername()+") za: "+s.getAktuelnaCena());
+		}
 	}
-
+	
 }
