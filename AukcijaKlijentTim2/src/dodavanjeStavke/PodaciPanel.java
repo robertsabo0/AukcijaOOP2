@@ -129,10 +129,19 @@ public class PodaciPanel extends JPanel {
 				String opis=textField_4.getText();
 				b.setOpis(opis);
 				BojaTim2 boja=null;
+				Boolean pom=false;
+				for(BojaTim2 bo : l){
+					if(bo.getOpis().equalsIgnoreCase(opis)){
+						comboBox.setSelectedItem(bo);
+						pom=true;
+					}
+				}
+				if(!pom){
 				boja=BeansGetter.sessionStavka().sacuvajBoju(b);
 				
 				comboBox.addItem(boja);
 				comboBox.setSelectedItem(boja);
+				}
 			}
 		});
 		textField_4.addKeyListener(new KeyAdapter() {
@@ -184,11 +193,21 @@ public class PodaciPanel extends JPanel {
 				MaterijalTim2 m=new MaterijalTim2();
 				String opis=textField_5.getText();
 				m.setOpis(opis);
-				MaterijalTim2 mat=null;
-				mat=BeansGetter.sessionStavka().sacuvajMaterija(m);
+				MaterijalTim2 materijal=null;
+				boolean pom1=false;
+				for(MaterijalTim2 mate : mat){
+					if(mate.getOpis().equalsIgnoreCase(opis)){
+						comboBox_1.setSelectedItem(mate);
+						pom1=true;
+					}
+				}
+				if(!pom1){
+					materijal=BeansGetter.sessionStavka().sacuvajMaterija(m);
+					
+					comboBox_1.addItem(materijal);
+					comboBox_1.setSelectedItem(materijal);
+				}
 				
-				comboBox_1.addItem(mat);
-				comboBox_1.setSelectedItem(mat);
 			}
 		});
 		textField_5.addKeyListener(new KeyAdapter() {
@@ -231,11 +250,21 @@ public class PodaciPanel extends JPanel {
 				TipTim2 t=new TipTim2();
 				String opis=textField_6.getText();
 				t.setOpis(opis);
-				TipTim2 tip=null;
-				tip=BeansGetter.sessionStavka().sacuvajTip(t);
+				TipTim2 tipp=null;
+				boolean pom2=false;
+				for(TipTim2 ti : tip){
+					if(ti.getOpis().equalsIgnoreCase(opis)){
+						comboBox_2.setSelectedItem(ti);
+						pom2=true;
+					}
+				}
+				if(!pom2){
+					tipp=BeansGetter.sessionStavka().sacuvajTip(t);
+					
+					comboBox_2.addItem(tipp);
+					comboBox_2.setSelectedItem(tipp);
+				}
 				
-				comboBox_2.addItem(tip);
-				comboBox_2.setSelectedItem(tip);
 			}
 		});
 		
@@ -306,12 +335,21 @@ public class PodaciPanel extends JPanel {
 				VelicinaTim2 v=new VelicinaTim2();
 				String opis=textField_7.getText();
 				v.setOpis(opis);
-				VelicinaTim2 vel=null;
+				VelicinaTim2 velicina=null;
+				boolean pom3=false;
+				for(VelicinaTim2 ve : vel){
+					if(ve.getOpis().equalsIgnoreCase(opis)){
+						comboBox_3.setSelectedItem(ve);
+						pom3=true;
+					}
+				}
+				if(!pom3){
+					velicina=BeansGetter.sessionStavka().sacuvajVelicni(v);
+					
+					comboBox_3.addItem(velicina);
+					comboBox_3.setSelectedItem(velicina);
+				}
 				
-				vel=BeansGetter.sessionStavka().sacuvajVelicni(v);
-				
-				comboBox_3.addItem(vel);
-				comboBox_3.setSelectedItem(vel);
 			}
 		});
 		
