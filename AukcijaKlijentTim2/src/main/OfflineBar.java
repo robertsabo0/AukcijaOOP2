@@ -51,17 +51,6 @@ public class OfflineBar extends JMenuBar {
 	}
 	
 	public void postaviStranicu(JPanel stranica) {
-		stranica.setPreferredSize(new Dimension(stranica.getWidth(), frame.getHeight()));
-		JScrollPane sp = new JScrollPane(stranica,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
-		JScrollBar vertical = sp.getVerticalScrollBar();
-		vertical.setValue(vertical.getMaximum());
-		sp.setVerticalScrollBar(vertical);
-		
-		frame.getContentPane().removeAll();
-		frame.setContentPane(sp);
-		frame.repaint();
-		frame.revalidate();
-		
+		Aukcija.postaviStranicu(stranica);	
 	}
 }

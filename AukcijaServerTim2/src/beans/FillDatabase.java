@@ -51,16 +51,22 @@ public class FillDatabase {
 	private KomentarTim2[] komentari;
 	private PonudaTim2[] ponude;
 	
+	/* clear DB!
+delete from ponudatim2 ;
+delete from komentartim2 ;
+delete from usertim2 ;
+delete from stavkatim2 ;
+delete from materijaltim2 ;
+delete from bojatim2 ;
+delete from tiptim2 ;
+delete from velicinatim2 ;
+	 */
+	
 	@PostConstruct
 
 	public void postConstruct() throws ParseException  {
 		
-		if(false)
-		{		SesionStavka ses = new SesionStavka();
-		ses.em = em;
-		//ses.getKupac(em.find(StavkaTim2.class, ));
-		}
-
+		
 		if(em.find(UserTim2.class, "admin") == null){
 
 			System.out.println("Database is not filled yet!");
@@ -76,7 +82,14 @@ public class FillDatabase {
 			fillVelicina();
 			dodajKorisnike();
 			popuniBazu();
+			popuniBazu();
+			popuniBazu();
+			popuniBazu();
 			dodajPonudu();
+			dodajPonudu();
+			dodajPonudu();
+			dodajPonudu();
+
 			dodajKomentar();
 			
 			

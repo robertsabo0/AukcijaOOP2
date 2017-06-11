@@ -68,7 +68,7 @@ public class SmallStavkaPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			GlavniPanel g=new GlavniPanel(s);
 			
-			Aukcija.me.postaviStranicu(g);
+			Aukcija.postaviStranicu(g);
 			
 		}
 		 
