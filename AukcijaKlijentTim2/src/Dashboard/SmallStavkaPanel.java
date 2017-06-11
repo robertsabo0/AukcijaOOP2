@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -44,7 +45,10 @@ public class SmallStavkaPanel extends JPanel {
 		 JLabel postavljenoOd = new JLabel("Postavljeno od strane: "+s.getPostavljenoOdStrane().getUsername());
 		 BufferedImage slika=null;;
 		try {
-			slika = ImageIO.read(new File("images.jpg"));
+			if(s.getSlika()==null)
+				slika = ImageIO.read(new File("images.jpg"));
+			else
+				slika = ImageIO.read(new ByteArrayInputStream(s.getSlika()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
