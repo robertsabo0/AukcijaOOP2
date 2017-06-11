@@ -1,6 +1,7 @@
 package prikazStavke;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class PanelKomentari extends JPanel  {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		List<KomentarTim2> kom=null;
 		kom=BeansGetter.sessionStavka().getSve(s.getId());
-		
+		setSize(new Dimension(200, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		for(KomentarTim2 k: kom){
@@ -67,6 +68,7 @@ public class PanelKomentari extends JPanel  {
 				k.setPostaljvenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
 				
 				BeansGetter.sessionStavka().sacuvajKomentar(k);
+				
 				Aukcija.me.postaviStranicu(new GlavniPanel(s));
 			}
 		});
