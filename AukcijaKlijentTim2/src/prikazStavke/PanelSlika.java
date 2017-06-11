@@ -2,6 +2,7 @@ package prikazStavke;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -18,17 +19,22 @@ public class PanelSlika extends JPanel {
 	 */
 	public PanelSlika(StavkaTim2 s) {
 		this.s=s;
-		/*BufferedImage img=null;
+		BufferedImage img=null;
 		try {
-			img=ImageIO.read(new ByteArrayInputStream(s.getSlika()));
+			if(s.getSlika()!=null)
+				img=ImageIO.read(new ByteArrayInputStream(s.getSlika()));
+			else
+				img = ImageIO.read(new File("images.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-		ImageIcon i=new ImageIcon("images.jpg");
-		JLabel labela=new JLabel();
-		labela.setIcon(i);
-		add(labela);
+		}
+		if(img!=null){
+			ImageIcon i=new ImageIcon(img);
+			JLabel labela=new JLabel();
+			labela.setIcon(i);
+			add(labela);
+		}
 	}
 
 }
