@@ -18,17 +18,20 @@ public class PanelSlika extends JPanel {
 	 */
 	public PanelSlika(StavkaTim2 s) {
 		this.s=s;
-		/*BufferedImage img=null;
+		BufferedImage img=null;
 		try {
+			if(s.getSlika()!=null)
 			img=ImageIO.read(new ByteArrayInputStream(s.getSlika()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-		ImageIcon i=new ImageIcon("images.jpg");
-		JLabel labela=new JLabel();
-		labela.setIcon(i);
-		add(labela);
+		}
+		if(img!=null){
+			ImageIcon i=new ImageIcon(img);
+			JLabel labela=new JLabel();
+			labela.setIcon(i);
+			add(labela);
+		}
 	}
 
 }
