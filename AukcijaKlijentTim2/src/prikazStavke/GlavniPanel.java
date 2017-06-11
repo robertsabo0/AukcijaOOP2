@@ -9,9 +9,11 @@ import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
 import model.StavkaTim2;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Component;
-import javax.swing.Box;
+import java.awt.Color;
+
+
+import javax.swing.BorderFactory;
+
 
 
 public class GlavniPanel extends JPanel {
@@ -21,12 +23,12 @@ public class GlavniPanel extends JPanel {
 	 */
 	public GlavniPanel(StavkaTim2 s) {
 		this.s=s;
-		setLayout(new BorderLayout());
 		PanelSlika slike=new PanelSlika();
 		PanelKomentari komentari=new PanelKomentari(s);
 		PanelOpis opis=new PanelOpis(s);
-		add(opis, BorderLayout.CENTER);
+		opis.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(slike, BorderLayout.WEST);
+		add(opis, BorderLayout.CENTER);
 		add(komentari, BorderLayout.SOUTH);
 		
 	}
