@@ -41,7 +41,10 @@ public class FillDatabase {
 	
 	private String[] komentariStr={"ok", "uzasno je", "lose je", "dobro je", "dobar kvalitet"};
 	
-	private Double[] ponudeD={(double) 100, (double) 500, (double)750, (double)1000, (double)2000, (double)2456, (double)3334};
+	private Double[] ponudeD={(double) 100, (double) 500, (double)750, 
+				(double)1000, (double)2000, (double)2456, (double)3334,
+				(double) 3335, (double) 3500, (double)3750, (double)3900,
+				(double)4000, (double)5000, (double)6456, (double)7334};
 	
 			
 	private BojaTim2[] boje;
@@ -84,10 +87,6 @@ delete from velicinatim2 ;
 			dodajKorisnike();
 			popuniBazu();
 			popuniBazu();
-			popuniBazu();
-			popuniBazu();
-			dodajPonudu();
-			dodajPonudu();
 			dodajPonudu();
 			dodajPonudu();
 
@@ -136,13 +135,13 @@ delete from velicinatim2 ;
 			StavkaTim2 s=new StavkaTim2();
 			double r = Math.random();
 			s.setAktuelnaCena(Math.round(r*10000));
-			s.setNaziv(naziviStr[(int)(r*naziviStr.length)]);
 			s.setMaterijal(materijali[(int)(r*materijali.length)]);
 			s.setBoja(boje[(int) (r*boje.length)]);
 			s.setVelicina(velicine[(int)(r*velicine.length)]);
 			s.setTip(tipovi[(int)(r*tipovi.length)]);
 			s.setDatumPostavljanja(date);
 			s.setPostavljenoOdStrane(useri[(int)(r*useri.length)]);
+			s.setNaziv(s.getTip()+" "+s.getBoja()+" "+s.getVelicina());
 			em.persist(s);
 			
 			stavke[i] = s;
@@ -157,6 +156,7 @@ delete from velicinatim2 ;
 		double r=Math.random();
 
 		for(Double d: ponudeD){	
+			r=Math.random();
 			PonudaTim2 p=new PonudaTim2();
 			StavkaTim2 stavka = stavke[(int)(r*stavke.length)];
 			stavka.setAktuelnaCena(stavka.getAktuelnaCena()+d);
