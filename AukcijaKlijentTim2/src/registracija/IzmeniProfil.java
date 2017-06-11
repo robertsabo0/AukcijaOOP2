@@ -6,11 +6,14 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,8 +35,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import main.Aukcija;
 import main.BeansGetter;
 import model.UserTim2;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class IzmeniProfil extends JPanel {
 
@@ -202,7 +203,18 @@ public class IzmeniProfil extends JPanel {
 		panel.setLayout(gl_panel);
 		
 		if (korisnik.getSlika() != null){
-			postaviSliku();
+			postaviSliku(korisnik.getSlika());
+		} else{
+			
+			try {
+				BufferedImage img = ImageIO.read(new File("noImage.png"));
+				img = resize(img, 75, 100);
+				byte [] nova = imageToByteArray(img);
+				postaviSliku(nova);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.SOUTH);
@@ -215,6 +227,7 @@ public class IzmeniProfil extends JPanel {
 						passwordField.getPassword(), eMailFiled.getText(), opisField.getText(), slika);
 				if (izmeni){
 					JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
+					postaviSliku(slika);
 					Aukcija.postaviStranicu(ovaj);
 				}
 				else
@@ -222,6 +235,16 @@ public class IzmeniProfil extends JPanel {
 			}
 		});
 		panel_1.add(btnIzmeni);
+
+		JButton btnTest = new JButton("Test");
+		btnTest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TestFrame tf = new TestFrame();
+				tf.setVisible(true);
+			}
+		});
+		panel_1.add(btnTest);
+
 	}
 	
 	//smanjuje velicinu slike
@@ -248,10 +271,10 @@ public class IzmeniProfil extends JPanel {
 	}
 	
 	//postavlja sliku na panel
-	public void postaviSliku() {
+	public void postaviSliku(byte [] slika) {
 		BufferedImage img;
 		try {
-			img = ImageIO.read(new ByteArrayInputStream(korisnik.getSlika()));
+			img = ImageIO.read(new ByteArrayInputStream(slika));
 			
 			ImageIcon i = new ImageIcon(img);
 			JLabel lblNewLabel = new JLabel();
@@ -269,10 +292,5 @@ public class IzmeniProfil extends JPanel {
 			e.printStackTrace();
 		}
 
-	}
-	
-	private void prefarbajSliku() {
-		// TODO Auto-generated method stub
-		
 	}
 }
