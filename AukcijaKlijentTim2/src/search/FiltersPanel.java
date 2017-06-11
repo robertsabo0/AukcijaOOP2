@@ -75,8 +75,6 @@ class FiltersPanel extends JPanel {
 		BoxLayout gridLayout = new BoxLayout(this, BoxLayout.X_AXIS);
 		setLayout(gridLayout);		
 
-		add(Box.createHorizontalStrut(20));
-		
 		JPanel bojePanel = new JPanel();
 		BoxLayout boxLayou = new BoxLayout(bojePanel, BoxLayout.Y_AXIS);
 		bojePanel.setLayout(boxLayou); 
@@ -153,7 +151,7 @@ class FiltersPanel extends JPanel {
 		ostaloPanel.add(showButton);		
 		add(ostaloPanel);
 		
-		showFiltered();
+		//showFiltered();
 	}
 
 	private void initializeBoxes() {
