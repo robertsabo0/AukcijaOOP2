@@ -164,8 +164,6 @@ public class PanelOpis extends JPanel {
 		gbc_textField_1.gridy = 19;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		System.out.println(s.getPostavljenoOdStrane().getUsername());
-		System.out.println(BeansGetter.sessionStavka().vratiUlogovanog().getUsername());
 			if(s.getPostavljenoOdStrane().getUsername().equals(BeansGetter.sessionStavka().vratiUlogovanog().getUsername()) || s.isProdata() || BeansGetter.sessionStavka().vratiUlogovanog()==null){
 				textField_1.setVisible(false);
 				lblNewLabel_9.setVisible(false);
