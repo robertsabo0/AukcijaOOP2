@@ -228,7 +228,7 @@ public class IzmeniProfil extends JPanel {
 				if (izmeni){
 					JOptionPane.showMessageDialog(null, "Uspesno ste izmeni profil");
 					postaviSliku(slika);
-					Aukcija.me.postaviStranicu(ovaj);
+					Aukcija.postaviStranicu(ovaj);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Niste uspeli izmeniti profil");

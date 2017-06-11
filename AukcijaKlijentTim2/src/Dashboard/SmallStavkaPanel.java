@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -16,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dodavanjeStavke.PodaciPanel;
 import main.Aukcija;
 import main.OnlineBar;
 import model.StavkaTim2;
@@ -43,12 +47,13 @@ public class SmallStavkaPanel extends JPanel {
 			
 		 }
 		 JLabel postavljenoOd = new JLabel("Postavljeno od strane: "+s.getPostavljenoOdStrane().getUsername());
-		 BufferedImage slika=null;;
+		 BufferedImage slika=null;
 		try {
 			if(s.getSlika()==null)
 				slika = ImageIO.read(new File("images.jpg"));
 			else
-				slika = ImageIO.read(new ByteArrayInputStream(s.getSlika()));
+				slika = PodaciPanel.resize(ImageIO.read(new ByteArrayInputStream(s.getSlika())),75,100);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
