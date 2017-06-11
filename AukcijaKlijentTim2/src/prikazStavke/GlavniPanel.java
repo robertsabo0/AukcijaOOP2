@@ -23,11 +23,12 @@ public class GlavniPanel extends JPanel {
 	 */
 	public GlavniPanel(StavkaTim2 s) {
 		this.s=s;
-		PanelSlika slike=new PanelSlika();
+		setLayout(new BorderLayout());
+		//PanelSlika slike=new PanelSlika(s);
 		PanelKomentari komentari=new PanelKomentari(s);
 		PanelOpis opis=new PanelOpis(s);
 		opis.setBorder(BorderFactory.createLineBorder(Color.black));
-		add(slike, BorderLayout.WEST);
+		//add(slike, BorderLayout.WEST);
 		add(opis, BorderLayout.CENTER);
 		add(komentari, BorderLayout.SOUTH);
 		

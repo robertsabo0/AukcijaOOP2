@@ -1,15 +1,19 @@
 package dodavanjeStavke;
 
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -22,17 +26,26 @@ import model.TipTim2;
 import model.VelicinaTim2;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.swing.JTextArea;
 
 public class PodaciPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_2;
-	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
-
+	private byte[] slika;
 	/**
 	 * Create the panel.
 	 */
@@ -332,15 +345,6 @@ public class PodaciPanel extends JPanel {
 		gbc_lblNewLabel_7.gridy = 15;
 		add(lblNewLabel_7, gbc_lblNewLabel_7);
 		
-		textField_3 = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.gridx = 4;
-		gbc_textField_3.gridy = 15;
-		add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
-		
 		JButton btnNewButton = new JButton("postavi");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -354,10 +358,40 @@ public class PodaciPanel extends JPanel {
 				s.setTip(comboBox_2.getItemAt(comboBox_2.getSelectedIndex()));
 				s.setVelicina(comboBox_3.getItemAt(comboBox_3.getSelectedIndex()));
 				s.setPostavljenoOdStrane(BeansGetter.sessionStavka().vratiUlogovanog());
+				s.setSlika(slika);
 				BeansGetter.sessionStavka().sacuvajStavku(s);
 				
 			}
 		});
+		
+		JButton btnNewButton_4 = new JButton("dodaj");
+		btnNewButton_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFileChooser fc = new JFileChooser();
+				fc.setCurrentDirectory(new java.io.File("."));
+				fc.setDialogTitle("Pretrazivac");
+				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				if (fc.showOpenDialog(btnNewButton_4) == JFileChooser.APPROVE_OPTION) {
+					System.out.println(fc.getSelectedFile().getAbsolutePath());
+					Path p = Paths.get(fc.getSelectedFile().getPath());
+					
+					//slika = 
+					BufferedImage img;
+					try{
+						img = resize(ImageIO.read(new ByteArrayInputStream(Files.readAllBytes(p))),75,100);
+						slika = imageToByteArray(img);
+					}catch (Exception e2){
+						e2.printStackTrace();
+					}
+				}
+			}
+		});
+		GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
+		gbc_btnNewButton_4.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_4.gridx = 4;
+		gbc_btnNewButton_4.gridy = 15;
+		add(btnNewButton_4, gbc_btnNewButton_4);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
@@ -365,6 +399,27 @@ public class PodaciPanel extends JPanel {
 		gbc_btnNewButton.gridy = 17;
 		add(btnNewButton, gbc_btnNewButton);
 		
+	}
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) {  
+	    int w = img.getWidth();  
+	    int h = img.getHeight();  
+	    BufferedImage dimg = new BufferedImage(newW, newH, img.getType());  
+	    Graphics2D g = dimg.createGraphics();  
+	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+	    RenderingHints.VALUE_INTERPOLATION_BILINEAR);  
+	    g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);  
+	    g.dispose();  
+	    return dimg;  
+	} 
+
+	static byte[] imageToByteArray(BufferedImage image) {
+	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	    try {
+	        ImageIO.write(image, "png", stream);
+	    } catch(IOException e) {
+	        throw new RuntimeException(e);
+	    }
+	    return stream.toByteArray();
 	}
 
 }

@@ -1,16 +1,31 @@
 package prikazStavke;
 
-import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import model.StavkaTim2;
 
 public class PanelSlika extends JPanel {
-
+	private StavkaTim2 s;
 	/**
 	 * Create the panel.
 	 */
-	public PanelSlika() {
-		ImageIcon i=new ImageIcon("images.jpg");
+	public PanelSlika(StavkaTim2 s) {
+		this.s=s;
+		BufferedImage img=null;
+		try {
+			img=ImageIO.read(new ByteArrayInputStream(s.getSlika()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ImageIcon i=new ImageIcon(img);
 		JLabel labela=new JLabel();
 		labela.setIcon(i);
 		add(labela);

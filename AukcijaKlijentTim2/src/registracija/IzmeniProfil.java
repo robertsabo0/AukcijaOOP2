@@ -170,11 +170,12 @@ public class IzmeniProfil extends JPanel {
 		ImageIcon  i = null;
 		JLabel lblSlika = new JLabel();
 		try {
+			if(korisnik.getSlika()!=null){
 			img = ImageIO.read(new ByteArrayInputStream(korisnik.getSlika()));
-			
-			if (img != null) {
-				i = new ImageIcon((Image)img);
-				lblSlika.setIcon(i);
+				if (img != null) {
+					i = new ImageIcon((Image)img);
+					lblSlika.setIcon(i);
+				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
